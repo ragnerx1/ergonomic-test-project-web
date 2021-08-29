@@ -27,7 +27,7 @@ export const homeData: HomeDataProps[] = [
     title: 'Cadastro por inportação',
     icon: AiOutlineUsergroupAdd,
     color: '#f7f7f7',
-    route: '/register',
+    route: '/import',
   },
   {
     id: 2,
