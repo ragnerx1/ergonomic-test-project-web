@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import ComponentHeader from '../../components/ComponentHeader';
 import { homeData, HomeDataProps } from './data';
 import { Container, ButtonCard } from './styles';
 
@@ -16,7 +17,7 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <h2>Olá, Lucas Coronel</h2>
+      <ComponentHeader buttomBack={false} />
 
       <section>
         <div>

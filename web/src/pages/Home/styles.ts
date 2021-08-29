@@ -7,13 +7,6 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
 
-  h2 {
-    color: black;
-    margin-left: 50px;
-    margin-top: 20px;
-    font-size: 30px;
-  }
-
   section {
     height: 80%;
     display: flex;

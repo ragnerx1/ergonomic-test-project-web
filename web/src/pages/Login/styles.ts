@@ -16,7 +16,7 @@ export const Container = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 400px;
 
     input {
       width: 100%;

@@ -6,7 +6,7 @@ import {
 import { GrLogout } from 'react-icons/gr';
 import { IconType } from 'react-icons';
 
-interface HomeDataProps {
+export interface HomeDataProps {
   id: number;
   title: string;
   icon: IconType;
@@ -14,35 +14,33 @@ interface HomeDataProps {
   route: string;
 }
 
-const homeData: HomeDataProps[] = [
+export const homeData: HomeDataProps[] = [
   {
     id: 0,
     title: 'Cadastro',
     icon: AiOutlineUserAdd,
     color: '#f7f7f7',
-    route: 'Register',
+    route: '/register',
   },
   {
     id: 1,
     title: 'Cadastro por inportação',
     icon: AiOutlineUsergroupAdd,
     color: '#f7f7f7',
-    route: 'Register',
+    route: '/register',
   },
   {
     id: 2,
     title: 'Lista de usuários',
     icon: AiOutlineOrderedList,
     color: '#f7f7f7',
-    route: 'Register',
+    route: '/register',
   },
   {
     id: 3,
     title: 'Sair',
     icon: GrLogout,
     color: '#fff0f0',
-    route: 'Login',
+    route: '/',
   },
 ];
-
-export { HomeDataProps, homeData };
