@@ -7,8 +7,9 @@ const Login: React.FC = () => (
     <h1>Login</h1>
 
     <form action="">
-      <input type="text" />
-      <input type="text" />
+      <input type="email" />
+      <input type="password" />
+      <button type="submit">Entrar</button>
     </form>
   </Container>
 );
