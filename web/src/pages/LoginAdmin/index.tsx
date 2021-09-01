@@ -3,11 +3,12 @@ import { useHistory } from 'react-router-dom';
 
 import { Container } from './styles';
 
-const Login: React.FC = () => {
+const LoginAdmin: React.FC = () => {
   const { push } = useHistory();
+
   return (
     <Container>
-      <h1>Login</h1>
+      <h1>Admin</h1>
 
       <form action="">
         <input type="email" />
@@ -20,4 +21,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginAdmin;
