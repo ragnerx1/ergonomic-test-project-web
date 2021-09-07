@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import api from '../services/api';
+import api from '../../services/api';
 import { Container } from './styles';
 
 const Login: React.FC = () => {
