@@ -23,6 +23,7 @@
         "prettier"
     ],
     "rules": {
+      "arrow-parens": "off",
       "react/prop-types": "off",
       "prettier/prettier": "error",
       "no-use-before-define":"off",
