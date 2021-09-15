@@ -9,8 +9,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: #fff;
     -webkit-font-smoothing: antialiased;
+    padding: 0 20vw;
   }
 
   body, input, button, p {
