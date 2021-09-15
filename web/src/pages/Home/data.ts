@@ -42,7 +42,7 @@ export const homeData: HomeDataProps[] = [
     title: 'Empresas',
     icon: FaRegBuilding,
     color: '#f7f7f7',
-    route: '/register',
+    route: '/company',
   },
   {
     id: 4,
