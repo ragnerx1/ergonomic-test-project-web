@@ -16,9 +16,10 @@ const Login: React.FC = () => {
 
     try {
       const response = await api.post('/session', { email, password });
-      const { register } = response.data;
+      const { register, token } = response.data;
 
       localStorage.setItem('ergonomic@name', register.email);
+      localStorage.setItem('ergonomic@token', token);
 
       push('/home');
     } catch (error) {
