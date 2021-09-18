@@ -1,10 +1,11 @@
+import { IconType } from 'react-icons';
 import {
   AiOutlineUserAdd,
   AiOutlineUsergroupAdd,
   AiOutlineOrderedList,
 } from 'react-icons/ai';
 import { GrLogout } from 'react-icons/gr';
-import { IconType } from 'react-icons';
+import { FaRegBuilding } from 'react-icons/fa';
 
 export interface HomeDataProps {
   id: number;
@@ -17,27 +18,20 @@ export interface HomeDataProps {
 export const homeData: HomeDataProps[] = [
   {
     id: 0,
-    title: 'Cadastro',
+    title: 'Usuários',
     icon: AiOutlineUserAdd,
     color: '#f7f7f7',
     route: '/register',
   },
   {
     id: 1,
-    title: 'Cadastro por inportação',
-    icon: AiOutlineUsergroupAdd,
+    title: 'Empresas',
+    icon: FaRegBuilding,
     color: '#f7f7f7',
-    route: '/import',
+    route: '/company',
   },
   {
     id: 2,
-    title: 'Lista de usuários',
-    icon: AiOutlineOrderedList,
-    color: '#f7f7f7',
-    route: '/register',
-  },
-  {
-    id: 3,
     title: 'Sair',
     icon: GrLogout,
     color: '#fff0f0',

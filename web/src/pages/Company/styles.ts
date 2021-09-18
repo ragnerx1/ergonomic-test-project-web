@@ -7,7 +7,6 @@ export const Container = styled.div`
     div {
       display: flex;
       align-items: center;
-      justify-content: space-between;
 
       .input-container {
         margin-left: 50px;
@@ -34,12 +33,8 @@ export const Container = styled.div`
       padding: 7px;
       margin-top: 40px;
 
-      .header-user {
-        width: 15vw;
-      }
-
       div {
-        width: 13vw;
+        width: 15vw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -51,7 +46,7 @@ export const Container = styled.div`
       margin: 10px 0;
 
       .id {
-        width: 11vw;
+        width: 15vw;
       }
 
       .company {
@@ -61,16 +56,8 @@ export const Container = styled.div`
         justify-content: center;
       }
 
-      .admin {
-        width: 10vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
       .option {
-        margin-left: 30px;
-        width: 10vw;
+        width: 15vw;
         display: flex;
         align-items: center;
         justify-content: center;

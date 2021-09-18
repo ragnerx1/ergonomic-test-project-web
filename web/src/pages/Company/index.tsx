@@ -4,25 +4,24 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
 import ComponentButton from '../../components/ComponentButton';
-import ComponentCreateUserModal from '../../components/ComponentCreateUserModal';
-import ComponentDeleteUserModal from '../../components/ComponentDeleteUserModal';
+import ComponentDeleteCompanyModal from '../../components/ComponentDeleteCompanyModal';
 import ComponentHeader from '../../components/ComponentHeader';
+import ComponentModalCreateCompany from '../../components/ComponentModalCreateCompany';
 import api from '../../services/api';
 import { Container } from './styles';
 
-interface UserProps {
+interface CompanyProps {
   id: string;
-  email: string;
-  access: boolean;
+  name: string;
 }
 
-interface UsersListProps {
-  usersList: UserProps[];
+interface CompaniesListProps {
+  listCompanies: CompanyProps[];
   query: string;
 }
 
-const Register: React.FC = () => {
-  const [users, setUsers] = useState<UserProps[]>([]);
+const Company: React.FC = () => {
+  const [companies, setCompanies] = useState<CompanyProps[]>([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [companySelected, setCompanySelected] = useState('');
@@ -31,12 +30,12 @@ const Register: React.FC = () => {
   useEffect(() => {
     const token = localStorage.getItem('ergonomic@token');
     api
-      .get('register', {
+      .get('company', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(response => setUsers(response.data));
+      .then(response => setCompanies(response.data));
   }, [visibleModal]);
 
   function handleModal() {
@@ -52,27 +51,24 @@ const Register: React.FC = () => {
     setVisibleModal(oldValue => !oldValue);
   }
 
-  const filter = (usersList: UserProps[], query: string) =>
-    usersList.filter(user => user.email.toLowerCase().includes(query));
+  const filter = (listCompanies: CompanyProps[], query: string) =>
+    listCompanies.filter(company => company.name.toLowerCase().includes(query));
 
-  function UsersList({ usersList, query }: UsersListProps) {
-    const filtered = filter(usersList, query);
+  function CompaniesList({ listCompanies, query }: CompaniesListProps) {
+    const filtered = filter(listCompanies, query);
 
     return (
       <>
-        {filtered.map(user => (
-          <section key={user.id}>
-            <div className="id">{`${user.id.substring(0, 25)}...`}</div>
+        {filtered.map(company => (
+          <section key={company.id}>
+            <div className="id">{`${company.id.substring(0, 25)}...`}</div>
             <div className="company">
-              <p>{user.email}</p>
-            </div>
-            <div className="admin">
-              <input type="checkbox" />
+              <p>{company.name}</p>
             </div>
             <div className="option">
               <button
                 type="button"
-                onClick={() => handleModalEditModal(user.email)}
+                onClick={() => handleModalEditModal(company.name)}
               >
                 <AiFillEdit color="black" />
               </button>
@@ -94,43 +90,33 @@ const Register: React.FC = () => {
 
       <section>
         <div>
-          <div>
-            <h1>Usuários</h1>
+          <h1>Empresas</h1>
 
-            <div className="input-container">
-              <label htmlFor="search">
-                <AiOutlineSearch color="black" />
-              </label>
-              <input
-                id="search"
-                type="text"
-                placeholder="Buscar usuários"
-                value={serach}
-                onChange={e => setSearch(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div>
-            <ComponentButton title="Importar usuários" onPress={handleModal} />
-
-            <ComponentButton
-              style={{ marginLeft: 20 }}
-              title="Cadastrar novo usuário"
-              onPress={handleModal}
+          <div className="input-container">
+            <label htmlFor="search">
+              <AiOutlineSearch color="black" />
+            </label>
+            <input
+              id="search"
+              type="text"
+              placeholder="Buscar empresas"
+              value={serach}
+              onChange={e => setSearch(e.target.value)}
             />
           </div>
+
+          <ComponentButton
+            title="Cadastrar nova empresa"
+            onPress={handleModal}
+          />
         </div>
 
         <section className="header-table">
           <div>
             <h3>ID</h3>
           </div>
-          <div className="header-user">
-            <h3>E-MAIL</h3>
-          </div>
-          <div>
-            <h3>ADMIN</h3>
+          <div className="header-company">
+            <h3>NOME</h3>
           </div>
           <div>
             <h3>EDITAR</h3>
@@ -140,16 +126,16 @@ const Register: React.FC = () => {
           </div>
         </section>
 
-        <UsersList usersList={users} query={serach} />
+        <CompaniesList listCompanies={companies} query={serach} />
       </section>
 
-      <ComponentCreateUserModal
+      <ComponentModalCreateCompany
         status={visibleModal}
         onPress={handleModal}
         company={companySelected}
       />
 
-      <ComponentDeleteUserModal
+      <ComponentDeleteCompanyModal
         status={visibleModalDelete}
         onPress={handleModalDelete}
         company={companySelected}
@@ -158,4 +144,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default Company;
