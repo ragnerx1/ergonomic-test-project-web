@@ -1,55 +1,84 @@
-import { darken } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-
   section {
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    margin-top: 80px;
 
-    h2 {
-      color: black;
-      margin-bottom: 30px;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .input-container {
+        margin-left: 50px;
+        background-color: #f7f7f7;
+        padding: 10px 15px;
+        border-radius: 25px;
+
+        input {
+          margin-left: 5px;
+          background-color: transparent;
+          border: none;
+        }
+      }
     }
 
-    form {
+    h1 {
+      font-size: 30px;
+    }
+
+    .header-table {
       display: flex;
-      flex-direction: column;
-      width: 400px;
+      align-items: center;
+      background-color: #f7f7f7;
+      padding: 7px;
+      margin-top: 40px;
 
-      label {
-        color: black;
-        margin-top: 20px;
+      .header-user {
+        width: 15vw;
       }
 
-      input {
-        width: 100%;
-        height: 45px;
-        margin-top: 5px;
-        background-color: #ebebeb;
-        border-radius: 5px;
-        border: none;
-        padding: 10px;
-        font-size: 20px;
+      div {
+        width: 13vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    section {
+      display: flex;
+      margin: 10px 0;
+
+      .id {
+        width: 11vw;
       }
 
-      button {
-        background-color: #2c8fed;
-        color: #fff;
-        border: none;
-        height: 45px;
-        border-radius: 5px;
-        margin-top: 25px;
-        font-weight: bold;
-        font-size: 20px;
+      .company {
+        width: 15vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        &:hover {
-          background-color: ${darken(0.05, '#2c8fed')};
+      .admin {
+        width: 10vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .option {
+        margin-left: 30px;
+        width: 10vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          border: none;
+          background-color: transparent;
+          width: 50px;
         }
       }
     }
