@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
@@ -11,16 +12,26 @@ import { Container, ContainerCreateData } from './styles';
 interface Props {
   status: boolean;
   onPress(): void;
-  company?: string;
+  user: string;
 }
 
 const ComponentDeleteUserModal: React.FC<Props> = ({
   status,
   onPress,
-  company,
+  user,
 }) => {
-  async function handleDeleteCompany() {
-    console.log('deletado');
+  async function handleDeleteUser() {
+    try {
+      const token = localStorage.getItem('ergonomic@token');
+      await api.delete(`register/${user}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      onPress();
+    } catch (err: any) {
+      toast.error('Não foi possivel deletar esse usuario');
+    }
   }
 
   return (
@@ -42,7 +53,7 @@ const ComponentDeleteUserModal: React.FC<Props> = ({
 
         <ComponentButton
           title="Excluir"
-          onPress={handleDeleteCompany}
+          onPress={handleDeleteUser}
           color="red"
         />
       </ContainerCreateData>

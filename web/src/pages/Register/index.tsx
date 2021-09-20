@@ -29,7 +29,7 @@ const Register: React.FC = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [visibleModalImport, setVisibleModalImport] = useState(false);
-  const [companySelected, setCompanySelected] = useState('');
+  const [userSerlected, setUserSerlected] = useState('');
   const [serach, setSearch] = useState('');
 
   const handleAdmin = useCallback(async (id: string) => {
@@ -57,13 +57,14 @@ const Register: React.FC = () => {
         },
       })
       .then(response => setUsers(response.data));
-  }, [visibleModal, handleAdmin]);
+  }, [visibleModal, visibleModalDelete, visibleModalImport]);
 
   function handleModal() {
     setVisibleModal(oldValue => !oldValue);
   }
 
-  function handleModalDelete() {
+  function handleModalDelete(user?: string) {
+    setUserSerlected(user || '');
     setVisibleModalDelete(oldValue => !oldValue);
   }
 
@@ -71,8 +72,8 @@ const Register: React.FC = () => {
     setVisibleModalImport(oldValue => !oldValue);
   }
 
-  function handleModalEditModal(company: string) {
-    setCompanySelected(company);
+  function handleModalEditModal(user: string) {
+    setUserSerlected(user);
     setVisibleModal(oldValue => !oldValue);
   }
 
@@ -106,7 +107,7 @@ const Register: React.FC = () => {
               </button>
             </div>
             <div className="option">
-              <button type="button" onClick={handleModalDelete}>
+              <button type="button" onClick={() => handleModalDelete(user.id)}>
                 <AiFillDelete color="black" />
               </button>
             </div>
@@ -177,13 +178,13 @@ const Register: React.FC = () => {
       <ComponentCreateUserModal
         status={visibleModal}
         onPress={handleModal}
-        user={companySelected}
+        user={userSerlected}
       />
 
       <ComponentDeleteUserModal
         status={visibleModalDelete}
         onPress={handleModalDelete}
-        company={companySelected}
+        user={userSerlected}
       />
 
       <ComponentImportUsersModal
