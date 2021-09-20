@@ -9,7 +9,7 @@ export const Container = styled(Modal)`
 
 export const ContainerCreateData = styled.div`
   width: 500px;
-  height: 250px;
+  height: 400px;
   background-color: white;
   padding: 15px;
 
@@ -32,8 +32,13 @@ export const ContainerCreateData = styled.div`
       height: 40px;
       border: none;
       background-color: #f7f7f7;
-      margin-top: 10px;
+      margin: 10px 0 20px;
       padding: 10px;
+    }
+
+    select {
+      width: 100%;
+      margin-top: 10px;
     }
   }
 `;
