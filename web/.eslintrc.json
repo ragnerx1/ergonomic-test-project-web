@@ -23,6 +23,7 @@
         "prettier"
     ],
     "rules": {
+      "camelcase": "off",
       "arrow-parens": "off",
       "react/prop-types": "off",
       "prettier/prettier": "error",

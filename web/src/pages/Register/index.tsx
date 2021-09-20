@@ -13,10 +13,11 @@ import ComponentImportUsersModal from '../../components/ComponentImportUsersModa
 import api from '../../services/api';
 import { Container } from './styles';
 
-interface UserProps {
+export interface UserProps {
   id: string;
   email: string;
   access: boolean;
+  company_id: string;
 }
 
 interface UsersListProps {
@@ -30,6 +31,7 @@ const Register: React.FC = () => {
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [visibleModalImport, setVisibleModalImport] = useState(false);
   const [userSerlected, setUserSerlected] = useState('');
+  const [userEdit, setUserEdit] = useState<UserProps>();
   const [serach, setSearch] = useState('');
 
   const handleAdmin = useCallback(async (id: string) => {
@@ -72,8 +74,8 @@ const Register: React.FC = () => {
     setVisibleModalImport(oldValue => !oldValue);
   }
 
-  function handleModalEditModal(user: string) {
-    setUserSerlected(user);
+  function handleModalEditModal(user: UserProps) {
+    setUserEdit(user);
     setVisibleModal(oldValue => !oldValue);
   }
 
@@ -99,10 +101,7 @@ const Register: React.FC = () => {
               />
             </div>
             <div className="option">
-              <button
-                type="button"
-                onClick={() => handleModalEditModal(user.email)}
-              >
+              <button type="button" onClick={() => handleModalEditModal(user)}>
                 <AiFillEdit color="black" />
               </button>
             </div>
@@ -178,7 +177,7 @@ const Register: React.FC = () => {
       <ComponentCreateUserModal
         status={visibleModal}
         onPress={handleModal}
-        user={userSerlected}
+        user={userEdit}
       />
 
       <ComponentDeleteUserModal
