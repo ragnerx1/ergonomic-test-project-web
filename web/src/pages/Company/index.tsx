@@ -26,6 +26,7 @@ const Company: React.FC = () => {
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [companySelected, setCompanySelected] = useState('');
   const [serach, setSearch] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('ergonomic@token');
@@ -36,18 +37,20 @@ const Company: React.FC = () => {
         },
       })
       .then(response => setCompanies(response.data));
-  }, [visibleModal]);
+  }, [visibleModal, visibleModalDelete]);
 
   function handleModal() {
     setVisibleModal(oldValue => !oldValue);
   }
 
-  function handleModalDelete() {
+  function handleModalDelete(id: string) {
+    setCompanySelected(id);
     setVisibleModalDelete(oldValue => !oldValue);
   }
 
-  function handleModalEditModal(company: string) {
-    setCompanySelected(company);
+  function handleModalEditModal(id: string, nameCompany: string) {
+    setCompanySelected(id);
+    setName(nameCompany);
     setVisibleModal(oldValue => !oldValue);
   }
 
@@ -68,13 +71,16 @@ const Company: React.FC = () => {
             <div className="option">
               <button
                 type="button"
-                onClick={() => handleModalEditModal(company.name)}
+                onClick={() => handleModalEditModal(company.id, company.name)}
               >
                 <AiFillEdit color="black" />
               </button>
             </div>
             <div className="option">
-              <button type="button" onClick={handleModalDelete}>
+              <button
+                type="button"
+                onClick={() => handleModalDelete(company.id)}
+              >
                 <AiFillDelete color="black" />
               </button>
             </div>
@@ -132,12 +138,13 @@ const Company: React.FC = () => {
       <ComponentModalCreateCompany
         status={visibleModal}
         onPress={handleModal}
-        company={companySelected}
+        company={name}
+        id={companySelected}
       />
 
       <ComponentDeleteCompanyModal
         status={visibleModalDelete}
-        onPress={handleModalDelete}
+        onPress={() => handleModalDelete('')}
         company={companySelected}
       />
     </Container>

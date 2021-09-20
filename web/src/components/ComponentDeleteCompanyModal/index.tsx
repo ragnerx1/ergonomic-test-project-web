@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
@@ -20,7 +21,17 @@ const ComponentDeleteCompanyModal: React.FC<Props> = ({
   company,
 }) => {
   async function handleDeleteCompany() {
-    console.log('deletado');
+    try {
+      const token = localStorage.getItem('ergonomic@token');
+      await api.delete(`company/${company}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      onPress();
+    } catch (err: any) {
+      toast.error('Não foi possivel excluir esta empresa');
+    }
   }
 
   return (

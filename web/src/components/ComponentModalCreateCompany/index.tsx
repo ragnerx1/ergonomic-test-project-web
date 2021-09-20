@@ -12,12 +12,14 @@ interface Props {
   status: boolean;
   onPress(): void;
   company?: string;
+  id: string | undefined;
 }
 
 const ComponentModalCreateCompany: React.FC<Props> = ({
   status,
   onPress,
   company,
+  id,
 }) => {
   const [name, setName] = useState('');
 
@@ -27,20 +29,31 @@ const ComponentModalCreateCompany: React.FC<Props> = ({
     }
   }, [company]);
 
+  function handleCloseModal() {
+    setName('');
+    onPress();
+  }
+
   async function handleCreateCompany() {
     try {
       const token = localStorage.getItem('ergonomic@token');
-
-      await api.post(
-        'company',
-        { name },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      if (id) {
+        await api.put(
+          `company/${id}`,
+          { name },
+          {
+            headers: { Authorization: `Bearer ${token}` },
           },
-        },
-      );
-      onPress();
+        );
+      } else {
+        await api.post(
+          'company',
+          { name },
+          { headers: { Authorization: `Bearer ${token}` } },
+        );
+      }
+
+      handleCloseModal();
     } catch (err) {
       toast.error('Erro ao criar empresa!');
     }
@@ -56,7 +69,7 @@ const ComponentModalCreateCompany: React.FC<Props> = ({
       <ContainerCreateData>
         <section className="header">
           <h2>Criar empresa</h2>
-          <button type="button" onClick={onPress}>
+          <button type="button" onClick={handleCloseModal}>
             <AiFillCloseCircle size={20} />
           </button>
         </section>
