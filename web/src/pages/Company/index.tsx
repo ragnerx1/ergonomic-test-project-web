@@ -10,7 +10,7 @@ import ComponentModalCreateCompany from '../../components/ComponentModalCreateCo
 import api from '../../services/api';
 import { Container } from './styles';
 
-interface CompanyProps {
+export interface CompanyProps {
   id: string;
   name: string;
 }

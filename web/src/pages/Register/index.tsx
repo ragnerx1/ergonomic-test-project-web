@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { toast } from 'react-toastify';
 
 import ComponentButton from '../../components/ComponentButton';
 import ComponentCreateUserModal from '../../components/ComponentCreateUserModal';
 import ComponentDeleteUserModal from '../../components/ComponentDeleteUserModal';
 import ComponentHeader from '../../components/ComponentHeader';
+import ComponentImportUsersModal from '../../components/ComponentImportUsersModal';
 import api from '../../services/api';
 import { Container } from './styles';
 
@@ -25,8 +28,25 @@ const Register: React.FC = () => {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
+  const [visibleModalImport, setVisibleModalImport] = useState(false);
   const [companySelected, setCompanySelected] = useState('');
   const [serach, setSearch] = useState('');
+
+  const handleAdmin = useCallback(async (id: string) => {
+    try {
+      const token = localStorage.getItem('ergonomic@token');
+
+      await api.request({
+        method: 'PUT',
+        url: `register/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      toast.error('Erro ao tonar usuário admin');
+    }
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem('ergonomic@token');
@@ -37,7 +57,7 @@ const Register: React.FC = () => {
         },
       })
       .then(response => setUsers(response.data));
-  }, [visibleModal]);
+  }, [visibleModal, handleAdmin]);
 
   function handleModal() {
     setVisibleModal(oldValue => !oldValue);
@@ -45,6 +65,10 @@ const Register: React.FC = () => {
 
   function handleModalDelete() {
     setVisibleModalDelete(oldValue => !oldValue);
+  }
+
+  function handleModalImport() {
+    setVisibleModalImport(oldValue => !oldValue);
   }
 
   function handleModalEditModal(company: string) {
@@ -67,7 +91,11 @@ const Register: React.FC = () => {
               <p>{user.email}</p>
             </div>
             <div className="admin">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={user.access}
+                onChange={e => handleAdmin(user.id)}
+              />
             </div>
             <div className="option">
               <button
@@ -112,7 +140,10 @@ const Register: React.FC = () => {
           </div>
 
           <div>
-            <ComponentButton title="Importar usuários" onPress={handleModal} />
+            <ComponentButton
+              title="Importar usuários"
+              onPress={handleModalImport}
+            />
 
             <ComponentButton
               style={{ marginLeft: 20 }}
@@ -146,13 +177,18 @@ const Register: React.FC = () => {
       <ComponentCreateUserModal
         status={visibleModal}
         onPress={handleModal}
-        company={companySelected}
+        user={companySelected}
       />
 
       <ComponentDeleteUserModal
         status={visibleModalDelete}
         onPress={handleModalDelete}
         company={companySelected}
+      />
+
+      <ComponentImportUsersModal
+        status={visibleModalImport}
+        onPress={handleModalImport}
       />
     </Container>
   );

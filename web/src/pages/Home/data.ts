@@ -1,9 +1,5 @@
 import { IconType } from 'react-icons';
-import {
-  AiOutlineUserAdd,
-  AiOutlineUsergroupAdd,
-  AiOutlineOrderedList,
-} from 'react-icons/ai';
+import { AiOutlineUserAdd } from 'react-icons/ai';
 import { GrLogout } from 'react-icons/gr';
 import { FaRegBuilding } from 'react-icons/fa';
 

@@ -1,7 +1,10 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unneeded-ternary */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
+import { CompanyProps } from '../../pages/Company';
 
 import api from '../../services/api';
 import ComponentButton from '../ComponentButton';
@@ -11,29 +14,43 @@ import { Container, ContainerCreateData } from './styles';
 interface Props {
   status: boolean;
   onPress(): void;
-  company?: string;
+  user?: string;
 }
 
 const ComponentCreateUserModal: React.FC<Props> = ({
   status,
   onPress,
-  company,
+  user,
 }) => {
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [companySelected, setCompanySelected] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [companies, setCompanies] = useState<CompanyProps[]>([]);
 
   useEffect(() => {
-    if (company) {
-      setName(company);
-    }
-  }, [company]);
+    const token = localStorage.getItem('ergonomic@token');
+    api
+      .get('company', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => setCompanies(response.data));
+  }, []);
 
   async function handleCreateCompany() {
+    const data = {
+      email,
+      access: isAdmin,
+      company_id: companySelected,
+    };
+
     try {
       const token = localStorage.getItem('ergonomic@token');
 
       await api.post(
-        'company',
-        { name },
+        'register',
+        data,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -61,18 +78,38 @@ const ComponentCreateUserModal: React.FC<Props> = ({
           </button>
         </section>
 
-        <form action="">
+        <form onSubmit={handleCreateCompany}>
           <label htmlFor="name">E-mail da usuário</label>
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
+
+          <label htmlFor="admin">Usuário administrativo</label>
+          <input
+            type="checkbox"
+            id="admin"
+            checked={isAdmin}
+            onChange={e => setIsAdmin(oldValue => !oldValue)}
+          />
+
+          <label htmlFor="admin">Empresa</label>
+          <select
+            name="companies"
+            id="admin"
+            value={companySelected}
+            onChange={e => setCompanySelected(e.target.value)}
+          >
+            {companies.map(company => (
+              <option value={company.id}>{company.name}</option>
+            ))}
+          </select>
         </form>
 
         <ComponentButton
-          title={company ? 'Editar' : 'Criar'}
+          title={user ? 'Editar' : 'Criar'}
           onPress={handleCreateCompany}
         />
       </ContainerCreateData>
