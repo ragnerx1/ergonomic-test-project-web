@@ -2,11 +2,12 @@ import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 import { Container } from './styles';
 
 const Login: React.FC = () => {
   const { push } = useHistory();
+  const { signIn } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,12 +16,7 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await api.post('/session', { email, password });
-      const { register, token } = response.data;
-
-      localStorage.setItem('ergonomic@name', register.email);
-      localStorage.setItem('ergonomic@token', token);
-
+      await signIn({ email, password });
       push('/home');
     } catch (error) {
       toast.error('Algo deu errado!', { theme: 'dark' });
