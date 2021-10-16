@@ -1,40 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { IModalUserDeleteActions } from '@components/ModalUserDelete/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
-import ComponentButton from '../../components/ComponentButton';
+import Button from '../../components/Button';
 import ComponentCreateUserModal from '../../components/ComponentCreateUserModal';
 import ModalUserDelete from '../../components/ModalUserDelete';
 import ComponentHeader from '../../components/ComponentHeader';
 import ComponentImportUsersModal from '../../components/ComponentImportUsersModal';
 import api from '../../services/api';
 import { Container } from './styles';
-
-export interface UserProps {
-  id: string;
-  email: string;
-  access: boolean;
-  company_id: string;
-}
-
-interface UsersListProps {
-  usersList: UserProps[];
-  query: string;
-}
+import { IUser, IUsersList } from './types';
 
 const Register: React.FC = () => {
   const modalUserDelete = useRef<IModalUserDeleteActions>(null);
 
-  const [users, setUsers] = useState<UserProps[]>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [visibleModalImport, setVisibleModalImport] = useState(false);
   const [userSerlected, setUserSerlected] = useState('');
-  const [userEdit, setUserEdit] = useState<UserProps>();
+  const [userEdit, setUserEdit] = useState<IUser>();
   const [serach, setSearch] = useState('');
 
   const handleAdmin = useCallback(async (id: string) => {
@@ -77,15 +63,15 @@ const Register: React.FC = () => {
     setVisibleModalImport(oldValue => !oldValue);
   }
 
-  function handleModalEditModal(user: UserProps) {
+  function handleModalEditModal(user: IUser) {
     setUserEdit(user);
     setVisibleModal(oldValue => !oldValue);
   }
 
-  const filter = (usersList: UserProps[], query: string) =>
+  const filter = (usersList: IUser[], query: string) =>
     usersList.filter(user => user.email.toLowerCase().includes(query));
 
-  function UsersList({ usersList, query }: UsersListProps) {
+  function UsersList({ usersList, query }: IUsersList) {
     const filtered = filter(usersList, query);
 
     return (
@@ -143,12 +129,9 @@ const Register: React.FC = () => {
           </div>
 
           <div>
-            <ComponentButton
-              title="Importar usuários"
-              onPress={handleModalImport}
-            />
+            <Button title="Importar usuários" onPress={handleModalImport} />
 
-            <ComponentButton
+            <Button
               style={{ marginLeft: 20 }}
               title="Cadastrar novo usuário"
               onPress={handleModal}
