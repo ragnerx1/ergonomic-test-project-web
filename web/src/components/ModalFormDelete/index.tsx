@@ -2,13 +2,12 @@ import React from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
+import Button from '../Button';
 import api from '../../services/api';
-import ComponentButton from '../ComponentButton';
-
-import { ICompanentDeleteFormModal } from './types';
+import { IModalFormDelete } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const CompanentDeleteFormModal: React.FC<ICompanentDeleteFormModal> = ({
+const ModalFormDelete: React.FC<IModalFormDelete> = ({
   status,
   onPress,
   company,
@@ -44,14 +43,10 @@ const CompanentDeleteFormModal: React.FC<ICompanentDeleteFormModal> = ({
 
         <p>Tem certeza que deseja excluir esse formulário?</p>
 
-        <ComponentButton
-          title="Excluir"
-          onPress={handleDeleteCompany}
-          color="red"
-        />
+        <Button title="Excluir" onPress={handleDeleteCompany} color="red" />
       </ContainerCreateData>
     </Container>
   );
 };
 
-export default CompanentDeleteFormModal;
+export default ModalFormDelete;
