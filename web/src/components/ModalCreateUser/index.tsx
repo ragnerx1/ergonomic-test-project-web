@@ -6,8 +6,8 @@ import React, {
 } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-import { CompanyProps } from '../../pages/Company';
 
+import { ICompany } from 'pages/Company/types';
 import api from '../../services/api';
 import Button from '../Button';
 import { IModalCreateUser, IModalCreateUserActions } from './types';
@@ -22,7 +22,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   const [email, setEmail] = useState('');
   const [companySelected, setCompanySelected] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
-  const [companies, setCompanies] = useState<CompanyProps[]>([]);
+  const [companies, setCompanies] = useState<ICompany[]>([]);
 
   useEffect(() => {
     if (user) {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
-import ComponentButton from '@components/ComponentButton';
-import ComponentDeleteCompanyModal from '@components/ComponentDeleteCompanyModal';
-import ComponentHeader from '@components/ComponentHeader';
-import ComponentModalCreateCompany from '@components/ComponentModalCreateCompany';
-import ComponentCreateQuestionModal from '@components/ModalCreateQuestion';
+import Button from '@components/Button';
+import Header from '@components/Header';
+import ModalDeleteCompany from '@components/ModalDeleteCompany';
+import ModalCreateCompany from '@components/ModalCreateCompany';
+import ModalCreateQuestion from '@components/ModalCreateQuestion';
 import { ICreateQuestionActions } from '@components/ModalCreateQuestion/types';
 
 import api from '../../services/api';
@@ -16,7 +16,6 @@ const Questions: React.FC = () => {
   const createQuestionModal = useRef<ICreateQuestionActions>(null);
 
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
-  const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [companySelected, setCompanySelected] = useState('');
   const [serach, setSearch] = useState('');
@@ -31,11 +30,7 @@ const Questions: React.FC = () => {
         },
       })
       .then(response => setQuestions(response.data));
-  }, [visibleModal, visibleModalDelete]);
-
-  function handleModal() {
-    setVisibleModal(oldValue => !oldValue);
-  }
+  }, [visibleModalDelete]);
 
   function handleModalDelete(id: string) {
     setCompanySelected(id);
@@ -45,7 +40,7 @@ const Questions: React.FC = () => {
   function handleModalEditModal(id: string, nameCompany: string) {
     setCompanySelected(id);
     setName(nameCompany);
-    setVisibleModal(oldValue => !oldValue);
+    createQuestionModal.current?.handleVisibleModal();
   }
 
   const filter = (listCompanies: IQuestionProps[], query: string) =>
@@ -86,7 +81,7 @@ const Questions: React.FC = () => {
 
   return (
     <Container>
-      <ComponentHeader buttomBack />
+      <Header buttomBack />
 
       <section>
         <div>
@@ -105,7 +100,7 @@ const Questions: React.FC = () => {
             />
           </div>
 
-          <ComponentButton
+          <Button
             title="Cadastrar nova pergunta"
             onPress={() => createQuestionModal.current?.handleVisibleModal()}
           />
@@ -129,20 +124,11 @@ const Questions: React.FC = () => {
         <CompaniesList listCompanies={questions} query={serach} />
       </section>
 
-      <ComponentCreateQuestionModal ref={createQuestionModal} />
+      <ModalCreateQuestion ref={createQuestionModal} />
 
-      <ComponentModalCreateCompany
-        status={visibleModal}
-        onPress={handleModal}
-        company={name}
-        id={companySelected}
-      />
+      <ModalCreateCompany company={name} id={companySelected} />
 
-      <ComponentDeleteCompanyModal
-        status={visibleModalDelete}
-        onPress={() => handleModalDelete('')}
-        company={companySelected}
-      />
+      <ModalDeleteCompany company={companySelected} />
     </Container>
   );
 };

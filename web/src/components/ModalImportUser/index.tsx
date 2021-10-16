@@ -1,3 +1,4 @@
+import { ICompany } from 'pages/Company/types';
 import React, {
   forwardRef,
   useEffect,
@@ -7,17 +8,16 @@ import React, {
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
-import { CompanyProps } from '../../pages/Company';
 import api from '../../services/api';
 import Button from '../Button';
-import { Container, ContainerCreateData } from './styles';
 import { IModalImportUserActions } from './types';
+import { Container, ContainerCreateData } from './styles';
 
 const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
   (props, ref) => {
     const [isVisible, setIsVisible] = useState(false);
 
-    const [companies, setCompanies] = useState<CompanyProps[]>([]);
+    const [companies, setCompanies] = useState<ICompany[]>([]);
     const [companySelected, setCompanySelected] = useState('');
     const [file, setFile] = useState<any>();
 
