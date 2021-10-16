@@ -1,5 +1,7 @@
 export interface IModalFormDelete {
-  status: boolean;
-  onPress(): void;
   company?: string;
+}
+
+export interface IModalFormDeleteActions {
+  handleVisibleModal(): void;
 }

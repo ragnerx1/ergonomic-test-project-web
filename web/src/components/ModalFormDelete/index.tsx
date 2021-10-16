@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import Button from '../Button';
 import api from '../../services/api';
-import { IModalFormDelete } from './types';
+import { IModalFormDelete, IModalFormDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalFormDelete: React.FC<IModalFormDelete> = ({
-  status,
-  onPress,
-  company,
-}) => {
+const ModalFormDelete: React.ForwardRefRenderFunction<
+  IModalFormDeleteActions,
+  IModalFormDelete
+> = ({ company }, ref) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  function handleVisibleModal() {
+    setIsVisible(oldValue => !oldValue);
+  }
+
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
+
   async function handleDeleteCompany() {
     try {
       const token = localStorage.getItem('ergonomic@token');
@@ -20,7 +27,7 @@ const ModalFormDelete: React.FC<IModalFormDelete> = ({
           Authorization: `Bearer ${token}`,
         },
       });
-      onPress();
+      handleVisibleModal();
     } catch (err: any) {
       toast.error('Não foi possivel excluir este formulário');
     }
@@ -28,15 +35,15 @@ const ModalFormDelete: React.FC<IModalFormDelete> = ({
 
   return (
     <Container
-      open={status}
-      onClose={onPress}
+      open={isVisible}
+      onClose={handleVisibleModal}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
       <ContainerCreateData>
         <section className="header">
           <h2>Excluir formulário</h2>
-          <button type="button" onClick={onPress}>
+          <button type="button" onClick={handleVisibleModal}>
             <AiFillCloseCircle size={20} />
           </button>
         </section>
@@ -49,4 +56,4 @@ const ModalFormDelete: React.FC<IModalFormDelete> = ({
   );
 };
 
-export default ModalFormDelete;
+export default forwardRef(ModalFormDelete);

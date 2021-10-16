@@ -1,36 +1,28 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
-
 import { toast } from 'react-toastify';
-import ComponentButton from '../../components/ComponentButton';
-import CompanentDeleteFormModal from '../../components/CompanentDeleteFormModal';
-import ComponentHeader from '../../components/ComponentHeader';
-import ComponentModalCreateForm from '../../components/ComponentModalCreateForm';
+
+import Button from '@components/Button';
+import Header from '@components/Header';
+import { IModalFormDeleteActions } from '@components/ModalFormDelete/types';
+import ModalFormDelete from '@components/ModalFormDelete';
+import ComponentModalCreateForm from '@components/ComponentModalCreateForm';
 import api from '../../services/api';
 import { Container } from './styles';
-
-export interface FormProps {
-  id: string;
-  name: string;
-  active: boolean;
-}
-
-interface FormListProps {
-  listForms: FormProps[];
-  query: string;
-}
+import { IForm, IFormList } from './types';
 
 const Form: React.FC = () => {
-  const [forms, setForms] = useState<FormProps[]>([]);
+  const modalFormDelete = useRef<IModalFormDeleteActions>(null);
+
+  const [forms, setForms] = useState<IForm[]>([]);
   const [visibleModal, setVisibleModal] = useState(false);
-  const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [companySelected, setCompanySelected] = useState('');
   const [serach, setSearch] = useState('');
   const [name, setName] = useState('');
 
-  const handleActive = useCallback(async (form: FormProps) => {
+  const handleActive = useCallback(async (form: IForm) => {
     const token = localStorage.getItem('ergonomic@token');
     const { name: formName, active, id } = form;
     try {
@@ -55,7 +47,7 @@ const Form: React.FC = () => {
         },
       })
       .then(response => setForms(response.data));
-  }, [visibleModal, visibleModalDelete, handleActive]);
+  }, [visibleModal, handleActive]);
 
   function handleModal() {
     setVisibleModal(oldValue => !oldValue);
@@ -63,7 +55,7 @@ const Form: React.FC = () => {
 
   function handleModalDelete(id: string) {
     setCompanySelected(id);
-    setVisibleModalDelete(oldValue => !oldValue);
+    modalFormDelete.current?.handleVisibleModal();
   }
 
   function handleModalEditModal(id: string, nameForm: string) {
@@ -72,10 +64,10 @@ const Form: React.FC = () => {
     setVisibleModal(oldValue => !oldValue);
   }
 
-  const filter = (listForms: FormProps[], query: string) =>
+  const filter = (listForms: IForm[], query: string) =>
     listForms.filter(form => form.name.toLowerCase().includes(query));
 
-  function FormsList({ listForms, query }: FormListProps) {
+  function FormsList({ listForms, query }: IFormList) {
     const filtered = filter(listForms, query);
 
     return (
@@ -114,7 +106,7 @@ const Form: React.FC = () => {
 
   return (
     <Container>
-      <ComponentHeader buttomBack />
+      <Header buttomBack />
 
       <section>
         <div>
@@ -133,10 +125,7 @@ const Form: React.FC = () => {
             />
           </div>
 
-          <ComponentButton
-            title="Cadastrar novo formulário"
-            onPress={handleModal}
-          />
+          <Button title="Cadastrar novo formulário" onPress={handleModal} />
         </div>
 
         <section className="header-table">
@@ -167,11 +156,7 @@ const Form: React.FC = () => {
         id={companySelected}
       />
 
-      <CompanentDeleteFormModal
-        status={visibleModalDelete}
-        onPress={() => handleModalDelete('')}
-        company={companySelected}
-      />
+      <ModalFormDelete company={companySelected} ref={modalFormDelete} />
     </Container>
   );
 };
