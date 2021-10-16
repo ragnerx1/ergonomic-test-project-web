@@ -5,17 +5,11 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
-import ComponentButton from '../ComponentButton';
-
+import Button from '../Button';
+import { IModalDeleteCompany } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-interface Props {
-  status: boolean;
-  onPress(): void;
-  company?: string;
-}
-
-const ComponentDeleteCompanyModal: React.FC<Props> = ({
+const ComponentDeleteCompanyModal: React.FC<IModalDeleteCompany> = ({
   status,
   onPress,
   company,
@@ -51,11 +45,7 @@ const ComponentDeleteCompanyModal: React.FC<Props> = ({
 
         <p>Tem certeza que deseja excluir essa empresa?</p>
 
-        <ComponentButton
-          title="Excluir"
-          onPress={handleDeleteCompany}
-          color="red"
-        />
+        <Button title="Excluir" onPress={handleDeleteCompany} color="red" />
       </ContainerCreateData>
     </Container>
   );
