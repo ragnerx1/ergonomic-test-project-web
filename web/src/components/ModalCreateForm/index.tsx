@@ -1,27 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
-import ComponentButton from '../ComponentButton';
-
+import Button from '../Button';
+import { IModalCreateForm, IModalCreateFormActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-interface Props {
-  status: boolean;
-  onPress(): void;
-  form?: string;
-  id: string | undefined;
-}
-
-const ComponentModalCreateForm: React.FC<Props> = ({
-  status,
-  onPress,
-  form,
-  id,
-}) => {
+const ModalCreateForm: React.ForwardRefRenderFunction<
+  IModalCreateFormActions,
+  IModalCreateForm
+> = ({ form, id }, ref) => {
+  const [isVisible, setIsVisible] = useState(false);
   const [name, setName] = useState('');
+
+  function handleVisibleModal() {
+    setIsVisible(oldValue => !oldValue);
+  }
+
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   useEffect(() => {
     if (form) {
@@ -31,7 +34,7 @@ const ComponentModalCreateForm: React.FC<Props> = ({
 
   function handleCloseModal() {
     setName('');
-    onPress();
+    handleVisibleModal();
   }
 
   async function handleCreateCompany() {
@@ -61,8 +64,8 @@ const ComponentModalCreateForm: React.FC<Props> = ({
 
   return (
     <Container
-      open={status}
-      onClose={onPress}
+      open={isVisible}
+      onClose={handleVisibleModal}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
@@ -84,7 +87,7 @@ const ComponentModalCreateForm: React.FC<Props> = ({
           />
         </form>
 
-        <ComponentButton
+        <Button
           title={form ? 'Editar' : 'Criar'}
           onPress={handleCreateCompany}
         />
@@ -93,4 +96,4 @@ const ComponentModalCreateForm: React.FC<Props> = ({
   );
 };
 
-export default ComponentModalCreateForm;
+export default forwardRef(ModalCreateForm);

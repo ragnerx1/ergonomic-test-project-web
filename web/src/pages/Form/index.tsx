@@ -1,23 +1,22 @@
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
+import { IModalFormDeleteActions } from '@components/ModalFormDelete/types';
+import { IModalCreateFormActions } from '@components/ModalCreateForm/types';
+import ModalFormDelete from '@components/ModalFormDelete';
+import ModalCreateForm from '@components/ModalCreateForm';
 import Button from '@components/Button';
 import Header from '@components/Header';
-import { IModalFormDeleteActions } from '@components/ModalFormDelete/types';
-import ModalFormDelete from '@components/ModalFormDelete';
-import ComponentModalCreateForm from '@components/ComponentModalCreateForm';
 import api from '../../services/api';
-import { Container } from './styles';
 import { IForm, IFormList } from './types';
+import { Container } from './styles';
 
 const Form: React.FC = () => {
   const modalFormDelete = useRef<IModalFormDeleteActions>(null);
+  const modalCreateForm = useRef<IModalCreateFormActions>(null);
 
   const [forms, setForms] = useState<IForm[]>([]);
-  const [visibleModal, setVisibleModal] = useState(false);
   const [companySelected, setCompanySelected] = useState('');
   const [serach, setSearch] = useState('');
   const [name, setName] = useState('');
@@ -47,11 +46,7 @@ const Form: React.FC = () => {
         },
       })
       .then(response => setForms(response.data));
-  }, [visibleModal, handleActive]);
-
-  function handleModal() {
-    setVisibleModal(oldValue => !oldValue);
-  }
+  }, [handleActive]);
 
   function handleModalDelete(id: string) {
     setCompanySelected(id);
@@ -61,7 +56,7 @@ const Form: React.FC = () => {
   function handleModalEditModal(id: string, nameForm: string) {
     setCompanySelected(id);
     setName(nameForm);
-    setVisibleModal(oldValue => !oldValue);
+    modalCreateForm.current?.handleVisibleModal();
   }
 
   const filter = (listForms: IForm[], query: string) =>
@@ -125,7 +120,10 @@ const Form: React.FC = () => {
             />
           </div>
 
-          <Button title="Cadastrar novo formulário" onPress={handleModal} />
+          <Button
+            title="Cadastrar novo formulário"
+            onPress={() => modalCreateForm.current?.handleVisibleModal()}
+          />
         </div>
 
         <section className="header-table">
@@ -149,13 +147,7 @@ const Form: React.FC = () => {
         <FormsList listForms={forms} query={serach} />
       </section>
 
-      <ComponentModalCreateForm
-        status={visibleModal}
-        onPress={handleModal}
-        form={name}
-        id={companySelected}
-      />
-
+      <ModalCreateForm form={name} id={companySelected} ref={modalCreateForm} />
       <ModalFormDelete company={companySelected} ref={modalFormDelete} />
     </Container>
   );
