@@ -1,27 +1,19 @@
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
-import ComponentButton from '../../components/ComponentButton';
+import Button from '@components/Button';
+import Header from '@components/Header';
+import { IModalCreateCompanyActions } from '@components/ModalCreateCompany/types';
+import ModalCreateCompany from '@components/ModalCreateCompany';
 import ComponentDeleteCompanyModal from '../../components/ComponentDeleteCompanyModal';
-import ComponentHeader from '../../components/ComponentHeader';
-import ComponentModalCreateCompany from '../../components/ComponentModalCreateCompany';
 import api from '../../services/api';
+import { ICompany, IListCompanies } from './types';
 import { Container } from './styles';
 
-export interface CompanyProps {
-  id: string;
-  name: string;
-}
-
-interface CompaniesListProps {
-  listCompanies: CompanyProps[];
-  query: string;
-}
-
 const Company: React.FC = () => {
-  const [companies, setCompanies] = useState<CompanyProps[]>([]);
+  const modalCreateCompany = useRef<IModalCreateCompanyActions>(null);
+
+  const [companies, setCompanies] = useState<ICompany[]>([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [companySelected, setCompanySelected] = useState('');
@@ -54,10 +46,10 @@ const Company: React.FC = () => {
     setVisibleModal(oldValue => !oldValue);
   }
 
-  const filter = (listCompanies: CompanyProps[], query: string) =>
+  const filter = (listCompanies: ICompany[], query: string) =>
     listCompanies.filter(company => company.name.toLowerCase().includes(query));
 
-  function CompaniesList({ listCompanies, query }: CompaniesListProps) {
+  function CompaniesList({ listCompanies, query }: IListCompanies) {
     const filtered = filter(listCompanies, query);
 
     return (
@@ -92,7 +84,7 @@ const Company: React.FC = () => {
 
   return (
     <Container>
-      <ComponentHeader buttomBack />
+      <Header buttomBack />
 
       <section>
         <div>
@@ -111,10 +103,7 @@ const Company: React.FC = () => {
             />
           </div>
 
-          <ComponentButton
-            title="Cadastrar nova empresa"
-            onPress={handleModal}
-          />
+          <Button title="Cadastrar nova empresa" onPress={handleModal} />
         </div>
 
         <section className="header-table">
@@ -135,11 +124,10 @@ const Company: React.FC = () => {
         <CompaniesList listCompanies={companies} query={serach} />
       </section>
 
-      <ComponentModalCreateCompany
-        status={visibleModal}
-        onPress={handleModal}
+      <ModalCreateCompany
         company={name}
         id={companySelected}
+        ref={modalCreateCompany}
       />
 
       <ComponentDeleteCompanyModal

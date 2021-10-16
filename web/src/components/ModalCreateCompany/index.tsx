@@ -1,27 +1,31 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
-import ComponentButton from '../ComponentButton';
+import Button from '../Button';
 
+import { IModalCreateCompany, IModalCreateCompanyActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-interface Props {
-  status: boolean;
-  onPress(): void;
-  company?: string;
-  id: string | undefined;
-}
-
-const ComponentModalCreateCompany: React.FC<Props> = ({
-  status,
-  onPress,
-  company,
-  id,
-}) => {
+const ModalCreateCompany: React.ForwardRefRenderFunction<
+  IModalCreateCompanyActions,
+  IModalCreateCompany
+> = ({ company, id }, ref) => {
   const [name, setName] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+
+  function handleVisibleModal() {
+    setIsVisible(oldValue => !oldValue);
+  }
+
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   useEffect(() => {
     if (company) {
@@ -31,7 +35,7 @@ const ComponentModalCreateCompany: React.FC<Props> = ({
 
   function handleCloseModal() {
     setName('');
-    onPress();
+    handleVisibleModal();
   }
 
   async function handleCreateCompany() {
@@ -61,8 +65,8 @@ const ComponentModalCreateCompany: React.FC<Props> = ({
 
   return (
     <Container
-      open={status}
-      onClose={onPress}
+      open={isVisible}
+      onClose={handleVisibleModal}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
@@ -84,7 +88,7 @@ const ComponentModalCreateCompany: React.FC<Props> = ({
           />
         </form>
 
-        <ComponentButton
+        <Button
           title={company ? 'Editar' : 'Criar'}
           onPress={handleCreateCompany}
         />
@@ -93,4 +97,4 @@ const ComponentModalCreateCompany: React.FC<Props> = ({
   );
 };
 
-export default ComponentModalCreateCompany;
+export default forwardRef(ModalCreateCompany);

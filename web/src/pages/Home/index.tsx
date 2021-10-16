@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Header from '@components/Header';
@@ -9,12 +9,9 @@ import { Container, ButtonCard } from './styles';
 const Home: React.FC = () => {
   const { push } = useHistory();
 
-  const handleNavigateTo = useCallback(
-    (routeName: string) => {
-      push(routeName);
-    },
-    [push],
-  );
+  function handleNavigateTo(routeName: string) {
+    push(routeName);
+  }
 
   return (
     <Container>
