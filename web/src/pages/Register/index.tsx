@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useCallback, useEffect, useState } from 'react';
+import { IModalUserDeleteActions } from '@components/ModalUserDelete/types';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import ComponentButton from '../../components/ComponentButton';
 import ComponentCreateUserModal from '../../components/ComponentCreateUserModal';
-import ComponentDeleteUserModal from '../../components/ComponentDeleteUserModal';
+import ModalUserDelete from '../../components/ModalUserDelete';
 import ComponentHeader from '../../components/ComponentHeader';
 import ComponentImportUsersModal from '../../components/ComponentImportUsersModal';
 import api from '../../services/api';
@@ -26,6 +27,8 @@ interface UsersListProps {
 }
 
 const Register: React.FC = () => {
+  const modalUserDelete = useRef<IModalUserDeleteActions>(null);
+
   const [users, setUsers] = useState<UserProps[]>([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
@@ -180,11 +183,7 @@ const Register: React.FC = () => {
         user={userEdit}
       />
 
-      <ComponentDeleteUserModal
-        status={visibleModalDelete}
-        onPress={handleModalDelete}
-        user={userSerlected}
-      />
+      <ModalUserDelete user={userSerlected} ref={modalUserDelete} />
 
       <ComponentImportUsersModal
         status={visibleModalImport}
