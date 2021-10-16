@@ -8,7 +8,7 @@ import { IModalImportUserActions } from '@components/ModalImportUser/types';
 import ModalCreateUser from '@components/ModalCreateUser';
 import ModalUserDelete from '@components/ModalUserDelete';
 import ModalImportUser from '@components/ModalImportUser';
-import ComponentHeader from '@components/ComponentHeader';
+import Header from '@components/Header';
 import Button from '@components/Button';
 import api from '../../services/api';
 import { IUser, IUsersList } from './types';
@@ -100,7 +100,7 @@ const Register: React.FC = () => {
 
   return (
     <Container>
-      <ComponentHeader buttomBack />
+      <Header buttomBack />
 
       <section>
         <div>

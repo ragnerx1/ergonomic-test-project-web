@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
-import { ComponentHeaderProps } from './types';
+import { IHeader } from './types';
 import { Container } from './styles';
 
-const ComponentHeader: React.FC<ComponentHeaderProps> = ({ buttomBack }) => {
+const Header: React.FC<IHeader> = ({ buttomBack }) => {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
@@ -30,4 +30,4 @@ const ComponentHeader: React.FC<ComponentHeaderProps> = ({ buttomBack }) => {
   );
 };
 
-export default ComponentHeader;
+export default Header;
