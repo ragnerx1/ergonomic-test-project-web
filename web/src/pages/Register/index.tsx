@@ -4,23 +4,22 @@ import { toast } from 'react-toastify';
 
 import { IModalUserDeleteActions } from '@components/ModalUserDelete/types';
 import { IModalCreateUserActions } from '@components/ModalCreateUser/types';
-import Button from '@components/Button';
+import { IModalImportUserActions } from '@components/ModalImportUser/types';
 import ModalCreateUser from '@components/ModalCreateUser';
 import ModalUserDelete from '@components/ModalUserDelete';
+import ModalImportUser from '@components/ModalImportUser';
 import ComponentHeader from '@components/ComponentHeader';
-import ComponentImportUsersModal from '@components/ComponentImportUsersModal';
+import Button from '@components/Button';
 import api from '../../services/api';
-import { Container } from './styles';
 import { IUser, IUsersList } from './types';
+import { Container } from './styles';
 
 const Register: React.FC = () => {
   const modalUserDelete = useRef<IModalUserDeleteActions>(null);
   const modalUserCreate = useRef<IModalCreateUserActions>(null);
+  const modalImportUser = useRef<IModalImportUserActions>(null);
 
   const [users, setUsers] = useState<IUser[]>([]);
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [visibleModalDelete, setVisibleModalDelete] = useState(false);
-  const [visibleModalImport, setVisibleModalImport] = useState(false);
   const [userSerlected, setUserSerlected] = useState('');
   const [userEdit, setUserEdit] = useState<IUser>();
   const [serach, setSearch] = useState('');
@@ -50,24 +49,16 @@ const Register: React.FC = () => {
         },
       })
       .then(response => setUsers(response.data));
-  }, [visibleModal, visibleModalDelete, visibleModalImport]);
-
-  function handleModal() {
-    setVisibleModal(oldValue => !oldValue);
-  }
+  }, []);
 
   function handleModalDelete(user?: string) {
     setUserSerlected(user || '');
-    setVisibleModalDelete(oldValue => !oldValue);
-  }
-
-  function handleModalImport() {
-    setVisibleModalImport(oldValue => !oldValue);
+    modalUserDelete.current?.handleVisibleModal();
   }
 
   function handleModalEditModal(user: IUser) {
     setUserEdit(user);
-    setVisibleModal(oldValue => !oldValue);
+    modalUserCreate.current?.handleVisibleModal();
   }
 
   const filter = (usersList: IUser[], query: string) =>
@@ -131,12 +122,15 @@ const Register: React.FC = () => {
           </div>
 
           <div>
-            <Button title="Importar usuários" onPress={handleModalImport} />
+            <Button
+              title="Importar usuários"
+              onPress={() => modalImportUser.current?.handleVisibleModal()}
+            />
 
             <Button
               style={{ marginLeft: 20 }}
               title="Cadastrar novo usuário"
-              onPress={handleModal}
+              onPress={() => modalUserCreate.current?.handleVisibleModal()}
             />
           </div>
         </div>
@@ -164,11 +158,7 @@ const Register: React.FC = () => {
 
       <ModalCreateUser user={userEdit} ref={modalUserCreate} />
       <ModalUserDelete user={userSerlected} ref={modalUserDelete} />
-
-      <ComponentImportUsersModal
-        status={visibleModalImport}
-        onPress={handleModalImport}
-      />
+      <ModalImportUser ref={modalImportUser} />
     </Container>
   );
 };
