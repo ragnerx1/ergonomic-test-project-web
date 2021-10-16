@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import ComponentHeader from '@components/ComponentHeader';
+import Header from '@components/Header';
 import { homeData } from './data';
 import { IHomeDataProps } from './types';
 import { Container, ButtonCard } from './styles';
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <ComponentHeader buttomBack={false} />
+      <Header buttomBack={false} />
 
       <section>
         <div>
