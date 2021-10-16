@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 import Button from '../Button';
-
 import { IModalUserDelete, IModalUserDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 

@@ -1,7 +1,9 @@
-import { UserProps } from 'pages/Register';
+import { IUser } from 'pages/Register/types';
 
 export interface IModalCreateUser {
-  status: boolean;
-  onPress(): void;
-  user: UserProps | undefined;
+  user: IUser | undefined;
+}
+
+export interface IModalCreateUserActions {
+  handleVisibleModal(): void;
 }

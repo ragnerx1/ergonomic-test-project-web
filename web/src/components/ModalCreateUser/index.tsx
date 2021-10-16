@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import { CompanyProps } from '../../pages/Company';
 
 import api from '../../services/api';
 import Button from '../Button';
-
-import { IModalCreateUser } from './types';
+import { IModalCreateUser, IModalCreateUserActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalCreateUser: React.FC<IModalCreateUser> = ({
-  status,
-  onPress,
-  user,
-}) => {
+const ModalCreateUser: React.ForwardRefRenderFunction<
+  IModalCreateUserActions,
+  IModalCreateUser
+> = ({ user }, ref) => {
+  const [isVisible, setIsVisible] = useState(false);
+
   const [email, setEmail] = useState('');
   const [companySelected, setCompanySelected] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
@@ -36,11 +41,17 @@ const ModalCreateUser: React.FC<IModalCreateUser> = ({
       .then(response => setCompanies(response.data));
   }, [user]);
 
+  function handleVisibleModal() {
+    setIsVisible(oldValue => !oldValue);
+  }
+
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
+
   function handleCloseModal() {
     setCompanySelected('');
     setEmail('');
     setIsAdmin(false);
-    onPress();
+    handleVisibleModal();
   }
 
   async function handleCreateCompany() {
@@ -70,8 +81,8 @@ const ModalCreateUser: React.FC<IModalCreateUser> = ({
 
   return (
     <Container
-      open={status}
-      onClose={onPress}
+      open={isVisible}
+      onClose={handleVisibleModal}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
@@ -122,4 +133,4 @@ const ModalCreateUser: React.FC<IModalCreateUser> = ({
   );
 };
 
-export default ModalCreateUser;
+export default forwardRef(ModalCreateUser);

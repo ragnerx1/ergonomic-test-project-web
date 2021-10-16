@@ -1,19 +1,21 @@
-import { IModalUserDeleteActions } from '@components/ModalUserDelete/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
-import Button from '../../components/Button';
-import ComponentCreateUserModal from '../../components/ComponentCreateUserModal';
-import ModalUserDelete from '../../components/ModalUserDelete';
-import ComponentHeader from '../../components/ComponentHeader';
-import ComponentImportUsersModal from '../../components/ComponentImportUsersModal';
+import { IModalUserDeleteActions } from '@components/ModalUserDelete/types';
+import { IModalCreateUserActions } from '@components/ModalCreateUser/types';
+import Button from '@components/Button';
+import ModalCreateUser from '@components/ModalCreateUser';
+import ModalUserDelete from '@components/ModalUserDelete';
+import ComponentHeader from '@components/ComponentHeader';
+import ComponentImportUsersModal from '@components/ComponentImportUsersModal';
 import api from '../../services/api';
 import { Container } from './styles';
 import { IUser, IUsersList } from './types';
 
 const Register: React.FC = () => {
   const modalUserDelete = useRef<IModalUserDeleteActions>(null);
+  const modalUserCreate = useRef<IModalCreateUserActions>(null);
 
   const [users, setUsers] = useState<IUser[]>([]);
   const [visibleModal, setVisibleModal] = useState(false);
@@ -160,12 +162,7 @@ const Register: React.FC = () => {
         <UsersList usersList={users} query={serach} />
       </section>
 
-      <ComponentCreateUserModal
-        status={visibleModal}
-        onPress={handleModal}
-        user={userEdit}
-      />
-
+      <ModalCreateUser user={userEdit} ref={modalUserCreate} />
       <ModalUserDelete user={userSerlected} ref={modalUserDelete} />
 
       <ComponentImportUsersModal
