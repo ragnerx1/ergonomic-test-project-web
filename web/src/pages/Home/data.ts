@@ -1,17 +1,10 @@
-import { IconType } from 'react-icons';
-import { AiOutlineUserAdd } from 'react-icons/ai';
+import { AiOutlineUserAdd, AiOutlineQuestionCircle } from 'react-icons/ai';
 import { GrLogout } from 'react-icons/gr';
 import { FaRegBuilding, FaWpforms } from 'react-icons/fa';
 
-export interface HomeDataProps {
-  id: number;
-  title: string;
-  icon: IconType;
-  color: string;
-  route: string;
-}
+import { IHomeDataProps } from './types';
 
-export const homeData: HomeDataProps[] = [
+export const homeData: IHomeDataProps[] = [
   {
     id: 0,
     title: 'Usuários',
@@ -35,6 +28,13 @@ export const homeData: HomeDataProps[] = [
   },
   {
     id: 3,
+    title: 'Perguntas',
+    icon: AiOutlineQuestionCircle,
+    color: '#f7f7f7',
+    route: '/questions',
+  },
+  {
+    id: 4,
     title: 'Sair',
     icon: GrLogout,
     color: '#fff0f0',

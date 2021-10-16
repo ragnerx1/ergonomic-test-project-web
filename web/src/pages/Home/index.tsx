@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import ComponentHeader from '../../components/ComponentHeader';
-import { homeData, HomeDataProps } from './data';
+import ComponentHeader from '@components/ComponentHeader';
+import { homeData } from './data';
+import { IHomeDataProps } from './types';
 import { Container, ButtonCard } from './styles';
 
 const Home: React.FC = () => {
@@ -21,7 +22,7 @@ const Home: React.FC = () => {
 
       <section>
         <div>
-          {homeData.map((item: HomeDataProps) => (
+          {homeData.map((item: IHomeDataProps) => (
             <ButtonCard
               type="button"
               color={item.color}

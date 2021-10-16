@@ -1,7 +1,7 @@
 import { darken } from 'polished';
 import styled from 'styled-components';
 
-import { ButtonCardProps } from './types';
+import { IButtonCardProps } from './types';
 
 export const Container = styled.div`
   height: 100vh;
@@ -27,7 +27,7 @@ export const Container = styled.div`
   }
 `;
 
-export const ButtonCard = styled.button<ButtonCardProps>`
+export const ButtonCard = styled.button<IButtonCardProps>`
   width: 250px;
   height: 150px;
   border: none;

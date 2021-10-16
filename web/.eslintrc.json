@@ -23,6 +23,21 @@
         "prettier"
     ],
     "rules": {
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "interface",
+          "format": ["PascalCase"],
+          "custom": {
+            "regex": "^I[A-Z]",
+            "match": true
+          }
+        }
+      ],
+      "jsx-a11y/label-has-associated-control": "off",
+      "implicit-arrow-linebreak": "off",
+      "operator-linebreak": "off",
+      "no-multi-spaces": "off",
       "camelcase": "off",
       "arrow-parens": "off",
       "react/prop-types": "off",

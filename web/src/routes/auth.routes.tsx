@@ -7,6 +7,7 @@ import Register from '../pages/Register';
 import LoginAdmin from '../pages/LoginAdmin';
 import Company from '../pages/Company';
 import Form from '../pages/Form';
+import Questions from '../pages/Questions';
 
 const Routes: React.FC = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ const Routes: React.FC = () => (
       <Route path="/register" component={Register} />
       <Route path="/company" component={Company} />
       <Route path="/form" component={Form} />
+      <Route path="/questions" component={Questions} />
     </Switch>
   </BrowserRouter>
 );

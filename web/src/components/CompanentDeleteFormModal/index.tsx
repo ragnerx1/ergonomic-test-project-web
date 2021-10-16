@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
@@ -7,15 +5,10 @@ import { toast } from 'react-toastify';
 import api from '../../services/api';
 import ComponentButton from '../ComponentButton';
 
+import { ICompanentDeleteFormModal } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-interface Props {
-  status: boolean;
-  onPress(): void;
-  company?: string;
-}
-
-const CompanentDeleteFormModal: React.FC<Props> = ({
+const CompanentDeleteFormModal: React.FC<ICompanentDeleteFormModal> = ({
   status,
   onPress,
   company,
