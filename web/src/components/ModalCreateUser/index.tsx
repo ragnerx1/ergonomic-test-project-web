@@ -1,24 +1,15 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-unneeded-ternary */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import { CompanyProps } from '../../pages/Company';
-import { UserProps } from '../../pages/Register';
 
 import api from '../../services/api';
-import ComponentButton from '../ComponentButton';
+import Button from '../Button';
 
+import { IModalCreateUser } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-interface Props {
-  status: boolean;
-  onPress(): void;
-  user: UserProps | undefined;
-}
-
-const ComponentCreateUserModal: React.FC<Props> = ({
+const ModalCreateUser: React.FC<IModalCreateUser> = ({
   status,
   onPress,
   user,
@@ -62,17 +53,13 @@ const ComponentCreateUserModal: React.FC<Props> = ({
     try {
       const token = localStorage.getItem('ergonomic@token');
       if (user) {
-        await api.put(
-          `register/info/${user?.id}`,
-          data,
-          { headers: { Authorization: `Bearer ${token}` } },
-        );
+        await api.put(`register/info/${user?.id}`, data, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
       } else {
-        await api.post(
-          'register',
-          data,
-          { headers: { Authorization: `Bearer ${token}` } },
-        );
+        await api.post('register', data, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
       }
 
       handleCloseModal();
@@ -90,11 +77,7 @@ const ComponentCreateUserModal: React.FC<Props> = ({
     >
       <ContainerCreateData>
         <section className="header">
-          <h2>
-            {user ? 'Editar' : 'Criar'}
-            {' '}
-            usuário
-          </h2>
+          <h2>{user ? 'Editar' : 'Criar'} usuário </h2>
           <button type="button" onClick={handleCloseModal}>
             <AiFillCloseCircle size={20} />
           </button>
@@ -130,7 +113,7 @@ const ComponentCreateUserModal: React.FC<Props> = ({
           </select>
         </form>
 
-        <ComponentButton
+        <Button
           title={user ? 'Editar' : 'Criar'}
           onPress={handleCreateCompany}
         />
@@ -139,4 +122,4 @@ const ComponentCreateUserModal: React.FC<Props> = ({
   );
 };
 
-export default ComponentCreateUserModal;
+export default ModalCreateUser;
