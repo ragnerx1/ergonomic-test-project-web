@@ -5,6 +5,12 @@ export interface ISignInCredentials {
   password: string;
 }
 
+export interface IAuthState {
+  token: string;
+  register: IUser;
+}
+
 export interface IAuthContextData {
   signIn(credentials: ISignInCredentials): Promise<void>;
+  user: IAuthState;
 }
