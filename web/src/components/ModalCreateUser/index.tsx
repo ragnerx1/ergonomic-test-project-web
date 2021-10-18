@@ -7,7 +7,8 @@ import React, {
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
-import { ICompany } from 'pages/Company/types';
+import { useRegister } from '@hooks/register';
+import { useCompany } from '@hooks/company';
 import api from '../../services/api';
 import Button from '../Button';
 import { IModalCreateUser, IModalCreateUserActions } from './types';
@@ -17,12 +18,13 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   IModalCreateUserActions,
   IModalCreateUser
 > = ({ user }, ref) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const { createRegister } = useRegister();
+  const { getCompanies, companies } = useCompany();
 
+  const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [companySelected, setCompanySelected] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
-  const [companies, setCompanies] = useState<ICompany[]>([]);
 
   useEffect(() => {
     if (user) {
@@ -31,15 +33,8 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
       setCompanySelected(user.company_id);
     }
 
-    const token = localStorage.getItem('ergonomic@token');
-    api
-      .get('company', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => setCompanies(response.data));
-  }, [user]);
+    getCompanies().then();
+  }, [user, getCompanies]);
 
   function handleVisibleModal() {
     setIsVisible(oldValue => !oldValue);
@@ -68,9 +63,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await api.post('register', data, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await createRegister(data);
       }
 
       handleCloseModal();
@@ -80,12 +73,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   }
 
   return (
-    <Container
-      open={isVisible}
-      onClose={handleVisibleModal}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
+    <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
         <section className="header">
           <h2>{user ? 'Editar' : 'Criar'} usuário </h2>

@@ -1,5 +1,7 @@
+import { IRegister } from 'pages/Register/types';
+
 export interface IModalUserDelete {
-  user: string;
+  user: IRegister;
 }
 
 export interface IModalUserDeleteActions {

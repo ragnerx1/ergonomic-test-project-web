@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { toast } from 'react-toastify';
 
 import { IModalUserDeleteActions } from '@components/ModalUserDelete/types';
 import { IModalCreateUserActions } from '@components/ModalCreateUser/types';
@@ -10,61 +9,42 @@ import ModalUserDelete from '@components/ModalUserDelete';
 import ModalImportUser from '@components/ModalImportUser';
 import Header from '@components/Header';
 import Button from '@components/Button';
-import api from '../../services/api';
-import { IUser, IUsersList } from './types';
+import { useRegister } from '@hooks/register';
+import { IRegister, IRegisterList } from './types';
 import { Container } from './styles';
 
 const Register: React.FC = () => {
+  const { getRegisters, registers, setAdmin } = useRegister();
+
   const modalUserDelete = useRef<IModalUserDeleteActions>(null);
   const modalUserCreate = useRef<IModalCreateUserActions>(null);
   const modalImportUser = useRef<IModalImportUserActions>(null);
 
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [userSerlected, setUserSerlected] = useState('');
-  const [userEdit, setUserEdit] = useState<IUser>();
+  const [userSerlected, setUserSerlected] = useState<IRegister>();
   const [serach, setSearch] = useState('');
 
-  const handleAdmin = useCallback(async (id: string) => {
-    try {
-      const token = localStorage.getItem('ergonomic@token');
-
-      await api.request({
-        method: 'PUT',
-        url: `register/${id}`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } catch (error) {
-      toast.error('Erro ao tonar usuário admin');
-    }
-  }, []);
-
   useEffect(() => {
-    const token = localStorage.getItem('ergonomic@token');
-    api
-      .get('register', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => setUsers(response.data));
-  }, []);
+    getRegisters();
+  }, [getRegisters]);
 
-  function handleModalDelete(user?: string) {
-    setUserSerlected(user || '');
+  async function handleAdmin(id: string) {
+    await setAdmin(id);
+  }
+
+  function handleModalDelete(user: IRegister) {
+    setUserSerlected(user);
     modalUserDelete.current?.handleVisibleModal();
   }
 
-  function handleModalEditModal(user: IUser) {
-    setUserEdit(user);
+  function handleModalEditModal(user: IRegister) {
+    setUserSerlected(user);
     modalUserCreate.current?.handleVisibleModal();
   }
 
-  const filter = (usersList: IUser[], query: string) =>
+  const filter = (usersList: IRegister[], query: string) =>
     usersList.filter(user => user.email.toLowerCase().includes(query));
 
-  function UsersList({ usersList, query }: IUsersList) {
+  function UsersList({ usersList, query }: IRegisterList) {
     const filtered = filter(usersList, query);
 
     return (
@@ -79,7 +59,7 @@ const Register: React.FC = () => {
               <input
                 type="checkbox"
                 checked={user.access}
-                onChange={e => handleAdmin(user.id)}
+                onChange={() => handleAdmin(user.id)}
               />
             </div>
             <div className="option">
@@ -88,7 +68,7 @@ const Register: React.FC = () => {
               </button>
             </div>
             <div className="option">
-              <button type="button" onClick={() => handleModalDelete(user.id)}>
+              <button type="button" onClick={() => handleModalDelete(user)}>
                 <AiFillDelete color="black" />
               </button>
             </div>
@@ -153,11 +133,11 @@ const Register: React.FC = () => {
           </div>
         </section>
 
-        <UsersList usersList={users} query={serach} />
+        <UsersList usersList={registers} query={serach} />
       </section>
 
-      <ModalCreateUser user={userEdit} ref={modalUserCreate} />
-      <ModalUserDelete user={userSerlected} ref={modalUserDelete} />
+      <ModalCreateUser user={userSerlected!} ref={modalUserCreate} />
+      <ModalUserDelete user={userSerlected!} ref={modalUserDelete} />
       <ModalImportUser ref={modalImportUser} />
     </Container>
   );

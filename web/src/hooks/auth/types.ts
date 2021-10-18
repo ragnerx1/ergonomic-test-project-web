@@ -1,4 +1,4 @@
-import { IUser } from 'pages/Register/types';
+import { IRegister } from 'pages/Register/types';
 
 export interface ISignInCredentials {
   email: string;
@@ -7,7 +7,7 @@ export interface ISignInCredentials {
 
 export interface IAuthState {
   token: string;
-  register: IUser;
+  register: IRegister;
 }
 
 export interface IAuthContextData {

@@ -1,8 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { toast } from 'react-toastify';
 
-import api from '../../services/api';
+import { useRegister } from '@hooks/register';
 import Button from '../Button';
 import { IModalUserDelete, IModalUserDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
@@ -11,6 +10,8 @@ const ModalUserDelete: React.ForwardRefRenderFunction<
   IModalUserDeleteActions,
   IModalUserDelete
 > = ({ user }, ref) => {
+  const { deleteRegister } = useRegister();
+
   const [isVisible, setIsVisible] = useState(false);
 
   function handleVisibleModal() {
@@ -20,26 +21,12 @@ const ModalUserDelete: React.ForwardRefRenderFunction<
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   async function handleDeleteUser() {
-    try {
-      const token = localStorage.getItem('ergonomic@token');
-      await api.delete(`register/${user}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      handleVisibleModal();
-    } catch (err: any) {
-      toast.error('Não foi possivel deletar esse usuario');
-    }
+    await deleteRegister(user.id);
+    handleVisibleModal();
   }
 
   return (
-    <Container
-      open={isVisible}
-      onClose={handleVisibleModal}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
+    <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
         <section className="header">
           <h2>Excluir usuário</h2>

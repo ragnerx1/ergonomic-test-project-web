@@ -34,6 +34,7 @@
           }
         }
       ],
+      "no-param-reassign": "off",
       "jsx-a11y/label-has-associated-control": "off",
       "implicit-arrow-linebreak": "off",
       "operator-linebreak": "off",
@@ -49,6 +50,7 @@
       "import/prefer-default-export": "off",
       "react/jsx-props-no-spreading": "off",
       "object-curly-newline": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
       "react/jsx-one-expression-per-line": "off",
       "import/extensions": [
         "error",

@@ -1,7 +1,7 @@
-import { IUser } from 'pages/Register/types';
+import { IRegister } from '../../pages/Register/types';
 
 export interface IModalCreateUser {
-  user: IUser | undefined;
+  user: IRegister | undefined;
 }
 
 export interface IModalCreateUserActions {
