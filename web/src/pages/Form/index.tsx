@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { toast } from 'react-toastify';
 
 import { IModalFormDeleteActions } from '@components/ModalFormDelete/types';
 import { IModalCreateFormActions } from '@components/ModalCreateForm/types';
@@ -8,54 +7,34 @@ import ModalFormDelete from '@components/ModalFormDelete';
 import ModalCreateForm from '@components/ModalCreateForm';
 import Button from '@components/Button';
 import Header from '@components/Header';
-import api from '../../services/api';
+import { useForm } from '@hooks/form';
 import { IForm, IFormList } from './types';
 import { Container } from './styles';
 
 const Form: React.FC = () => {
+  const { getForms, forms, setActive } = useForm();
+
   const modalFormDelete = useRef<IModalFormDeleteActions>(null);
   const modalCreateForm = useRef<IModalCreateFormActions>(null);
 
-  const [forms, setForms] = useState<IForm[]>([]);
-  const [companySelected, setCompanySelected] = useState('');
-  const [serach, setSearch] = useState('');
-  const [name, setName] = useState('');
+  const [companySelected, setCompanySelected] = useState<IForm>();
+  const [search, setSearch] = useState('');
 
-  const handleActive = useCallback(async (form: IForm) => {
-    const token = localStorage.getItem('ergonomic@token');
-    const { name: formName, active, id } = form;
-    try {
-      await api.put(
-        `forms/${id}`,
-        { name: formName, active: !active },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
-    } catch (error) {
-      toast.error('Erro ao ativar formulário');
-    }
-  }, []);
+  async function handleActive(form: IForm) {
+    await setActive(form.id, form);
+  }
 
   useEffect(() => {
-    const token = localStorage.getItem('ergonomic@token');
-    api
-      .get('forms', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => setForms(response.data));
-  }, [handleActive]);
+    getForms().then();
+  }, [getForms]);
 
-  function handleModalDelete(id: string) {
-    setCompanySelected(id);
+  function handleModalDelete(selectedForm: IForm) {
+    setCompanySelected(selectedForm);
     modalFormDelete.current?.handleVisibleModal();
   }
 
-  function handleModalEditModal(id: string, nameForm: string) {
-    setCompanySelected(id);
-    setName(nameForm);
+  function handleModalEditModal(selectedForm: IForm) {
+    setCompanySelected(selectedForm);
     modalCreateForm.current?.handleVisibleModal();
   }
 
@@ -77,19 +56,16 @@ const Form: React.FC = () => {
               <input
                 type="checkbox"
                 checked={form.active}
-                onChange={e => handleActive(form)}
+                onChange={() => handleActive(form)}
               />
             </div>
             <div className="option">
-              <button
-                type="button"
-                onClick={() => handleModalEditModal(form.id, form.name)}
-              >
+              <button type="button" onClick={() => handleModalEditModal(form)}>
                 <AiFillEdit color="black" />
               </button>
             </div>
             <div className="option">
-              <button type="button" onClick={() => handleModalDelete(form.id)}>
+              <button type="button" onClick={() => handleModalDelete(form)}>
                 <AiFillDelete color="black" />
               </button>
             </div>
@@ -115,7 +91,7 @@ const Form: React.FC = () => {
               id="search"
               type="text"
               placeholder="Buscar formulários"
-              value={serach}
+              value={search}
               onChange={e => setSearch(e.target.value)}
             />
           </div>
@@ -144,11 +120,11 @@ const Form: React.FC = () => {
           </div>
         </section>
 
-        <FormsList listForms={forms} query={serach} />
+        <FormsList listForms={forms} query={search} />
       </section>
 
-      <ModalCreateForm form={name} id={companySelected} ref={modalCreateForm} />
-      <ModalFormDelete company={companySelected} ref={modalFormDelete} />
+      <ModalCreateForm form={companySelected!} ref={modalCreateForm} />
+      <ModalFormDelete company={companySelected!} ref={modalFormDelete} />
     </Container>
   );
 };

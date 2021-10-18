@@ -1,6 +1,7 @@
+import { IForm } from 'pages/Form/types';
+
 export interface IModalCreateForm {
-  form?: string;
-  id: string | undefined;
+  form: IForm;
 }
 
 export interface IModalCreateFormActions {
