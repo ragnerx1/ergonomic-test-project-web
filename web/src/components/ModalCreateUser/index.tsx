@@ -87,7 +87,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
             type="checkbox"
             id="admin"
             checked={isAdmin}
-            onChange={e => setIsAdmin(oldValue => !oldValue)}
+            onChange={() => setIsAdmin(oldValue => !oldValue)}
           />
 
           <label htmlFor="admin">Empresa</label>
