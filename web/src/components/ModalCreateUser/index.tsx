@@ -5,11 +5,9 @@ import React, {
   useState,
 } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { toast } from 'react-toastify';
 
 import { useRegister } from '@hooks/register';
 import { useCompany } from '@hooks/company';
-import api from '../../services/api';
 import Button from '../Button';
 import { IModalCreateUser, IModalCreateUserActions } from './types';
 import { Container, ContainerCreateData } from './styles';
@@ -18,7 +16,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   IModalCreateUserActions,
   IModalCreateUser
 > = ({ user }, ref) => {
-  const { createRegister } = useRegister();
+  const { createRegister, editRegister } = useRegister();
   const { getCompanies, companies } = useCompany();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -56,20 +54,13 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
       company_id: companySelected,
     };
 
-    try {
-      const token = localStorage.getItem('ergonomic@token');
-      if (user) {
-        await api.put(`register/info/${user?.id}`, data, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-      } else {
-        await createRegister(data);
-      }
-
-      handleCloseModal();
-    } catch (err) {
-      toast.error('Erro ao criar empresa!');
+    if (user) {
+      await editRegister(user.id, data);
+    } else {
+      await createRegister(data);
     }
+
+    handleCloseModal();
   }
 
   return (
@@ -107,15 +98,14 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
             onChange={e => setCompanySelected(e.target.value)}
           >
             {companies.map(company => (
-              <option value={company.id}>{company.name}</option>
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
             ))}
           </select>
         </form>
 
-        <Button
-          title={user ? 'Editar' : 'Criar'}
-          onPress={handleCreateCompany}
-        />
+        <Button title="Salvar" onPress={handleCreateCompany} />
       </ContainerCreateData>
     </Container>
   );

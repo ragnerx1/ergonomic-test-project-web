@@ -5,5 +5,6 @@ export interface IRegisterContextData {
   setAdmin(id: string): Promise<void>;
   deleteRegister(id: string): Promise<void>;
   createRegister(data: Omit<IRegister, 'id'>): Promise<void>;
+  editRegister(id: string, data: Omit<IRegister, 'id'>): Promise<void>;
   registers: IRegister[];
 }

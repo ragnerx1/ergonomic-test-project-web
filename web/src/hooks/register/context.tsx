@@ -51,15 +51,32 @@ export const RegisterProvider: React.FC = ({ children }) => {
   );
 
   const createRegister = useCallback(async (data: Omit<IRegister, 'id'>) => {
-    console.log(data);
-
     try {
-      await api.post('register', data);
+      const response = await api.post('register', data);
+      setRegisters(oldValues => [...oldValues, response.data]);
       toast.success('Usuário criado');
     } catch (error) {
       toast.error('Erro ao criar usuário');
     }
   }, []);
+
+  const editRegister = useCallback(
+    async (id: string, data: Omit<IRegister, 'id'>) => {
+      try {
+        const response = await api.put(`register/info/${id}`, data);
+
+        const filteredRegisters = registers.filter(
+          register => register.id !== id,
+        );
+        setRegisters([...filteredRegisters, response.data]);
+
+        toast.success('Usuário criado');
+      } catch (error) {
+        toast.error('Erro ao criar usuário');
+      }
+    },
+    [registers],
+  );
 
   return (
     <RegisterContext.Provider
@@ -68,6 +85,7 @@ export const RegisterProvider: React.FC = ({ children }) => {
         setAdmin,
         deleteRegister,
         createRegister,
+        editRegister,
         registers,
       }}
     >
