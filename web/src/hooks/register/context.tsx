@@ -78,6 +78,23 @@ export const RegisterProvider: React.FC = ({ children }) => {
     [registers],
   );
 
+  const importRegisters = useCallback(async (data: FormData) => {
+    try {
+      await api.request({
+        method: 'POST',
+        url: 'register/import',
+        headers: {
+          'Content-Type':
+            'multipart/form-data; boundary=---011000010111000001101001',
+        },
+        data,
+      });
+      toast.success('Usuários importados');
+    } catch (error) {
+      toast.error('Erro ao importar usuários');
+    }
+  }, []);
+
   return (
     <RegisterContext.Provider
       value={{
@@ -86,6 +103,7 @@ export const RegisterProvider: React.FC = ({ children }) => {
         deleteRegister,
         createRegister,
         editRegister,
+        importRegisters,
         registers,
       }}
     >

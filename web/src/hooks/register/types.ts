@@ -6,5 +6,6 @@ export interface IRegisterContextData {
   deleteRegister(id: string): Promise<void>;
   createRegister(data: Omit<IRegister, 'id'>): Promise<void>;
   editRegister(id: string, data: Omit<IRegister, 'id'>): Promise<void>;
+  importRegisters(data: FormData): Promise<void>;
   registers: IRegister[];
 }

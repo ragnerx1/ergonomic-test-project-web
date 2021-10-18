@@ -1,4 +1,3 @@
-import { ICompany } from 'pages/Company/types';
 import React, {
   forwardRef,
   useEffect,
@@ -6,31 +5,25 @@ import React, {
   useState,
 } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { toast } from 'react-toastify';
 
-import api from '../../services/api';
+import { useCompany } from '@hooks/company';
+import { useRegister } from '@hooks/register';
 import Button from '../Button';
 import { IModalImportUserActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
 const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
   (props, ref) => {
-    const [isVisible, setIsVisible] = useState(false);
+    const { getCompanies, companies } = useCompany();
+    const { importRegisters } = useRegister();
 
-    const [companies, setCompanies] = useState<ICompany[]>([]);
+    const [isVisible, setIsVisible] = useState(false);
     const [companySelected, setCompanySelected] = useState('');
     const [file, setFile] = useState<any>();
 
     useEffect(() => {
-      const token = localStorage.getItem('ergonomic@token');
-      api
-        .get('company', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(response => setCompanies(response.data));
-    }, []);
+      getCompanies().then();
+    }, [getCompanies]);
 
     function handleVisibleModal() {
       setIsVisible(oldValue => !oldValue);
@@ -39,35 +32,15 @@ const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
     useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
     async function handleImport() {
-      try {
-        const token = localStorage.getItem('ergonomic@token');
+      const form = new FormData();
+      form.append('file', file[0]);
 
-        const form = new FormData();
-        form.append('file', file[0]);
-
-        await api.request({
-          method: 'POST',
-          url: 'register/import',
-          headers: {
-            'Content-Type':
-              'multipart/form-data; boundary=---011000010111000001101001',
-            Authorization: `Bearer ${token}`,
-          },
-          data: form,
-        });
-        handleVisibleModal();
-      } catch (error) {
-        toast.error('Erro ao importar novos usuários');
-      }
+      await importRegisters(form);
+      handleVisibleModal();
     }
 
     return (
-      <Container
-        open={isVisible}
-        onClose={handleVisibleModal}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
+      <Container open={isVisible} onClose={handleVisibleModal}>
         <ContainerCreateData>
           <section className="header">
             <h2>Importar usuários</h2>
