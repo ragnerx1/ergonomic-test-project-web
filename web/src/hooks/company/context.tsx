@@ -1,6 +1,7 @@
-import { ICompany } from 'pages/Company/types';
 import React, { createContext, useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
 
+import { ICompany } from 'pages/Company/types';
 import api from '../../services/api';
 import { ICompanyContextData } from './types';
 
@@ -11,13 +12,65 @@ export const CompanyProvider: React.FC = ({ children }) => {
 
   const getCompanies = useCallback(async () => {
     const response = await api.get('company');
-    console.log(response.data);
-
     setCompanies(response.data);
   }, []);
 
+  const deleteCompany = useCallback(
+    async (id: string) => {
+      try {
+        const filteredComapnies = companies.filter(
+          comapany => comapany.id !== id,
+        );
+
+        setCompanies(filteredComapnies);
+        await api.delete(`company/${id}`);
+        toast.success('Empresa deletada');
+      } catch (error) {
+        toast.error('Erro ao deletar empresa', { theme: 'dark' });
+      }
+    },
+    [companies],
+  );
+
+  const createCompany = useCallback(async (name: string) => {
+    try {
+      const response = await api.post('company', { name });
+      setCompanies(oldValues => [...oldValues, response.data]);
+
+      toast.success('Empresa criada');
+    } catch (error) {
+      toast.error('Erro ao criar empresa', { theme: 'dark' });
+    }
+  }, []);
+
+  const editCompany = useCallback(
+    async (companySeletced: ICompany) => {
+      const { id, name } = companySeletced;
+
+      try {
+        const response = await api.put(`company/${id}`, { name });
+
+        const filteredCompany = companies.filter(company => company.id !== id);
+        setCompanies([...filteredCompany, response.data]);
+
+        toast.success('Empresa atualizada');
+      } catch (error) {
+        toast.error('Erro ao criar empresa', { theme: 'dark' });
+      }
+    },
+    [companies],
+  );
+
   return (
-    <CompanyContext.Provider value={{ getCompanies, companies }}>
+    <CompanyContext.Provider
+      value={{
+        getCompanies,
+        deleteCompany,
+        createCompany,
+        editCompany,
+        companies,
+      }}
+    >
       {children}
     </CompanyContext.Provider>
   );

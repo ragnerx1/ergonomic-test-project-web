@@ -1,5 +1,7 @@
+import { ICompany } from 'pages/Company/types';
+
 export interface IModalDeleteCompany {
-  company?: string;
+  company: ICompany;
 }
 
 export interface IModalDeleteCompanyActions {

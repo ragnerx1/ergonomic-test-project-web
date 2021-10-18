@@ -7,38 +7,30 @@ import { IModalCreateCompanyActions } from '@components/ModalCreateCompany/types
 import { IModalDeleteCompanyActions } from '@components/ModalDeleteCompany/types';
 import ModalCreateCompany from '@components/ModalCreateCompany';
 import ModalDeleteCompany from '@components/ModalDeleteCompany';
-import api from '../../services/api';
+import { useCompany } from '@hooks/company';
 import { ICompany, IListCompanies } from './types';
 import { Container } from './styles';
 
 const Company: React.FC = () => {
+  const { getCompanies, companies } = useCompany();
+
   const modalCreateCompany = useRef<IModalCreateCompanyActions>(null);
   const modalDeleteCompany = useRef<IModalDeleteCompanyActions>(null);
 
-  const [companies, setCompanies] = useState<ICompany[]>([]);
-  const [companySelected, setCompanySelected] = useState('');
+  const [companySelected, setCompanySelected] = useState<ICompany>();
   const [serach, setSearch] = useState('');
-  const [name, setName] = useState('');
 
   useEffect(() => {
-    const token = localStorage.getItem('ergonomic@token');
-    api
-      .get('company', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => setCompanies(response.data));
-  }, []);
+    getCompanies().then();
+  }, [getCompanies]);
 
-  function handleModalDelete(id: string) {
-    setCompanySelected(id);
+  function handleModalDelete(company: ICompany) {
+    setCompanySelected(company);
     modalDeleteCompany.current?.handleVisibleModal();
   }
 
-  function handleModalEditModal(id: string, nameCompany: string) {
-    setCompanySelected(id);
-    setName(nameCompany);
+  function handleModalEditModal(company: ICompany) {
+    setCompanySelected(company);
     modalCreateCompany.current?.handleVisibleModal();
   }
 
@@ -59,16 +51,13 @@ const Company: React.FC = () => {
             <div className="option">
               <button
                 type="button"
-                onClick={() => handleModalEditModal(company.id, company.name)}
+                onClick={() => handleModalEditModal(company)}
               >
                 <AiFillEdit color="black" />
               </button>
             </div>
             <div className="option">
-              <button
-                type="button"
-                onClick={() => handleModalDelete(company.id)}
-              >
+              <button type="button" onClick={() => handleModalDelete(company)}>
                 <AiFillDelete color="black" />
               </button>
             </div>
@@ -123,13 +112,8 @@ const Company: React.FC = () => {
         <CompaniesList listCompanies={companies} query={serach} />
       </section>
 
-      <ModalCreateCompany
-        company={name}
-        id={companySelected}
-        ref={modalCreateCompany}
-      />
-
-      <ModalDeleteCompany company={companySelected} ref={modalDeleteCompany} />
+      <ModalCreateCompany company={companySelected!} ref={modalCreateCompany} />
+      <ModalDeleteCompany company={companySelected!} ref={modalDeleteCompany} />
     </Container>
   );
 };

@@ -1,6 +1,7 @@
+import { ICompany } from 'pages/Company/types';
+
 export interface IModalCreateCompany {
-  company?: string;
-  id: string | undefined;
+  company: ICompany;
 }
 
 export interface IModalCreateCompanyActions {

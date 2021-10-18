@@ -125,10 +125,6 @@ const Questions: React.FC = () => {
       </section>
 
       <ModalCreateQuestion ref={createQuestionModal} />
-
-      <ModalCreateCompany company={name} id={companySelected} />
-
-      <ModalDeleteCompany company={companySelected} />
     </Container>
   );
 };

@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { toast } from 'react-toastify';
 
-import api from '../../services/api';
+import { useCompany } from '@hooks/company';
 import Button from '../Button';
 import { IModalDeleteCompany, IModalDeleteCompanyActions } from './types';
 import { Container, ContainerCreateData } from './styles';
@@ -13,6 +10,8 @@ const ModalDeleteCompany: React.ForwardRefRenderFunction<
   IModalDeleteCompanyActions,
   IModalDeleteCompany
 > = ({ company }, ref) => {
+  const { deleteCompany } = useCompany();
+
   const [isVisible, setIsVisible] = useState(false);
 
   function handleVisibleModal() {
@@ -22,24 +21,12 @@ const ModalDeleteCompany: React.ForwardRefRenderFunction<
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   async function handleDeleteCompany() {
-    try {
-      const token = localStorage.getItem('ergonomic@token');
-      await api.delete(`company/${company}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      handleVisibleModal();
-    } catch (err: any) {
-      toast.error('Não foi possivel excluir esta empresa');
-    }
+    await deleteCompany(company.id);
+    handleVisibleModal();
   }
 
   return (
-    <Container
-      open={isVisible}
-      onClose={handleVisibleModal}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
+    <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
         <section className="header">
           <h2>Excluir empresa</h2>

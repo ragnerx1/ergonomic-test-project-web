@@ -6,9 +6,8 @@ import React, {
   useState,
 } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { toast } from 'react-toastify';
 
-import api from '../../services/api';
+import { useCompany } from '@hooks/company';
 import Button from '../Button';
 
 import { IModalCreateCompany, IModalCreateCompanyActions } from './types';
@@ -17,9 +16,11 @@ import { Container, ContainerCreateData } from './styles';
 const ModalCreateCompany: React.ForwardRefRenderFunction<
   IModalCreateCompanyActions,
   IModalCreateCompany
-> = ({ company, id }, ref) => {
-  const [name, setName] = useState('');
+> = ({ company }, ref) => {
+  const { createCompany, editCompany } = useCompany();
+
   const [isVisible, setIsVisible] = useState(false);
+  const [name, setName] = useState('');
 
   function handleVisibleModal() {
     setIsVisible(oldValue => !oldValue);
@@ -28,9 +29,7 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   useEffect(() => {
-    if (company) {
-      setName(company);
-    }
+    if (company) setName(company.name);
   }, [company]);
 
   function handleCloseModal() {
@@ -39,40 +38,21 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
   }
 
   async function handleCreateCompany() {
-    try {
-      const token = localStorage.getItem('ergonomic@token');
-      if (id) {
-        await api.put(
-          `company/${id}`,
-          { name },
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        );
-      } else {
-        await api.post(
-          'company',
-          { name },
-          { headers: { Authorization: `Bearer ${token}` } },
-        );
-      }
-
-      handleCloseModal();
-    } catch (err) {
-      toast.error('Erro ao criar empresa!');
+    if (company.id) {
+      const data = { id: company.id, name };
+      await editCompany(data);
+    } else {
+      await createCompany(name);
     }
+
+    handleCloseModal();
   }
 
   return (
-    <Container
-      open={isVisible}
-      onClose={handleVisibleModal}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
+    <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
         <section className="header">
-          <h2>Criar empresa</h2>
+          <h2>{company ? 'Editar' : 'Criar'} empresa</h2>
           <button type="button" onClick={handleCloseModal}>
             <AiFillCloseCircle size={20} />
           </button>
@@ -88,10 +68,7 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
           />
         </form>
 
-        <Button
-          title={company ? 'Editar' : 'Criar'}
-          onPress={handleCreateCompany}
-        />
+        <Button title="Salvar" onPress={handleCreateCompany} />
       </ContainerCreateData>
     </Container>
   );
