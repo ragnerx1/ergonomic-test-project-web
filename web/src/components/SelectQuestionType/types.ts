@@ -5,3 +5,7 @@ export interface IQuestiontypes {
   title: string;
   icon: IconType;
 }
+
+export interface ISelectQuestionType {
+  selectQuestionType(id: number): void;
+}

@@ -3,8 +3,6 @@ import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
 import Button from '@components/Button';
 import Header from '@components/Header';
-import ModalDeleteCompany from '@components/ModalDeleteCompany';
-import ModalCreateCompany from '@components/ModalCreateCompany';
 import ModalCreateQuestion from '@components/ModalCreateQuestion';
 import { ICreateQuestionActions } from '@components/ModalCreateQuestion/types';
 
@@ -17,9 +15,7 @@ const Questions: React.FC = () => {
 
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
-  const [companySelected, setCompanySelected] = useState('');
   const [serach, setSearch] = useState('');
-  const [name, setName] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('ergonomic@token');
@@ -33,13 +29,10 @@ const Questions: React.FC = () => {
   }, [visibleModalDelete]);
 
   function handleModalDelete(id: string) {
-    setCompanySelected(id);
     setVisibleModalDelete(oldValue => !oldValue);
   }
 
   function handleModalEditModal(id: string, nameCompany: string) {
-    setCompanySelected(id);
-    setName(nameCompany);
     createQuestionModal.current?.handleVisibleModal();
   }
 

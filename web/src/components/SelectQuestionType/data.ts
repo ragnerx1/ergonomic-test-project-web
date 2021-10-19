@@ -8,8 +8,8 @@ import {
 import { IQuestiontypes } from './types';
 
 export const questionTypes: IQuestiontypes[] = [
-  { id: 0, title: 'Imagem e múltipla escolha', icon: IoMdImage },
-  { id: 1, title: 'Múltipla escolha', icon: IoIosCheckmarkCircleOutline },
-  { id: 2, title: 'Imagens', icon: IoIosImages },
-  { id: 3, title: 'Descrição', icon: GrDocumentText },
+  { id: 1, title: 'Imagem e múltipla escolha', icon: IoMdImage },
+  { id: 2, title: 'Múltipla escolha', icon: IoIosCheckmarkCircleOutline },
+  { id: 3, title: 'Imagens', icon: IoIosImages },
+  { id: 4, title: 'Descrição', icon: GrDocumentText },
 ];
