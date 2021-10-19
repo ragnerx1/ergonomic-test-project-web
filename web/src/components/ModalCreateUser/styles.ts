@@ -13,17 +13,6 @@ export const ContainerCreateData = styled.div`
   background-color: white;
   padding: 15px;
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    button {
-      border: none;
-      background-color: transparent;
-    }
-  }
-
   form {
     margin: 40px 0;
 

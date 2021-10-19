@@ -5,11 +5,10 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
 
 import { useCompany } from '@hooks/company';
+import { HeaderModal } from '@components/HeaderModal';
 import Button from '../Button';
-
 import { IModalCreateCompany, IModalCreateCompanyActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
@@ -51,12 +50,10 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <section className="header">
-          <h2>{company ? 'Editar' : 'Criar'} empresa</h2>
-          <button type="button" onClick={handleCloseModal}>
-            <AiFillCloseCircle size={20} />
-          </button>
-        </section>
+        <HeaderModal
+          title={`${company ? 'Editar' : 'Criar'} empresa`}
+          onClick={handleCloseModal}
+        />
 
         <form action="">
           <label htmlFor="name">Nome da empresa</label>
