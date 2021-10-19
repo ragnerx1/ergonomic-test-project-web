@@ -3,7 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import Button from '@components/Button';
 import { Container } from './styles';
 
-const ImageAndMultipleChoice: React.FC = () => {
+const MultipleChoice: React.FC = () => {
   const [image, setImage] = useState<any>();
 
   function handleCreateQuestion(e: FormEvent<HTMLFormElement>) {
@@ -14,14 +14,6 @@ const ImageAndMultipleChoice: React.FC = () => {
 
   return (
     <Container onSubmit={handleCreateQuestion}>
-      <p>Escolher arquivo imagem:</p>
-      <input
-        type="file"
-        name="file"
-        style={{ color: 'black' }}
-        onChange={e => setImage(e.target.files)}
-      />
-
       <label htmlFor="description">Descricão da pergunta:</label>
       <input type="text" id="description" />
 
@@ -45,4 +37,4 @@ const ImageAndMultipleChoice: React.FC = () => {
   );
 };
 
-export default ImageAndMultipleChoice;
+export default MultipleChoice;
