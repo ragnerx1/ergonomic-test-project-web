@@ -4,10 +4,10 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
 
 import { useRegister } from '@hooks/register';
 import { useCompany } from '@hooks/company';
+import { HeaderModal } from '@components/HeaderModal';
 import Button from '../Button';
 import { IModalCreateUser, IModalCreateUserActions } from './types';
 import { Container, ContainerCreateData } from './styles';
@@ -22,12 +22,12 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [companySelected, setCompanySelected] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [access, setAccess] = useState(false);
 
   useEffect(() => {
     if (user) {
       setEmail(user.email);
-      setIsAdmin(user.access);
+      setAccess(user.access);
       setCompanySelected(user.company_id);
     }
 
@@ -43,16 +43,12 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   function handleCloseModal() {
     setCompanySelected('');
     setEmail('');
-    setIsAdmin(false);
+    setAccess(false);
     handleVisibleModal();
   }
 
   async function handleCreateCompany() {
-    const data = {
-      email,
-      access: isAdmin,
-      company_id: companySelected,
-    };
+    const data = { email, access, company_id: companySelected };
 
     if (user) {
       await editRegister(user.id, data);
@@ -66,12 +62,10 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <section className="header">
-          <h2>{user ? 'Editar' : 'Criar'} usuário </h2>
-          <button type="button" onClick={handleCloseModal}>
-            <AiFillCloseCircle size={20} />
-          </button>
-        </section>
+        <HeaderModal
+          title={`${user ? 'Editar' : 'Criar'} usuário`}
+          onClick={handleCloseModal}
+        />
 
         <form onSubmit={handleCreateCompany}>
           <label htmlFor="name">E-mail da usuário</label>
@@ -86,8 +80,8 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
           <input
             type="checkbox"
             id="admin"
-            checked={isAdmin}
-            onChange={() => setIsAdmin(oldValue => !oldValue)}
+            checked={access}
+            onChange={() => setAccess(oldValue => !oldValue)}
           />
 
           <label htmlFor="admin">Empresa</label>
