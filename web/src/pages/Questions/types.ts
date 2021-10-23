@@ -1,11 +1,8 @@
-interface IQuestionProps {
-  id: string;
-  name: string;
-}
+import { IQuestion } from '@hooks/questions/types';
 
 interface IQuestionListProps {
-  listCompanies: IQuestionProps[];
+  listQuestions: IQuestion[];
   query: string;
 }
 
-export type { IQuestionProps, IQuestionListProps };
+export type { IQuestionListProps };

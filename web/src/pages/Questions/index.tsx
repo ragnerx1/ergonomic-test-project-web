@@ -1,59 +1,66 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect, useState, useRef } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
 import Button from '@components/Button';
 import Header from '@components/Header';
 import ModalCreateQuestion from '@components/ModalCreateQuestion';
+import ModalDeleteQuestion from '@components/ModalDeleteQuestion';
 import { ICreateQuestionActions } from '@components/ModalCreateQuestion/types';
-
-import api from '../../services/api';
-import { IQuestionListProps, IQuestionProps } from './types';
+import { IIModalDeleteQuestionActions } from '@components/ModalDeleteQuestion/types';
+import { useQuestion } from '@hooks/questions';
+import { IQuestion } from '@hooks/questions/types';
+import { IQuestionListProps } from './types';
 import { Container } from './styles';
 
 const Questions: React.FC = () => {
   const createQuestionModal = useRef<ICreateQuestionActions>(null);
+  const deleteQuestionModal = useRef<IIModalDeleteQuestionActions>(null);
 
-  const [questions, setQuestions] = useState<IQuestionProps[]>([]);
-  const [visibleModalDelete, setVisibleModalDelete] = useState(false);
+  const { questions, getQuestions, setActive } = useQuestion();
+
   const [serach, setSearch] = useState('');
+  const [selectedQuestion, seletctedQuestion] = useState<IQuestion>();
 
   useEffect(() => {
-    const token = localStorage.getItem('ergonomic@token');
-    api
-      .get('company', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => setQuestions(response.data));
-  }, [visibleModalDelete]);
+    getQuestions().then();
+  }, [getQuestions]);
 
-  function handleModalDelete(id: string) {
-    setVisibleModalDelete(oldValue => !oldValue);
+  function handleModalDelete(question: IQuestion) {
+    seletctedQuestion(question);
+    deleteQuestionModal.current?.handleVisibleModal();
   }
 
-  function handleModalEditModal(id: string, nameCompany: string) {
-    createQuestionModal.current?.handleVisibleModal();
+  async function handleChangeStatus(question: IQuestion) {
+    await setActive(question.id);
   }
 
-  const filter = (listCompanies: IQuestionProps[], query: string) =>
-    listCompanies.filter(company => company.name.toLowerCase().includes(query));
+  const filter = (listQuestions: IQuestion[], query: string) =>
+    listQuestions.filter(question =>
+      question.description.toLowerCase().includes(query));
 
-  function CompaniesList({ listCompanies, query }: IQuestionListProps) {
-    const filtered = filter(listCompanies, query);
+  function CompaniesList({ listQuestions, query }: IQuestionListProps) {
+    const filtered = filter(listQuestions, query);
 
     return (
       <>
-        {filtered.map(company => (
-          <section key={company.id}>
-            <div className="id">{`${company.id.substring(0, 25)}...`}</div>
+        {filtered.map(question => (
+          <section key={question.id}>
+            <div className="id">{`${question.id.substring(0, 25)}...`}</div>
             <div className="company">
-              <p>{company.name}</p>
+              <p>{question.description}</p>
+            </div>
+            <div className="company">
+              <input
+                type="checkbox"
+                checked={question.active}
+                onChange={() => handleChangeStatus(question)}
+              />
             </div>
             <div className="option">
               <button
                 type="button"
-                onClick={() => handleModalEditModal(company.id, company.name)}
+                onClick={() => console.log('ola')}
               >
                 <AiFillEdit color="black" />
               </button>
@@ -61,7 +68,7 @@ const Questions: React.FC = () => {
             <div className="option">
               <button
                 type="button"
-                onClick={() => handleModalDelete(company.id)}
+                onClick={() => handleModalDelete(question)}
               >
                 <AiFillDelete color="black" />
               </button>
@@ -107,6 +114,9 @@ const Questions: React.FC = () => {
             <h3>NOME</h3>
           </div>
           <div>
+            <h3>ATIVO</h3>
+          </div>
+          <div>
             <h3>EDITAR</h3>
           </div>
           <div>
@@ -114,10 +124,11 @@ const Questions: React.FC = () => {
           </div>
         </section>
 
-        <CompaniesList listCompanies={questions} query={serach} />
+        <CompaniesList listQuestions={questions} query={serach} />
       </section>
 
       <ModalCreateQuestion ref={createQuestionModal} />
+      <ModalDeleteQuestion ref={deleteQuestionModal} question={selectedQuestion!} />
     </Container>
   );
 };
