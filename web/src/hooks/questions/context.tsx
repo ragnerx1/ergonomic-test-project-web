@@ -2,7 +2,11 @@ import React, { createContext, useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
-import { IQuestion, IQuestionContextData } from './types';
+import {
+  IImageAndMultipleChoice,
+  IQuestion,
+  IQuestionContextData,
+} from './types';
 
 const QuestionContext = createContext({} as IQuestionContextData);
 
@@ -52,9 +56,39 @@ const QuestionProvider: React.FC = ({ children }) => {
     [questions],
   );
 
+  const createImageAndMultipleChoice = useCallback(
+    async (data: FormData, body: IImageAndMultipleChoice) => {
+      try {
+        const response = await api.post(
+          'questions/image-and-multiple-choice/1',
+          data,
+        );
+        const createdQuestion = await api.put(
+          `questions/image-and-multiple-choice/${response.data.id}`,
+          body,
+        );
+
+        setQuestions(oladValues => [...oladValues, createdQuestion.data]);
+
+        toast.success('Pegunta criada');
+      } catch (error) {
+        toast.error('Erro ao subir imagem', {
+          theme: 'dark',
+        });
+      }
+    },
+    [],
+  );
+
   return (
     <QuestionContext.Provider
-      value={{ questions, getQuestions, setActive, deleteQuestion }}
+      value={{
+        questions,
+        getQuestions,
+        setActive,
+        deleteQuestion,
+        createImageAndMultipleChoice,
+      }}
     >
       {children}
     </QuestionContext.Provider>

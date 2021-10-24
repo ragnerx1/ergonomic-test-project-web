@@ -111,7 +111,7 @@ const Questions: React.FC = () => {
             <h3>ID</h3>
           </div>
           <div className="header-company">
-            <h3>NOME</h3>
+            <h3>DESCRIÇÃO</h3>
           </div>
           <div>
             <h3>ATIVO</h3>

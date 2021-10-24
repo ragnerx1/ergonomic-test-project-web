@@ -15,9 +15,25 @@ export interface IQuestion {
   form_id: string | null;
 }
 
+export interface IImageAndMultipleChoice {
+  question_type: number;
+  description: string;
+  answer_fist: string;
+  answer_second: string;
+  answer_third: string;
+  answer_fourth: string;
+  answer_correct: string;
+  form_id: string;
+  active: boolean;
+}
+
 export interface IQuestionContextData {
   questions: IQuestion[];
   getQuestions(): Promise<void>;
   setActive(id: string): Promise<void>;
   deleteQuestion(id: string): Promise<void>;
+  createImageAndMultipleChoice(
+    data: FormData,
+    body: IImageAndMultipleChoice,
+  ): Promise<void>;
 }

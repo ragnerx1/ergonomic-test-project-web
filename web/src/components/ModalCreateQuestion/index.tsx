@@ -28,7 +28,9 @@ const ModalCreateQuestion: React.ForwardRefRenderFunction<ICreateQuestionActions
           {type === 0 && (
             <SelectQuestionType selectQuestionType={id => setType(id)} />
           )}
-          {type === 1 && <ImageAndMultipleChoice />}
+          {type === 1 && (
+            <ImageAndMultipleChoice onClick={handleVisibleModal} />
+          )}
           {type === 2 && <MultipleChoice />}
           {type === 3 && <ImagesChoice />}
           {type === 4 && <Description />}
