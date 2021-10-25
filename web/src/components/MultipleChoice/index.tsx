@@ -3,13 +3,12 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import Button from '@components/Button';
 import { useForm } from '@hooks/form';
 import { useQuestion } from '@hooks/questions';
-import { IMultipleChoice } from '@hooks/questions/types';
 import { IMultipleChoiceProps } from './types';
 import { Container } from './styles';
 
 const MultipleChoice: React.FC<IMultipleChoiceProps> = ({ onClick }) => {
   const { getForms, forms } = useForm();
-  const { createMultipleChoice } = useQuestion();
+  const { createQuestion } = useQuestion();
 
   const [description, setDescription] = useState('');
   const [answerFirst, setAnswerFirst] = useState('');
@@ -26,7 +25,8 @@ const MultipleChoice: React.FC<IMultipleChoiceProps> = ({ onClick }) => {
   async function handleCreateQuestion(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const data: IMultipleChoice = {
+    await createQuestion({
+      question_type: 2,
       description,
       answer_fist: answerFirst,
       answer_second: answerSecond,
@@ -35,9 +35,7 @@ const MultipleChoice: React.FC<IMultipleChoiceProps> = ({ onClick }) => {
       answer_correct: answerCorrect,
       active: true,
       form_id: formSelected,
-    };
-
-    await createMultipleChoice(data);
+    });
     onClick();
   }
 
