@@ -1,21 +1,58 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
+import { useForm } from '@hooks/form';
+import { useQuestion } from '@hooks/questions';
+import { IDescriptionProps } from './types';
 import { Container } from './styles';
 
-const Description: React.FC = () => {
-  const [image, setImage] = useState<any>();
+const Description: React.FC<IDescriptionProps> = ({ onClick }) => {
+  const { getForms, forms } = useForm();
+  const { createQuestion } = useQuestion();
 
-  function handleCreateQuestion(e: FormEvent<HTMLFormElement>) {
+  const [description, setDescription] = useState('');
+  const [formSelected, setFormSelected] = useState('');
+
+  useEffect(() => {
+    getForms().then();
+  }, [getForms]);
+
+  async function handleCreateQuestion(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log(image);
+    await createQuestion({
+      question_type: 4,
+      description,
+      form_id: formSelected,
+      active: true,
+    });
+
+    onClick();
   }
 
   return (
     <Container onSubmit={handleCreateQuestion}>
       <label htmlFor="description">Descricão da pergunta:</label>
-      <input type="text" id="description" />
+      <input
+        type="text"
+        id="description"
+        value={description}
+        onChange={v => setDescription(v.target.value)}
+      />
+
+      <label htmlFor="admin">Formulários</label>
+      <select
+        name="companies"
+        id="admin"
+        value={formSelected}
+        onChange={e => setFormSelected(e.target.value)}
+      >
+        {forms.map(form => (
+          <option key={form.id} value={form.id}>
+            {form.name}
+          </option>
+        ))}
+      </select>
 
       <Button title="Salvar" />
     </Container>
