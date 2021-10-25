@@ -1,9 +1,11 @@
 import { darken } from '@material-ui/core';
 import styled from 'styled-components';
 
+import { variables } from '../../styles/variables';
+
 export const Container = styled.button`
   margin-left: auto;
-  background-color: #4b9e1f;
+  background-color: ${variables.colors.blue_500};
   border: none;
   padding: 10px 15px;
   border-radius: 25px;
@@ -11,6 +13,6 @@ export const Container = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: ${darken('#4b9e1f', 0.2)};
+    background-color: ${darken(variables.colors.blue_500, 0.2)};
   }
 `;

@@ -21,6 +21,7 @@ const Home: React.FC = () => {
         <div>
           {homeData.map((item: IHomeDataProps) => (
             <ButtonCard
+              key={item.id}
               type="button"
               color={item.color}
               onClick={() => handleNavigateTo(item.route)}

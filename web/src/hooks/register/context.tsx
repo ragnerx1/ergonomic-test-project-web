@@ -89,6 +89,7 @@ export const RegisterProvider: React.FC = ({ children }) => {
         },
         data,
       });
+
       toast.success('Usuários importados');
     } catch (error) {
       toast.error('Erro ao importar usuários');

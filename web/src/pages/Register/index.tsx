@@ -24,7 +24,7 @@ const Register: React.FC = () => {
   const [serach, setSearch] = useState('');
 
   useEffect(() => {
-    getRegisters();
+    getRegisters().then();
   }, [getRegisters]);
 
   async function handleAdmin(id: string) {

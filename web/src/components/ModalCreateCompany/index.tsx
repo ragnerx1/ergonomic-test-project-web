@@ -37,11 +37,11 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
   }
 
   async function handleCreateCompany() {
-    if (company.id) {
+    if (!company) {
+      await createCompany(name);
+    } else {
       const data = { id: company.id, name };
       await editCompany(data);
-    } else {
-      await createCompany(name);
     }
 
     handleCloseModal();
