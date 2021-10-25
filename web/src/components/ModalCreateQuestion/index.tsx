@@ -32,7 +32,7 @@ const ModalCreateQuestion: React.ForwardRefRenderFunction<ICreateQuestionActions
             <ImageAndMultipleChoice onClick={handleVisibleModal} />
           )}
           {type === 2 && <MultipleChoice onClick={handleVisibleModal} />}
-          {type === 3 && <ImagesChoice />}
+          {type === 3 && <ImagesChoice onClick={handleVisibleModal} />}
           {type === 4 && <Description />}
         </Content>
       </Container>
