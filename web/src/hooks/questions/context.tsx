@@ -2,12 +2,7 @@ import React, { createContext, useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
-import {
-  IImageAndMultipleChoice,
-  IMultipleChoice,
-  IQuestion,
-  IQuestionContextData,
-} from './types';
+import { IQuestion, IQuestionContextData } from './types';
 
 const QuestionContext = createContext({} as IQuestionContextData);
 
@@ -57,33 +52,24 @@ const QuestionProvider: React.FC = ({ children }) => {
     [questions],
   );
 
-  const createImageAndMultipleChoice = useCallback(
-    async (data: FormData, body: IImageAndMultipleChoice) => {
-      try {
-        const response = await api.post(
-          'questions/image-and-multiple-choice/1',
-          data,
-        );
-        const createdQuestion = await api.put(
-          `questions/image-and-multiple-choice/${response.data.id}`,
-          body,
-        );
-
-        setQuestions(oladValues => [...oladValues, createdQuestion.data]);
-
-        toast.success('Pegunta criada');
-      } catch (error) {
-        toast.error('Erro ao criar imagem', { theme: 'dark' });
-      }
-    },
-    [],
-  );
-
-  const createMultipleChoice = useCallback(async (data: IMultipleChoice) => {
+  const createQuestion = useCallback(async (data: IQuestion) => {
     try {
-      const response = await api.post('questions/multiple-choice/2', data);
+      const response = await api.post('questions', data);
+
       setQuestions(oladValues => [...oladValues, response.data]);
-      toast.success('Pegunta criada');
+
+      toast.success('Pergunta criada');
+      return response.data.id;
+    } catch (error) {
+      toast.error('Erro ao criar pergunta', { theme: 'dark' });
+      return false;
+    }
+  }, []);
+
+  const updateImage = useCallback(async (id: string, data: FormData) => {
+    try {
+      await api.put(`questions/image/${id}`, data);
+      toast.success('Imagem criada');
     } catch (error) {
       toast.error('Erro ao criar imagem', { theme: 'dark' });
     }
@@ -96,8 +82,8 @@ const QuestionProvider: React.FC = ({ children }) => {
         getQuestions,
         setActive,
         deleteQuestion,
-        createImageAndMultipleChoice,
-        createMultipleChoice,
+        createQuestion,
+        updateImage,
       }}
     >
       {children}

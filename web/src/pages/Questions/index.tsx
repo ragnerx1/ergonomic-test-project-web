@@ -32,12 +32,12 @@ const Questions: React.FC = () => {
   }
 
   async function handleChangeStatus(question: IQuestion) {
-    await setActive(question.id);
+    await setActive(question.id!);
   }
 
   const filter = (listQuestions: IQuestion[], query: string) =>
     listQuestions.filter(question =>
-      question.description.toLowerCase().includes(query));
+      question.description!.toLowerCase().includes(query));
 
   function CompaniesList({ listQuestions, query }: IQuestionListProps) {
     const filtered = filter(listQuestions, query);
@@ -46,7 +46,7 @@ const Questions: React.FC = () => {
       <>
         {filtered.map(question => (
           <section key={question.id}>
-            <div className="id">{`${question.id.substring(0, 25)}...`}</div>
+            <div className="id">{`${question.id!.substring(0, 25)}...`}</div>
             <div className="company">
               <p>{question.description}</p>
             </div>

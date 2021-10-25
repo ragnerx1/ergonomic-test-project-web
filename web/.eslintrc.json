@@ -52,6 +52,7 @@
       "object-curly-newline": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "react/jsx-one-expression-per-line": "off",
+      "@typescript-eslint/no-explicit-any": "off",
       "import/extensions": [
         "error",
         "ignorePackages",

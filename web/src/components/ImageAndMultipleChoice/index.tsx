@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FormEvent, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
 import { useQuestion } from '@hooks/questions';
-import { IImageAndMultipleChoice } from '@hooks/questions/types';
 import { useForm } from '@hooks/form';
 import { IImageAndMultipleChoiceProps } from './types';
 import { Container } from './styles';
@@ -10,7 +10,7 @@ import { Container } from './styles';
 const ImageAndMultipleChoice: React.FC<IImageAndMultipleChoiceProps> = ({
   onClick,
 }) => {
-  const { createImageAndMultipleChoice } = useQuestion();
+  const { createQuestion, updateImage } = useQuestion();
   const { getForms, forms } = useForm();
 
   const [image, setImage] = useState<any>();
@@ -30,9 +30,9 @@ const ImageAndMultipleChoice: React.FC<IImageAndMultipleChoiceProps> = ({
     e.preventDefault();
 
     const data = new FormData();
-    data.append('image', image[0]);
+    data.append('image1', image[0]);
 
-    const body: IImageAndMultipleChoice = {
+    const response = await createQuestion({
       description,
       question_type: 1,
       answer_fist: answerFirst,
@@ -42,9 +42,12 @@ const ImageAndMultipleChoice: React.FC<IImageAndMultipleChoiceProps> = ({
       answer_correct: answerCorrect,
       active: true,
       form_id: formSelected,
-    };
+    });
 
-    await createImageAndMultipleChoice(data, body);
+    if (response !== false && response !== true) {
+      await updateImage(response, data);
+    }
+
     onClick();
   }
 

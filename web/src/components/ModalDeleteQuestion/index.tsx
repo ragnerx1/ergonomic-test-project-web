@@ -21,7 +21,7 @@ const ModalDeleteDelete: React.ForwardRefRenderFunction<
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   async function handleDeleteQuestion() {
-    await deleteQuestion(question.id);
+    await deleteQuestion(question.id!);
     handleVisibleModal();
   }
 
