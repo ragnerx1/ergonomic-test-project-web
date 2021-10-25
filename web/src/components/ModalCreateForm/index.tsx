@@ -4,9 +4,9 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
 
 import { useForm } from '@hooks/form';
+import { HeaderModal } from '@components/HeaderModal';
 import Button from '../Button';
 import { IModalCreateForm, IModalCreateFormActions } from './types';
 import { Container, ContainerCreateData } from './styles';
@@ -49,12 +49,10 @@ const ModalCreateForm: React.ForwardRefRenderFunction<
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <section className="header">
-          <h2>{form ? 'Editar' : 'Criar'} formulário</h2>
-          <button type="button" onClick={handleCloseModal}>
-            <AiFillCloseCircle size={20} />
-          </button>
-        </section>
+        <HeaderModal
+          title={`${form ? 'Editar' : 'Criar'} formulário`}
+          onClick={handleCloseModal}
+        />
 
         <form action="">
           <label htmlFor="name">Nome do formulário</label>
