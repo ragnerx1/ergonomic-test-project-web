@@ -106,7 +106,7 @@ const ImageAndMultipleChoice: React.FC<IImageAndMultipleChoiceProps> = ({
         onChange={v => setAnswerCorrect(v.target.value)}
       />
 
-      <label htmlFor="admin">Empresa</label>
+      <label htmlFor="admin">Formulários</label>
       <select
         name="companies"
         id="admin"

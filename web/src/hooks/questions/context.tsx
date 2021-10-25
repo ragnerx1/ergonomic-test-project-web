@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import api from '../../services/api';
 import {
   IImageAndMultipleChoice,
+  IMultipleChoice,
   IQuestion,
   IQuestionContextData,
 } from './types';
@@ -72,13 +73,21 @@ const QuestionProvider: React.FC = ({ children }) => {
 
         toast.success('Pegunta criada');
       } catch (error) {
-        toast.error('Erro ao subir imagem', {
-          theme: 'dark',
-        });
+        toast.error('Erro ao criar imagem', { theme: 'dark' });
       }
     },
     [],
   );
+
+  const createMultipleChoice = useCallback(async (data: IMultipleChoice) => {
+    try {
+      const response = await api.post('questions/multiple-choice/2', data);
+      setQuestions(oladValues => [...oladValues, response.data]);
+      toast.success('Pegunta criada');
+    } catch (error) {
+      toast.error('Erro ao criar imagem', { theme: 'dark' });
+    }
+  }, []);
 
   return (
     <QuestionContext.Provider
@@ -88,6 +97,7 @@ const QuestionProvider: React.FC = ({ children }) => {
         setActive,
         deleteQuestion,
         createImageAndMultipleChoice,
+        createMultipleChoice,
       }}
     >
       {children}

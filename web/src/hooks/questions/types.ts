@@ -27,6 +27,17 @@ export interface IImageAndMultipleChoice {
   active: boolean;
 }
 
+export interface IMultipleChoice {
+  description: string;
+  answer_fist: string;
+  answer_second: string;
+  answer_third: string;
+  answer_fourth: string;
+  answer_correct: string;
+  form_id: string;
+  active: boolean;
+}
+
 export interface IQuestionContextData {
   questions: IQuestion[];
   getQuestions(): Promise<void>;
@@ -36,4 +47,5 @@ export interface IQuestionContextData {
     data: FormData,
     body: IImageAndMultipleChoice,
   ): Promise<void>;
+  createMultipleChoice(data: IMultipleChoice): Promise<void>;
 }
