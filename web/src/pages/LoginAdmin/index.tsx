@@ -2,11 +2,13 @@ import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import api from '../../services/api';
+import { useAuth } from '@hooks/auth';
+import logo from '../../assets/logo.png';
 import { Container } from './styles';
 
 const Login: React.FC = () => {
   const { push } = useHistory();
+  const { signIn } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,18 +17,22 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await api.post('/session', { email, password });
-      const { register } = response.data;
+      const response = await signIn({ email, password });
 
-      localStorage.setItem('ergonomic@name', register.email);
+      if (response.register.access === false) {
+        toast.error('Algo deu errado!', { theme: 'dark' });
+        return;
+      }
+
       push('/home');
     } catch (error) {
-      toast.error('Algo deu errado!', { theme: 'dark' });
+      toast.error('Confira seus dados e tente novamente', { theme: 'dark' });
     }
   }
 
   return (
     <Container>
+      <img src={logo} alt="logo" />
       <h1>Admin</h1>
 
       <form onSubmit={handleAuth}>

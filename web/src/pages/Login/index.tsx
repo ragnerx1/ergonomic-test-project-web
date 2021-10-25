@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAuth } from '../../hooks/auth';
+import logo from '../../assets/logo.png';
 import { Container } from './styles';
 
 const Login: React.FC = () => {
@@ -25,6 +26,8 @@ const Login: React.FC = () => {
 
   return (
     <Container>
+      <img src={logo} alt="logo" />
+
       <h1>Login</h1>
 
       <form onSubmit={handleAuth}>

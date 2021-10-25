@@ -1,12 +1,20 @@
 import { darken } from 'polished';
 import styled from 'styled-components';
+import { variables } from '../../styles/variables';
 
+const imageSize = 250;
 export const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  img {
+    width: ${imageSize}px;
+    height: ${imageSize}px;
+    margin-bottom: 20px;
+  }
 
   h1 {
     color: black;
@@ -21,7 +29,7 @@ export const Container = styled.div`
       width: 100%;
       height: 45px;
       margin-top: 15px;
-      background-color: #ebebeb;
+      background-color: ${variables.colors.white_400};
       border-radius: 5px;
       border: none;
       padding: 10px;
@@ -29,8 +37,8 @@ export const Container = styled.div`
     }
 
     button {
-      background-color: #2c8fed;
-      color: #fff;
+      background-color: ${variables.colors.blue_500};
+      color: ${variables.colors.white_500};
       border: none;
       height: 45px;
       border-radius: 5px;
@@ -39,7 +47,7 @@ export const Container = styled.div`
       font-size: 20px;
 
       &:hover {
-        background-color: ${darken(0.05, '#2c8fed')};
+        background-color: ${darken(0.05, variables.colors.blue_500)};
       }
     }
   }

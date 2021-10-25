@@ -10,7 +10,13 @@ export interface IAuthState {
   register: IRegister;
 }
 
+export interface IResponseSignin {
+  register: {
+    access: boolean;
+  };
+}
+
 export interface IAuthContextData {
-  signIn(credentials: ISignInCredentials): Promise<void>;
+  signIn(credentials: ISignInCredentials): Promise<IResponseSignin>;
   user: IAuthState;
 }

@@ -28,6 +28,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       api.defaults.headers.authorization = `Bearer ${token}`;
       setData({ register, token });
+
+      return response.data;
     },
     [],
   );
