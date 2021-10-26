@@ -92,7 +92,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
             onChange={e => setCompanySelected(e.target.value)}
           >
             {companies
-              .concat({ id: '', name: 'selecionar empresa' })
+              .concat({ id: '', name: 'selecionar empresa', form_id: '' })
               .map(company => (
                 <option key={company.id} value={company.id}>
                   {company.name}

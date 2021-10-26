@@ -65,7 +65,7 @@ const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
             onChange={e => setCompanySelected(e.target.value)}
           >
             {companies
-              .concat({ id: '', name: 'selecionar empresa' })
+              .concat({ id: '', name: 'selecionar empresa', form_id: '' })
               .map(company => (
                 <option value={company.id}>{company.name}</option>
               ))}

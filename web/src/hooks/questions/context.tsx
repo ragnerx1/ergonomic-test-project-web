@@ -75,6 +75,11 @@ const QuestionProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const getQuestionsByForm = useCallback(async (id: string) => {
+    const response = await api.get(`questions/form/${id}`);
+    return response.data;
+  }, []);
+
   return (
     <QuestionContext.Provider
       value={{
@@ -84,6 +89,7 @@ const QuestionProvider: React.FC = ({ children }) => {
         deleteQuestion,
         createQuestion,
         updateImage,
+        getQuestionsByForm,
       }}
     >
       {children}

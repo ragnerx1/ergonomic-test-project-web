@@ -9,10 +9,15 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<IAuthState>(() => {
     const token = localStorage.getItem('@ergonomic:token');
     const register = localStorage.getItem('@ergonomic:user');
+    const company = localStorage.getItem('@ergonomic:company');
 
     if (token && register) {
       api.defaults.headers.authorization = `Bearer ${token}`;
-      return { token, register: JSON.parse(register) };
+      return {
+        token,
+        register: JSON.parse(register),
+        company: company && JSON.parse(company),
+      };
     }
 
     return {} as IAuthState;
@@ -21,13 +26,14 @@ export const AuthProvider: React.FC = ({ children }) => {
   const signIn = useCallback(
     async ({ email, password }: ISignInCredentials) => {
       const response = await api.post('/session', { email, password });
-      const { register, token } = response.data;
+      const { register, token, company } = response.data;
 
       localStorage.setItem('@ergonomic:token', token);
       localStorage.setItem('@ergonomic:user', JSON.stringify(register));
+      localStorage.setItem('@ergonomic:company', JSON.stringify(company));
 
       api.defaults.headers.authorization = `Bearer ${token}`;
-      setData({ register, token });
+      setData({ register, token, company });
 
       return response.data;
     },

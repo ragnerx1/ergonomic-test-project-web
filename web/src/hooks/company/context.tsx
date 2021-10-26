@@ -32,9 +32,9 @@ export const CompanyProvider: React.FC = ({ children }) => {
     [companies],
   );
 
-  const createCompany = useCallback(async (name: string) => {
+  const createCompany = useCallback(async (name: string, formId: string) => {
     try {
-      const response = await api.post('company', { name });
+      const response = await api.post('company', { name, form_id: formId });
       setCompanies(oldValues => [...oldValues, response.data]);
 
       toast.success('Empresa criada');
@@ -45,10 +45,10 @@ export const CompanyProvider: React.FC = ({ children }) => {
 
   const editCompany = useCallback(
     async (companySeletced: ICompany) => {
-      const { id, name } = companySeletced;
+      const { id, name, form_id } = companySeletced;
 
       try {
-        const response = await api.put(`company/${id}`, { name });
+        const response = await api.put(`company/${id}`, { name, form_id });
 
         const filteredCompany = companies.filter(company => company.id !== id);
         setCompanies([...filteredCompany, response.data]);

@@ -1,3 +1,4 @@
+import { ICompany } from 'pages/Company/types';
 import { IRegister } from 'pages/Register/types';
 
 export interface ISignInCredentials {
@@ -8,6 +9,7 @@ export interface ISignInCredentials {
 export interface IAuthState {
   token: string;
   register: IRegister;
+  company: ICompany;
 }
 
 export interface IResponseSignin {

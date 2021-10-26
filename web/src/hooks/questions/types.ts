@@ -22,4 +22,5 @@ export interface IQuestionContextData {
   deleteQuestion(id: string): Promise<void>;
   createQuestion(data: IQuestion): Promise<string | boolean>;
   updateImage(id: string, data: FormData): Promise<void>;
+  getQuestionsByForm(id: string): Promise<IQuestion[]>;
 }

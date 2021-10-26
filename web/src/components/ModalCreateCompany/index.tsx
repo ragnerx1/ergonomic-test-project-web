@@ -8,6 +8,7 @@ import React, {
 
 import { useCompany } from '@hooks/company';
 import { HeaderModal } from '@components/HeaderModal';
+import { useForm } from '@hooks/form';
 import Button from '../Button';
 import { IModalCreateCompany, IModalCreateCompanyActions } from './types';
 import { Container, ContainerCreateData } from './styles';
@@ -17,9 +18,11 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
   IModalCreateCompany
 > = ({ company }, ref) => {
   const { createCompany, editCompany } = useCompany();
+  const { getForms, forms } = useForm();
 
   const [isVisible, setIsVisible] = useState(false);
   const [name, setName] = useState('');
+  const [formSelected, setFormSelected] = useState('');
 
   function handleVisibleModal() {
     setIsVisible(oldValue => !oldValue);
@@ -28,8 +31,9 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   useEffect(() => {
+    getForms().then();
     if (company) setName(company.name);
-  }, [company]);
+  }, [company, getForms]);
 
   function handleCloseModal() {
     setName('');
@@ -38,9 +42,9 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
 
   async function handleCreateCompany() {
     if (!company) {
-      await createCompany(name);
+      await createCompany(name, formSelected);
     } else {
-      const data = { id: company.id, name };
+      const data = { id: company.id, name, form_id: formSelected };
       await editCompany(data);
     }
 
@@ -64,6 +68,20 @@ const ModalCreateCompany: React.ForwardRefRenderFunction<
             onChange={e => setName(e.target.value)}
           />
         </form>
+
+        <label htmlFor="admin">Formulários</label>
+        <select
+          name="companies"
+          id="admin"
+          value={formSelected}
+          onChange={e => setFormSelected(e.target.value)}
+        >
+          {forms.map(form => (
+            <option key={form.id} value={form.id}>
+              {form.name}
+            </option>
+          ))}
+        </select>
 
         <Button title="Salvar" onPress={handleCreateCompany} />
       </ContainerCreateData>
