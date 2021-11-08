@@ -1,33 +1,17 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable prettier/prettier */
-import QuestionImageAndMultipleChoice from '@components/QuestionImageAndMultipleChoice';
-import { useAuth } from '@hooks/auth';
-import { useQuestion } from '@hooks/questions';
-import { IQuestion } from '@hooks/questions/types';
-import React, { useEffect, useState } from 'react';
-
+import React from 'react';
+import QuestionTypeOne from '@components/QuestionTypeOne';
 import { Container } from './styles';
+import { form } from './data';
 
-const UserForm: React.FC = () => {
-  const { getQuestionsByForm } = useQuestion();
-  const { user } = useAuth();
+const UserForm: React.FC = () => (
+  <Container>
+    <h1>user form</h1>
 
-  const [questions, setQuestions] = useState<IQuestion[]>([]);
-
-  useEffect(() => {
-    getQuestionsByForm(user.company.form_id).then(response => setQuestions(response));
-  }, [getQuestionsByForm, user]);
-
-  return (
-    <Container>
-      <h1>user form</h1>
-
-      {questions.map(question => (
-        <QuestionImageAndMultipleChoice data={question} key={question.id} />
-      ))}
-    </Container>
-  );
-};
+    {form.map(
+      question =>
+        question.question_type === 1 && <QuestionTypeOne data={question} />,
+    )}
+  </Container>
+);
 
 export default UserForm;

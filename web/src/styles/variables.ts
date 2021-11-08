@@ -5,4 +5,8 @@ export const variables = {
     white_400: '#ebebeb',
     white_500: '#fff',
   },
+
+  fontSize: {
+    small: 16,
+  },
 };
