@@ -7,6 +7,6 @@ export const variables = {
   },
 
   fontSize: {
-    small: 16,
+    small: 14,
   },
 };
