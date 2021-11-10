@@ -8,22 +8,12 @@ export const Container = styled.section`
   padding: 20px;
   border-radius: 7px;
 
-  .question-order {
-    width: 90px;
-    background-color: ${variables.colors.blue_500};
-    color: ${variables.colors.white_500};
-    padding: 5px;
-    border-radius: 7px;
-    font-size: ${variables.fontSize.small};
-    margin-bottom: 15px;
-  }
-
   .question-description {
     margin-bottom: 15px;
     font-size: 20px;
   }
 
-  div {
+  .images {
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 10px 10px;
@@ -33,13 +23,14 @@ export const Container = styled.section`
       background-color: transparent;
 
       img {
-        width: 380px;
-        height: 260px;
+        border: 0.5px solid black;
+        width: 95%;
+        height: 95%;
         border-radius: 7px;
 
         &:hover {
-          width: 390px;
-          height: 270px;
+          width: 96%;
+          height: 96%;
           border-radius: 7px;
         }
       }
