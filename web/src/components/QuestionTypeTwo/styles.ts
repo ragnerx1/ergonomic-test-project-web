@@ -12,14 +12,4 @@ export const Container = styled.section`
     margin-bottom: 15px;
     font-size: 20px;
   }
-
-  div {
-    input {
-      margin-right: 15px;
-    }
-
-    label {
-      font-size: ${variables.fontSize.small};
-    }
-  }
 `;

@@ -125,10 +125,6 @@ export const form: IQuestion[] = [
       { id: 2, choice: 'Ruídos externos' },
       { id: 3, choice: 'Ruídos persistentes' },
     ],
-    first_answer:
-      'Uma boa iluminação favorece o conforto ao trabalhar, que bom que você cuida este aspecto!',
-    second_answer:
-      'A utilização de computador em lugar com má iluminação predispõe há um maior cansaço e outros problemas.',
   },
   {
     id: 7,
