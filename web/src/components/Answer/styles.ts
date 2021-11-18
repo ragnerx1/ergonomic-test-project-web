@@ -9,7 +9,7 @@ export const Container = styled.div`
   border-radius: 7px;
 
   .answer-box {
-    background-color: ${variables.colors.green_500};
+    background-color: #e5872a;
     width: 95px;
     padding: 5px;
     margin-bottom: 15px;

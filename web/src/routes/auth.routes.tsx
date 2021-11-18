@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
+import GetInfoUser from '../pages/GetInfoUser';
 import UserForm from '../pages/UserForm';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
@@ -21,6 +22,7 @@ const Routes: React.FC = () => (
       <Route path="/form" component={Form} />
       <Route path="/questions" component={Questions} />
       <Route path="/user-form" component={UserForm} />
+      <Route path="/user-info" component={GetInfoUser} />
     </Switch>
   </BrowserRouter>
 );
