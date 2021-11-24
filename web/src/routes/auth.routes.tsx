@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
+import DiscompfortMap from '../pages/DiscompfortMap';
 import GetInfoUser from '../pages/GetInfoUser';
 import UserForm from '../pages/UserForm';
 import Login from '../pages/Login';
@@ -23,6 +24,7 @@ const Routes: React.FC = () => (
       <Route path="/questions" component={Questions} />
       <Route path="/user-form" component={UserForm} />
       <Route path="/user-info" component={GetInfoUser} />
+      <Route path="/discomfort-map" component={DiscompfortMap} />
     </Switch>
   </BrowserRouter>
 );
