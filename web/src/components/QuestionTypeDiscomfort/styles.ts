@@ -7,7 +7,7 @@ export const Container = styled.section`
     margin: 30px 0;
 
     p {
-      width: 300px;
+      width: 40%;
       font-weight: normal;
     }
 

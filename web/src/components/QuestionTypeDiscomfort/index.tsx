@@ -11,6 +11,7 @@ const QuestionTypeDiscomfort: React.FC<IQuestionTypeDiscomfort> = ({
     {data.map(choice => (
       <div key={choice.id} className="choice-container">
         <p>{choice.description}</p>
+
         <div>
           <RowCustomCheckbox />
         </div>

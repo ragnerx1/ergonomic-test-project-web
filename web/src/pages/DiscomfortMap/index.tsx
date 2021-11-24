@@ -1,10 +1,10 @@
-import QuestionTypeDiscomfort from '@components/QuestionTypeDiscomfort';
 import React from 'react';
 
+import QuestionTypeDiscomfort from '@components/QuestionTypeDiscomfort';
 import { choices } from './data';
 import { Container } from './styles';
 
-const DiscompfortMap: React.FC = () => (
+const DiscomfortMap: React.FC = () => (
   <Container>
     <h1>Mapa de Desconforto</h1>
 
@@ -44,4 +44,4 @@ const DiscompfortMap: React.FC = () => (
   </Container>
 );
 
-export default DiscompfortMap;
+export default DiscomfortMap;
