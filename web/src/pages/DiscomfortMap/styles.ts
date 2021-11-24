@@ -7,6 +7,11 @@ export const Container = styled.section`
   background-color: ${lighten(0.4, variables.colors.blue_500)};
   padding: 0 30vw;
 
+  h1 {
+    padding-top: 30px;
+    margin-bottom: 10px;
+  }
+
   .image {
     background-color: ${variables.colors.white_500};
     display: flex;
