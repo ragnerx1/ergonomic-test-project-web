@@ -28,6 +28,7 @@ export const Container = styled.section`
     label {
       margin-top: 20px;
       margin-bottom: 10px;
+      font-weight: bold;
     }
 
     input {

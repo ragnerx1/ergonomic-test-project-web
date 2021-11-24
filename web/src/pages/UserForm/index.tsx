@@ -5,10 +5,13 @@ import QuestionTypeTwo from '@components/QuestionTypeTwo';
 import QuestionTypeThree from '@components/QuestionTypeThree';
 import ModalForm from '@components/ModalForm';
 import { IModalFormActions } from '@components/ModalForm/types';
+import Button from '@components/Button';
+import { useHistory } from 'react-router-dom';
 import { form } from './data';
 import { Container } from './styles';
 
 const UserForm: React.FC = () => {
+  const { push } = useHistory();
   const modalRef = useRef<IModalFormActions>(null);
 
   return (
@@ -24,6 +27,12 @@ const UserForm: React.FC = () => {
           )}
         </>
       ))}
+
+      <Button
+        title="Continuar"
+        onClick={() => push('/discomfort-map')}
+        style={{ marginTop: 50, marginBottom: 15 }}
+      />
 
       <ModalForm ref={modalRef} />
     </Container>
