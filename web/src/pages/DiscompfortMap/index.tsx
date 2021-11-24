@@ -1,6 +1,6 @@
-import QuestionTypeDiscomfort from '@components/QuestionTypeDiscomfort';
 import React from 'react';
 
+import QuestionTypeDiscomfort from '@components/QuestionTypeDiscomfort';
 import { choices } from './data';
 import { Container } from './styles';
 
