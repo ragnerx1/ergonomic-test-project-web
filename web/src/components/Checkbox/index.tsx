@@ -23,7 +23,7 @@ const Checkbox: React.FC<ICheckbox> = ({
         id="choice"
         name="choice"
         checked={checked}
-        onChange={e => handleChooseAnswer()}
+        onChange={handleChooseAnswer}
       />
       <label htmlFor="choice">{choice.choice}</label>
     </Container>

@@ -60,7 +60,6 @@ const Questions: React.FC = () => {
             <div className="option">
               <button
                 type="button"
-                onClick={() => console.log('ola')}
               >
                 <AiFillEdit color="black" />
               </button>
