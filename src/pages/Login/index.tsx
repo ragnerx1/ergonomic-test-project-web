@@ -1,14 +1,14 @@
 import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
-import { useAuth } from '../../hooks/auth';
+// import { useAuth } from '../../hooks/auth';
 import logo from '../../assets/logo.png';
 import { Container } from './styles';
 
 const Login: React.FC = () => {
   const { push } = useHistory();
-  const { signIn } = useAuth();
+  // const { signIn } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,12 +16,12 @@ const Login: React.FC = () => {
   async function handleAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    try {
-      await signIn({ email, password });
-      push('/user-info');
-    } catch (error) {
-      toast.error('Algo deu errado!', { theme: 'dark' });
-    }
+    // try {
+    //   await signIn({ email, password });
+    push('/user-info');
+    // } catch (error) {
+    //   toast.error('Algo deu errado!', { theme: 'dark' });
+    // }
   }
 
   return (
