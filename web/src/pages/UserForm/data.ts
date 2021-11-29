@@ -127,7 +127,7 @@ export const form: IQuestion[] = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     question_type: 3,
     description:
       'Você usa apoio para pés (equipamento, caixa) quando, para ficar com os braços na altura adequada, seus pés não alcançam o chão?',
@@ -143,7 +143,7 @@ export const form: IQuestion[] = [
       'A não Utilização de apoio para os pés quando seus pés ficam suspensos no ar,  acarreta compressão de vasos sanguíneos e compromete a  circulação dos membros inferiores e a  sobrecarga da articulação do joelho. Procure utilizar apoio para os pés. ',
   },
   {
-    id: 8,
+    id: 9,
     question_type: 2,
     description: 'Você faz pausas para alongamento com frequência? ',
     multiple_choice: [
@@ -156,7 +156,7 @@ export const form: IQuestion[] = [
       'Seus músculos e tendões precisam de reparos e descanso! Os alongamentos promovem o alinhamento das fibras musculares promovendo melhor desempenho dos músculos e tendões, melhora a circulação e acelera a metabolização do Ácido Lácteo (residuo que causa dor nos músculos). Quando alonga você prolonga a vida de seus músculos e tendões bem como de seu corpo todo!!!!',
   },
   {
-    id: 9,
+    id: 10,
     question_type: 2,
     description:
       'O teclado e mouse ficam posicionados de modo que você não precise esticar os braços ',
@@ -170,7 +170,7 @@ export const form: IQuestion[] = [
       'De preferência para que os objetos que mais utiliza se encontrem bem ao alcance de suas mão e procure acessa-los sem esforço. Teclado e mouse devem ficar perto da borda da mesa para facilitar o acesso e utilização mais confortável.',
   },
   {
-    id: 10,
+    id: 11,
     question_type: 1,
     description: 'Qual geralmente é sua postura ao usar o celular?',
     first_photo:
@@ -183,7 +183,7 @@ export const form: IQuestion[] = [
       'Desta forma sua cabeça está apoiada adequadamente e não sobrecarrega ombros e pescoço. A Ergonomia é um valor para você!',
   },
   {
-    id: 11,
+    id: 12,
     question_type: 2,
     description: 'Em média quantas horas você dorme?',
     multiple_choice: [
@@ -194,7 +194,7 @@ export const form: IQuestion[] = [
       'Durante o sono um hormônio muito importante é produzido: a Melatonina, um dos principais hormônios reguladores de diversos processos intracelulares.Quanto mais Melatonina melhor a reparação celular e retardo do envelhecimento das células do organismo. O ideal é dormir de 6-8h por noite, dependendo da pessoa e da idade. Invista em uma boa noite de sono.',
   },
   {
-    id: 12,
+    id: 13,
     question_type: 2,
     description: 'Em média, quantos copos de água você bebe por dia?',
     multiple_choice: [
@@ -205,7 +205,7 @@ export const form: IQuestion[] = [
       'A água é fundamental para as funções de nosso organismo, 80% dele é líquido. A água  ',
   },
   {
-    id: 13,
+    id: 14,
     question_type: 2,
     description:
       'Quantas vezes na semana você pratica alguma atividade física?',
@@ -217,7 +217,7 @@ export const form: IQuestion[] = [
     ],
   },
   {
-    id: 14,
+    id: 15,
     question_type: 2,
     description:
       'Caso você sinta alguma dor ou desconforto, o que você acredita provocar o sintoma?',
@@ -226,9 +226,9 @@ export const form: IQuestion[] = [
       { id: 1, choice: 'Tensão/estresse' },
       { id: 2, choice: 'Má postura física' },
       { id: 3, choice: 'Características do Trabalho' },
-      { id: 3, choice: 'Ergonomia' },
-      { id: 3, choice: 'Sedentarismo' },
-      { id: 3, choice: 'Sobrepeso' },
+      { id: 4, choice: 'Ergonomia' },
+      { id: 5, choice: 'Sedentarismo' },
+      { id: 6, choice: 'Sobrepeso' },
     ],
   },
 ];
