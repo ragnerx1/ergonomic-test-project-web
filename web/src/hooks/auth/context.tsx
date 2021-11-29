@@ -13,6 +13,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     if (token && register) {
       api.defaults.headers.authorization = `Bearer ${token}`;
+
       return {
         token,
         register: JSON.parse(register),

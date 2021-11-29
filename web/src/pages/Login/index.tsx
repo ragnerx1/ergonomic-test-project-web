@@ -18,7 +18,7 @@ const Login: React.FC = () => {
 
     try {
       await signIn({ email, password });
-      push('/user-form');
+      push('/user-info');
     } catch (error) {
       toast.error('Algo deu errado!', { theme: 'dark' });
     }
