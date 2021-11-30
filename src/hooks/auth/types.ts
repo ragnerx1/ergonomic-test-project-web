@@ -1,5 +1,5 @@
 import { ICompany } from 'pages/Company/types';
-import { IRegister } from 'pages/Register/types';
+import { IRegister } from 'pages/Users/types';
 
 export interface ISignInCredentials {
   email: string;

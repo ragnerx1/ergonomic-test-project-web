@@ -13,7 +13,7 @@ import { useRegister } from '@hooks/register';
 import { IRegister, IRegisterList } from './types';
 import { Container } from './styles';
 
-const Register: React.FC = () => {
+export const Users: React.FC = () => {
   const { getRegisters, registers, setAdmin } = useRegister();
 
   const modalUserDelete = useRef<IModalUserDeleteActions>(null);
@@ -142,5 +142,3 @@ const Register: React.FC = () => {
     </Container>
   );
 };
-
-export default Register;

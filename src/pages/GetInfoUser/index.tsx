@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '@components/Button';
 import Checkbox from '@components/Checkbox';
+import ModalForm from '@components/ModalForm';
+import { IModalFormActions } from '@components/ModalForm/types';
 import { Container } from './styles';
 
 const GetInfoUser: React.FC = () => {
+  const modalRef = useRef<IModalFormActions>(null);
   const { push } = useHistory();
 
   return (
@@ -48,6 +51,8 @@ const GetInfoUser: React.FC = () => {
 
         <Button title="Continuar" onClick={() => push('/user-form')} />
       </form>
+
+      <ModalForm ref={modalRef} />
     </Container>
   );
 };

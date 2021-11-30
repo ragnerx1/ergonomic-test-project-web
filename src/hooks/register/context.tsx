@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { IRegister } from 'pages/Register/types';
+import { IRegister } from '../../pages/Users/types';
 import api from '../../services/api';
 import { IRegisterContextData } from './types';
 
