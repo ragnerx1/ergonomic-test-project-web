@@ -1,50 +1,54 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
-import { IModalUserDeleteActions } from '@components/ModalUserDelete/types';
-import { IModalCreateUserActions } from '@components/ModalCreateUser/types';
-import { IModalImportUserActions } from '@components/ModalImportUser/types';
-import ModalCreateUser from '@components/ModalCreateUser';
-import ModalUserDelete from '@components/ModalUserDelete';
-import ModalImportUser from '@components/ModalImportUser';
 import Header from '@components/Header';
 import Button from '@components/Button';
-import { useRegister } from '@hooks/register';
-import { IRegister, IRegisterList } from './types';
+
+import { useUser } from '@hooks/user';
+import { IUser } from 'dtos/user';
+
+import ModalImportUser from './components/ModalImportUser';
+import ModalUserDelete from './components/ModalDeleteUser';
+import ModalCreateUser from './components/ModalCreateUser';
+import { IModalImportUserActions } from './components/ModalImportUser/types';
+import { IModalCreateUserActions } from './components/ModalCreateUser/types';
+import { IModalUserDeleteActions } from './components/ModalDeleteUser/types';
+
+import { IUserList } from './types';
 import { Container } from './styles';
 
 export const Users: React.FC = () => {
-  const { getRegisters, registers, setAdmin } = useRegister();
+  const { getUsers, users, setAdmin } = useUser();
 
   const modalUserDelete = useRef<IModalUserDeleteActions>(null);
   const modalUserCreate = useRef<IModalCreateUserActions>(null);
   const modalImportUser = useRef<IModalImportUserActions>(null);
 
-  const [userSerlected, setUserSerlected] = useState<IRegister>();
-  const [serach, setSearch] = useState('');
+  const [userSerlected, setUserSerlected] = useState<IUser>();
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    getRegisters().then();
-  }, [getRegisters]);
+    getUsers().then();
+  }, [getUsers]);
 
   async function handleAdmin(id: string) {
     await setAdmin(id);
   }
 
-  function handleModalDelete(user: IRegister) {
+  function handleModalDelete(user: IUser) {
     setUserSerlected(user);
     modalUserDelete.current?.handleVisibleModal();
   }
 
-  function handleModalEditModal(user: IRegister) {
+  function handleModalEditModal(user: IUser) {
     setUserSerlected(user);
     modalUserCreate.current?.handleVisibleModal();
   }
 
-  const filter = (usersList: IRegister[], query: string) =>
+  const filter = (usersList: IUser[], query: string) =>
     usersList.filter(user => user.email.toLowerCase().includes(query));
 
-  function UsersList({ usersList, query }: IRegisterList) {
+  function UsersList({ usersList, query }: IUserList) {
     const filtered = filter(usersList, query);
 
     return (
@@ -95,7 +99,7 @@ export const Users: React.FC = () => {
                 id="search"
                 type="text"
                 placeholder="Buscar usuários"
-                value={serach}
+                value={search}
                 onChange={e => setSearch(e.target.value)}
               />
             </div>
@@ -133,7 +137,7 @@ export const Users: React.FC = () => {
           </div>
         </section>
 
-        <UsersList usersList={registers} query={serach} />
+        <UsersList usersList={users} query={search} />
       </section>
 
       <ModalCreateUser user={userSerlected!} ref={modalUserCreate} />

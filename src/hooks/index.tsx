@@ -4,17 +4,17 @@ import { AuthProvider } from './auth/context';
 import { CompanyProvider } from './company/context';
 import { FormProsvider } from './form/context';
 import { QuestionProvider } from './questions/context';
-import { RegisterProvider } from './register/context';
+import { UserProvider } from './user/context';
 
 const AppProvider: React.FC = ({ children }) => (
   <AuthProvider>
-    <RegisterProvider>
+    <UserProvider>
       <CompanyProvider>
         <FormProsvider>
           <QuestionProvider>{children}</QuestionProvider>
         </FormProsvider>
       </CompanyProvider>
-    </RegisterProvider>
+    </UserProvider>
   </AuthProvider>
 );
 

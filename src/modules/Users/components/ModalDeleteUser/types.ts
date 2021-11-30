@@ -1,7 +1,7 @@
-import { IRegister } from '../../pages/Users/types';
+import { IUser } from 'dtos/user';
 
 export interface IModalUserDelete {
-  user: IRegister;
+  user: IUser;
 }
 
 export interface IModalUserDeleteActions {

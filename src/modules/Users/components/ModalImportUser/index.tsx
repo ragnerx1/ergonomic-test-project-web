@@ -7,15 +7,15 @@ import React, {
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 import { useCompany } from '@hooks/company';
-import { useRegister } from '@hooks/register';
-import Button from '../Button';
+import { useUser } from '@hooks/user';
+import Button from '@components/Button';
 import { IModalImportUserActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
 const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
   (props, ref) => {
     const { getCompanies, companies } = useCompany();
-    const { importRegisters } = useRegister();
+    const { importUsers } = useUser();
 
     const [isVisible, setIsVisible] = useState(false);
     const [companySelected, setCompanySelected] = useState('');
@@ -35,7 +35,7 @@ const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
       const form = new FormData();
       form.append('file', file[0]);
 
-      await importRegisters(form);
+      await importUsers(form);
       handleVisibleModal();
     }
 

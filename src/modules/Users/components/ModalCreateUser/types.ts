@@ -1,7 +1,7 @@
-import { IRegister } from '../../pages/Users/types';
+import { IUser } from 'dtos/user';
 
 export interface IModalCreateUser {
-  user: IRegister | undefined;
+  user: IUser | undefined;
 }
 
 export interface IModalCreateUserActions {

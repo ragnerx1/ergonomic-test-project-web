@@ -1,16 +1,16 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
-import { useRegister } from '@hooks/register';
-import Button from '../Button';
+import { useUser } from '@hooks/user';
+import Button from '@components/Button';
 import { IModalUserDelete, IModalUserDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalUserDelete: React.ForwardRefRenderFunction<
+const ModalDeleteUser: React.ForwardRefRenderFunction<
   IModalUserDeleteActions,
   IModalUserDelete
 > = ({ user }, ref) => {
-  const { deleteRegister } = useRegister();
+  const { deleteUser } = useUser();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -21,7 +21,7 @@ const ModalUserDelete: React.ForwardRefRenderFunction<
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   async function handleDeleteUser() {
-    await deleteRegister(user.id);
+    await deleteUser(user.id);
     handleVisibleModal();
   }
 
@@ -43,4 +43,4 @@ const ModalUserDelete: React.ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(ModalUserDelete);
+export default forwardRef(ModalDeleteUser);

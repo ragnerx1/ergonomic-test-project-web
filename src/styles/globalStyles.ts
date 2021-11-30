@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
-    /* padding: 0 20vw; */
+    padding: 0 20vw;
   }
 
   body, input, button, p {

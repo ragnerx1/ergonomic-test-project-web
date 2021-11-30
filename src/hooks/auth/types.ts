@@ -1,5 +1,5 @@
+import { IUser } from '@dtos/user';
 import { ICompany } from 'pages/Company/types';
-import { IRegister } from 'pages/Users/types';
 
 export interface ISignInCredentials {
   email: string;
@@ -8,7 +8,7 @@ export interface ISignInCredentials {
 
 export interface IAuthState {
   token: string;
-  register: IRegister;
+  register: IUser;
   company: ICompany;
 }
 

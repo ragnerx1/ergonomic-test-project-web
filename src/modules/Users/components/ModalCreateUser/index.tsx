@@ -5,10 +5,10 @@ import React, {
   useState,
 } from 'react';
 
-import { useRegister } from '@hooks/register';
+import { useUser } from '@hooks/user';
 import { useCompany } from '@hooks/company';
 import { HeaderModal } from '@components/HeaderModal';
-import Button from '../Button';
+import Button from '@components/Button';
 import { IModalCreateUser, IModalCreateUserActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
@@ -16,7 +16,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   IModalCreateUserActions,
   IModalCreateUser
 > = ({ user }, ref) => {
-  const { createRegister, editRegister } = useRegister();
+  const { createUser, editUser } = useUser();
   const { getCompanies, companies } = useCompany();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -51,9 +51,9 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
     const data = { email, access, company_id: companySelected };
 
     if (user) {
-      await editRegister(user.id, data);
+      await editUser(user.id, data);
     } else {
-      await createRegister(data);
+      await createUser(data);
     }
 
     handleCloseModal();
