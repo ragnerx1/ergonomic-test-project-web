@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 import Header from '@components/Header';
 import Button from '@components/Button';
 
 import { useUser } from '@hooks/user';
-import { IUser } from 'dtos/user';
+import { IUser } from '@dtos/user';
 
 import ModalImportUser from './components/ModalImportUser';
 import ModalUserDelete from './components/ModalDeleteUser';
@@ -14,11 +14,11 @@ import { IModalImportUserActions } from './components/ModalImportUser/types';
 import { IModalCreateUserActions } from './components/ModalCreateUser/types';
 import { IModalUserDeleteActions } from './components/ModalDeleteUser/types';
 
-import { IUserList } from './types';
+import { UsersList } from './components/UsersList';
 import { Container } from './styles';
 
 export const Users: React.FC = () => {
-  const { getUsers, users, setAdmin } = useUser();
+  const { getUsers, users } = useUser();
 
   const modalUserDelete = useRef<IModalUserDeleteActions>(null);
   const modalUserCreate = useRef<IModalCreateUserActions>(null);
@@ -31,64 +31,23 @@ export const Users: React.FC = () => {
     getUsers().then();
   }, [getUsers]);
 
-  async function handleAdmin(id: string) {
-    await setAdmin(id);
-  }
-
-  function handleModalDelete(user: IUser) {
-    setUserSerlected(user);
+  function handleModalDelete() {
+    // setUserSerlected(user);
     modalUserDelete.current?.handleVisibleModal();
   }
 
-  function handleModalEditModal(user: IUser) {
-    setUserSerlected(user);
+  function handleModalEditModal() {
+    // setUserSerlected(user);
     modalUserCreate.current?.handleVisibleModal();
-  }
-
-  const filter = (usersList: IUser[], query: string) =>
-    usersList.filter(user => user.email.toLowerCase().includes(query));
-
-  function UsersList({ usersList, query }: IUserList) {
-    const filtered = filter(usersList, query);
-
-    return (
-      <>
-        {filtered.map(user => (
-          <section key={user.id}>
-            <div className="id">{`${user.id.substring(0, 25)}...`}</div>
-            <div className="company">
-              <p>{user.email}</p>
-            </div>
-            <div className="admin">
-              <input
-                type="checkbox"
-                checked={user.access}
-                onChange={() => handleAdmin(user.id)}
-              />
-            </div>
-            <div className="option">
-              <button type="button" onClick={() => handleModalEditModal(user)}>
-                <AiFillEdit color="black" />
-              </button>
-            </div>
-            <div className="option">
-              <button type="button" onClick={() => handleModalDelete(user)}>
-                <AiFillDelete color="black" />
-              </button>
-            </div>
-          </section>
-        ))}
-      </>
-    );
   }
 
   return (
     <Container>
       <Header buttomBack />
 
-      <section>
-        <div>
-          <div>
+      <section className="content">
+        <div className="table-header">
+          <div className="part-one">
             <h1>Usuários</h1>
 
             <div className="input-container">
@@ -137,7 +96,12 @@ export const Users: React.FC = () => {
           </div>
         </section>
 
-        <UsersList usersList={users} query={search} />
+        <UsersList
+          usersList={users}
+          query={search}
+          handleModalDelete={handleModalDelete}
+          handleModalEditModal={handleModalEditModal}
+        />
       </section>
 
       <ModalCreateUser user={userSerlected!} ref={modalUserCreate} />

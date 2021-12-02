@@ -1,24 +1,28 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  section {
+  .content {
     margin-top: 80px;
 
-    div {
+    .table-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      .input-container {
-        margin-left: 50px;
-        background-color: #f7f7f7;
-        padding: 10px 15px;
-        border-radius: 25px;
+      .part-one {
+        display: flex;
 
-        input {
-          margin-left: 5px;
-          background-color: transparent;
-          border: none;
+        .input-container {
+          margin-left: 50px;
+          background-color: #f7f7f7;
+          padding: 10px 15px;
+          border-radius: 25px;
+
+          input {
+            margin-left: 5px;
+            background-color: transparent;
+            border: none;
+          }
         }
       }
     }
@@ -43,43 +47,6 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-    }
-
-    section {
-      display: flex;
-      margin: 10px 0;
-
-      .id {
-        width: 11vw;
-      }
-
-      .company {
-        width: 15vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .admin {
-        width: 10vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .option {
-        margin-left: 30px;
-        width: 10vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        button {
-          border: none;
-          background-color: transparent;
-          width: 50px;
-        }
       }
     }
   }

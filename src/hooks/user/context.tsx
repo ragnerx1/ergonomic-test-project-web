@@ -19,7 +19,7 @@ export const UserProvider: React.FC = ({ children }) => {
     async (id: string) => {
       try {
         const updatedRegisters = users.map(register => {
-          if (register.id === id) register.access = !register.access;
+          if (register.id === id) register.admin = !register.admin;
           return register;
         });
 

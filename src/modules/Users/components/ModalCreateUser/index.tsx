@@ -22,12 +22,12 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [companySelected, setCompanySelected] = useState('');
-  const [access, setAccess] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     if (user) {
       setEmail(user.email);
-      setAccess(user.access);
+      setAdmin(user.admin);
       setCompanySelected(user.company_id);
     }
 
@@ -43,12 +43,12 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   function handleCloseModal() {
     setCompanySelected('');
     setEmail('');
-    setAccess(false);
+    setAdmin(false);
     handleVisibleModal();
   }
 
   async function handleCreateCompany() {
-    const data = { email, access, company_id: companySelected };
+    const data = { email, admin, company_id: companySelected };
 
     if (user) {
       await editUser(user.id, data);
@@ -80,8 +80,8 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
           <input
             type="checkbox"
             id="admin"
-            checked={access}
-            onChange={() => setAccess(oldValue => !oldValue)}
+            checked={admin}
+            onChange={() => setAdmin(oldValue => !oldValue)}
           />
 
           <label htmlFor="admin">Empresa</label>

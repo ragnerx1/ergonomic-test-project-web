@@ -1,6 +1,6 @@
 export interface IUser {
   id: string;
   email: string;
-  access: boolean;
+  admin: boolean;
   company_id: string;
 }
