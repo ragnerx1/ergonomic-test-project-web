@@ -68,7 +68,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
         toast.success('Usuário criado');
       } catch (error) {
-        toast.error('Erro ao criar usuário');
+        toast.error('Erro ao atualizar usuário');
       }
     },
     [users],
