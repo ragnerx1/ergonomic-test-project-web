@@ -9,6 +9,7 @@ export const variables = {
   },
 
   fontSize: {
+    little: 12,
     small: 14,
   },
 };
