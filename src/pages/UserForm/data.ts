@@ -5,7 +5,7 @@ export const form: IQuestion[] = [
     id: 0,
     question_type: 1,
     description:
-      'Qual imagem mais se assemelha ao local onde você usa o computador para trabalhar:',
+      'Qual imagem mais se assemelha ao local onde você usa o computador para :',
     first_photo:
       'https://www.moveisdevalor.com.br/portal/upload/files/image/16475/pessoa_trabalhando_na_cama.png',
     second_photo:
