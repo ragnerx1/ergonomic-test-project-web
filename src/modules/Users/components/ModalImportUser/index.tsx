@@ -21,6 +21,7 @@ const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
     const [companySelected, setCompanySelected] = useState('');
     const [file, setFile] = useState<any>();
 
+    useImperativeHandle(ref, () => ({ handleVisibleModal }));
     useEffect(() => {
       getCompanies().then();
     }, [getCompanies]);
@@ -28,8 +29,6 @@ const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
     function handleVisibleModal() {
       setIsVisible(oldValue => !oldValue);
     }
-
-    useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
     async function handleImport() {
       const form = new FormData();
