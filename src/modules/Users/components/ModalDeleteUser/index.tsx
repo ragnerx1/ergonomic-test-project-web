@@ -14,11 +14,11 @@ const ModalDeleteUser: React.ForwardRefRenderFunction<
 
   const [isVisible, setIsVisible] = useState(false);
 
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
+
   function handleVisibleModal() {
     setIsVisible(oldValue => !oldValue);
   }
-
-  useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   async function handleDeleteUser() {
     await deleteUser(user.id);
