@@ -1,5 +1,4 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 
 import { useCompany } from '@hooks/company';
