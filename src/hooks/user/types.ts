@@ -6,6 +6,8 @@ export interface IUserContextData {
   deleteUser(id: string): Promise<void>;
   createUser(data: Omit<IUser, 'id'>): Promise<void>;
   editUser(id: string, data: Omit<IUser, 'id'>): Promise<void>;
-  importUsers(data: FormData): Promise<void>;
+  importUsers(data: FormData, company_id: string): Promise<void>;
+  selectUser(user: IUser): void;
+  selectedUser: IUser;
   users: IUser[];
 }

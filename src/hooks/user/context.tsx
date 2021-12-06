@@ -1,7 +1,7 @@
-import { IUser } from '@dtos/user';
 import React, { createContext, useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
+import { IUser } from '@dtos/user';
 import api from '../../services/api';
 import { IUserContextData } from './types';
 
@@ -9,6 +9,11 @@ export const UserContext = createContext({} as IUserContextData);
 
 export const UserProvider: React.FC = ({ children }) => {
   const [users, setUsers] = useState<IUser[]>([]);
+  const [selectedUser, setSelectedUser] = useState<IUser>({} as IUser);
+
+  const selectUser = useCallback((user: IUser) => {
+    setSelectedUser(user);
+  }, []);
 
   const getUsers = useCallback(async () => {
     const response = await api.get('user');
@@ -74,11 +79,11 @@ export const UserProvider: React.FC = ({ children }) => {
     [users],
   );
 
-  const importUsers = useCallback(async (data: FormData) => {
+  const importUsers = useCallback(async (data: FormData, company_id: string) => {
     try {
       await api.request({
         method: 'POST',
-        url: 'user/import',
+        url: `user/import/${company_id}`,
         headers: {
           'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
         },
@@ -100,6 +105,8 @@ export const UserProvider: React.FC = ({ children }) => {
         createUser,
         editUser,
         importUsers,
+        selectedUser,
+        selectUser,
         users,
       }}
     >
