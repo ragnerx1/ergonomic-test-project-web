@@ -31,11 +31,6 @@ export const Users: React.FC = () => {
     getUsers().then();
   }, [getUsers]);
 
-  function handleModalDelete() {
-    // setUserSerlected(user);
-    modalUserDelete.current?.handleVisibleModal();
-  }
-
   function handleModalEditModal() {
     // setUserSerlected(user);
     modalUserCreate.current?.handleVisibleModal();
@@ -96,13 +91,13 @@ export const Users: React.FC = () => {
         <UsersList
           usersList={users}
           query={search}
-          handleModalDelete={handleModalDelete}
+          handleModalDelete={() => modalUserDelete.current?.handleVisibleModal()}
           handleModalEditModal={handleModalEditModal}
         />
       </section>
 
       <ModalCreateUser user={userSerlected!} ref={modalUserCreate} />
-      <ModalUserDelete user={userSerlected!} ref={modalUserDelete} />
+      <ModalUserDelete ref={modalUserDelete} />
       <ModalImportUser ref={modalImportUser} />
     </Container>
   );

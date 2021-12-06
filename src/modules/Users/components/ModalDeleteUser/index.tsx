@@ -3,11 +3,11 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 
 import { useUser } from '@hooks/user';
 import Button from '@components/Button';
-import { IModalUserDelete, IModalUserDeleteActions } from './types';
+import { IModalUserDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalDeleteUser: React.ForwardRefRenderFunction<IModalUserDeleteActions, IModalUserDelete> = ({ user }, ref) => {
-  const { deleteUser } = useUser();
+const ModalDeleteUser: React.ForwardRefRenderFunction<IModalUserDeleteActions> = (props, ref) => {
+  const { deleteUser, selectedUser } = useUser();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -18,7 +18,7 @@ const ModalDeleteUser: React.ForwardRefRenderFunction<IModalUserDeleteActions, I
   }
 
   async function handleDeleteUser() {
-    await deleteUser(user.id);
+    await deleteUser(selectedUser.id);
     handleVisibleModal();
   }
 
