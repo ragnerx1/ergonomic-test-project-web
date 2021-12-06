@@ -18,9 +18,7 @@ export const CompanyProvider: React.FC = ({ children }) => {
   const deleteCompany = useCallback(
     async (id: string) => {
       try {
-        const filteredComapnies = companies.filter(
-          comapany => comapany.id !== id,
-        );
+        const filteredComapnies = companies.filter(comapany => comapany.id !== id);
 
         setCompanies(filteredComapnies);
         await api.delete(`company/${id}`);

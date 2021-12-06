@@ -20,12 +20,7 @@ const Home: React.FC = () => {
       <section>
         <div>
           {homeData.map((item: IHomeDataProps) => (
-            <ButtonCard
-              key={item.id}
-              type="button"
-              color={item.color}
-              onClick={() => handleNavigateTo(item.route)}
-            >
+            <ButtonCard key={item.id} type="button" color={item.color} onClick={() => handleNavigateTo(item.route)}>
               <item.icon size={30} />
               <p>{item.title}</p>
             </ButtonCard>

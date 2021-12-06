@@ -35,12 +35,7 @@ const QuestionTypeTwo: React.FC<IQuestionTypeTwo> = ({ data }) => {
       <p className="question-description">{data.description}</p>
 
       {data.multiple_choice?.map(choice => (
-        <Checkbox
-          choice={choice}
-          selectedAnswer={id => handleChooseAnswer(id)}
-          key={choice.id}
-          disabled={!!answer}
-        />
+        <Checkbox choice={choice} selectedAnswer={id => handleChooseAnswer(id)} key={choice.id} disabled={!!answer} />
       ))}
 
       {answer && <Answer answer={answer} />}

@@ -19,17 +19,11 @@ const UserForm: React.FC = () => {
         <div key={question.id}>
           {question.question_type === 1 && <QuestionTypeOne data={question} />}
           {question.question_type === 2 && <QuestionTypeTwo data={question} />}
-          {question.question_type === 3 && (
-            <QuestionTypeThree data={question} />
-          )}
+          {question.question_type === 3 && <QuestionTypeThree data={question} />}
         </div>
       ))}
 
-      <Button
-        title="Continuar"
-        onClick={() => push('/discomfort-map')}
-        style={{ marginTop: 50, marginBottom: 15 }}
-      />
+      <Button title="Continuar" onClick={() => push('/discomfort-map')} style={{ marginTop: 50, marginBottom: 15 }} />
     </Container>
   );
 };

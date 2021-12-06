@@ -6,10 +6,10 @@ import Button from '../Button';
 import { IModalFormDelete, IModalFormDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalFormDelete: React.ForwardRefRenderFunction<
-  IModalFormDeleteActions,
-  IModalFormDelete
-> = ({ company }, ref) => {
+const ModalFormDelete: React.ForwardRefRenderFunction<IModalFormDeleteActions, IModalFormDelete> = (
+  { company },
+  ref,
+) => {
   const { deleteForm } = useForm();
   const [isVisible, setIsVisible] = useState(false);
 

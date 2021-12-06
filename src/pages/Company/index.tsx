@@ -49,10 +49,7 @@ const Company: React.FC = () => {
               <p>{company.name}</p>
             </div>
             <div className="option">
-              <button
-                type="button"
-                onClick={() => handleModalEditModal(company)}
-              >
+              <button type="button" onClick={() => handleModalEditModal(company)}>
                 <AiFillEdit color="black" />
               </button>
             </div>
@@ -88,10 +85,7 @@ const Company: React.FC = () => {
             />
           </div>
 
-          <Button
-            title="Cadastrar nova empresa"
-            onPress={() => modalCreateCompany.current?.handleVisibleModal()}
-          />
+          <Button title="Cadastrar nova empresa" onPress={() => modalCreateCompany.current?.handleVisibleModal()} />
         </div>
 
         <section className="header-table">

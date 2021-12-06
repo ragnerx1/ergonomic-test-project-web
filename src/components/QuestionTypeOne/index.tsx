@@ -34,38 +34,22 @@ const QuestionTypeOne: React.FC<IQuestionTypeOne> = ({ data }) => {
       <p className="question-description">{data.description}</p>
 
       <div className="images">
-        <button
-          type="button"
-          disabled={!!answer.length}
-          onClick={() => handleChoicceImage(1)}
-        >
+        <button type="button" disabled={!!answer.length} onClick={() => handleChoicceImage(1)}>
           <img src={data.first_photo} alt="laptop bed" />
         </button>
 
-        <button
-          type="button"
-          disabled={!!answer.length}
-          onClick={() => handleChoicceImage(2)}
-        >
+        <button type="button" disabled={!!answer.length} onClick={() => handleChoicceImage(2)}>
           <img src={data.second_photo} alt="laptop sofa" />
         </button>
 
         {data.third_photo && (
-          <button
-            type="button"
-            disabled={!!answer.length}
-            onClick={() => handleChoicceImage(3)}
-          >
+          <button type="button" disabled={!!answer.length} onClick={() => handleChoicceImage(3)}>
             <img src={data.third_photo} alt="laptop kitchen" />
           </button>
         )}
 
         {data.fourth_photo && (
-          <button
-            type="button"
-            disabled={!!answer.length}
-            onClick={() => handleChoicceImage(4)}
-          >
+          <button type="button" disabled={!!answer.length} onClick={() => handleChoicceImage(4)}>
             <img src={data.fourth_photo} alt="laptop kitchen" />
           </button>
         )}

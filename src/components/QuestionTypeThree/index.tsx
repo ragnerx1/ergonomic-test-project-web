@@ -39,12 +39,7 @@ const QuestionTypeThree: React.FC<IQuestionTypeThree> = ({ data }) => {
       </div>
 
       {data.multiple_choice?.map(choice => (
-        <Checkbox
-          key={choice.id}
-          disabled={!!answer}
-          choice={choice}
-          selectedAnswer={id => handleChooseAnswer(id)}
-        />
+        <Checkbox key={choice.id} disabled={!!answer} choice={choice} selectedAnswer={id => handleChooseAnswer(id)} />
       ))}
 
       {answer && <Answer answer={answer} />}

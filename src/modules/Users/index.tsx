@@ -65,10 +65,7 @@ export const Users: React.FC = () => {
           </div>
 
           <div>
-            <Button
-              title="Importar usuários"
-              onPress={() => modalImportUser.current?.handleVisibleModal()}
-            />
+            <Button title="Importar usuários" onPress={() => modalImportUser.current?.handleVisibleModal()} />
 
             <Button
               style={{ marginLeft: 20 }}

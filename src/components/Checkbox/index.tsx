@@ -3,11 +3,7 @@ import React, { useState } from 'react';
 import { Container } from './styles';
 import { ICheckbox } from './types';
 
-const Checkbox: React.FC<ICheckbox> = ({
-  choice,
-  selectedAnswer,
-  disabled,
-}) => {
+const Checkbox: React.FC<ICheckbox> = ({ choice, selectedAnswer, disabled }) => {
   const [checked, setChecked] = useState(false);
 
   function handleChooseAnswer() {

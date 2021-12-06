@@ -1,13 +1,12 @@
+/* eslint-disable max-len */
 import { IQuestion } from './types';
 
 export const form: IQuestion[] = [
   {
     id: 0,
     question_type: 1,
-    description:
-      'Qual imagem mais se assemelha ao local onde você usa o computador para trabalhar:',
-    first_photo:
-      'https://www.moveisdevalor.com.br/portal/upload/files/image/16475/pessoa_trabalhando_na_cama.png',
+    description: 'Qual imagem mais se assemelha ao local onde você usa o computador para trabalhar:',
+    first_photo: 'https://www.moveisdevalor.com.br/portal/upload/files/image/16475/pessoa_trabalhando_na_cama.png',
     second_photo:
       'https://st.depositphotos.com/1743476/1276/i/950/depositphotos_12765235-stock-photo-young-man-at-laptop.jpg',
     third_photo:
@@ -38,8 +37,7 @@ export const form: IQuestion[] = [
       'Está cadeira não é adequada para trabalho diário , mas é possível, melhorar o seu conforto. Assista ao vídeo de dicas.',
     second_answer:
       'Esta cadeira é ergonômica do ponto de vista da regulagem de altura, mas se possível adquira uma que tenha suporte para braços também.',
-    third_answer:
-      'Esta cadeira é ergonômica e possibilita regulagens e adequação à mesa utilizada para o  trabalho .',
+    third_answer: 'Esta cadeira é ergonômica e possibilita regulagens e adequação à mesa utilizada para o  trabalho .',
     fourth_answer:
       'Sofás não são recomendados para serem utilizados como assento para trabalho com computador devido a não possibilitar regulagem de altura e não permitir um suporte adequado à coluna vertebral',
   },
@@ -66,8 +64,7 @@ export const form: IQuestion[] = [
       'Notebooks utilizados diretamente sobre a mesa ou outra superfície tendem a sobrecarregar o pescoço e os músculos do trapézio, predispondo à dores. Procure elevar o Notebook com suporte apropriado, livros ou caixas para que fique na altura da linha dos olhos',
     second_answer:
       'Você está utilizando o Notebook de maneira ergonômica utilizando suporte para eleva-lo à altura dos olhos.',
-    third_answer:
-      'Utilize apoios para elevar a altura do monitor  de maneira que fique na altura da linha dos olhos.',
+    third_answer: 'Utilize apoios para elevar a altura do monitor  de maneira que fique na altura da linha dos olhos.',
     fourth_answer:
       'Você está cuidando de seu bem estar utilizando apoio para elevar e regular a altura do monitor em relação a linha dos olhos.',
   },
@@ -80,8 +77,7 @@ export const form: IQuestion[] = [
       { id: 1, choice: 'Não' },
       { id: 3, choice: 'Não uso notebook' },
     ],
-    first_answer:
-      'Você está trabalhando de forma ergonômica e prevenindo problemas osteomusculares',
+    first_answer: 'Você está trabalhando de forma ergonômica e prevenindo problemas osteomusculares',
     second_answer:
       'Geralmente a não utilização de teclado e mouse acoplado ao notebook predispõe a sobrecarregar o músculo do Trapézio e gerar dores nos ombros. Melhore seu conforto fazendo uso destes periféricos.',
   },
@@ -109,16 +105,14 @@ export const form: IQuestion[] = [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
     ],
-    first_answer:
-      'Uma boa iluminação favorece o conforto ao trabalhar, que bom que você cuida este aspecto!',
+    first_answer: 'Uma boa iluminação favorece o conforto ao trabalhar, que bom que você cuida este aspecto!',
     second_answer:
       'A utilização de computador em lugar com má iluminação predispõe há um maior cansaço e outros problemas.',
   },
   {
     id: 7,
     question_type: 2,
-    description:
-      'Quanto a ruídos como você classificaria o local onde você trabalha:',
+    description: 'Quanto a ruídos como você classificaria o local onde você trabalha:',
     multiple_choice: [
       { id: 0, choice: 'Silencioso' },
       { id: 1, choice: 'Ruídos domésticos' },
@@ -135,8 +129,7 @@ export const form: IQuestion[] = [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
     ],
-    first_photo:
-      'https://www.casadaergonomia.com.br/wp-content/uploads/2021/03/apoio-para-pes.png',
+    first_photo: 'https://www.casadaergonomia.com.br/wp-content/uploads/2021/03/apoio-para-pes.png',
     first_answer:
       'Utilizando o apoio para os pés você mantém uma melhor circulação dos membros inferiores e não sobrecarrega a articulação do joelho.',
     second_answer:
@@ -158,14 +151,12 @@ export const form: IQuestion[] = [
   {
     id: 10,
     question_type: 2,
-    description:
-      'O teclado e mouse ficam posicionados de modo que você não precise esticar os braços ',
+    description: 'O teclado e mouse ficam posicionados de modo que você não precise esticar os braços ',
     multiple_choice: [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
     ],
-    first_answer:
-      'Muito bem você está permitindo que seus ombros e braços estejam em posição mais confortável.',
+    first_answer: 'Muito bem você está permitindo que seus ombros e braços estejam em posição mais confortável.',
     second_answer:
       'De preferência para que os objetos que mais utiliza se encontrem bem ao alcance de suas mão e procure acessa-los sem esforço. Teclado e mouse devem ficar perto da borda da mesa para facilitar o acesso e utilização mais confortável.',
   },
@@ -201,14 +192,12 @@ export const form: IQuestion[] = [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
     ],
-    first_answer:
-      'A água é fundamental para as funções de nosso organismo, 80% dele é líquido. A água  ',
+    first_answer: 'A água é fundamental para as funções de nosso organismo, 80% dele é líquido. A água  ',
   },
   {
     id: 14,
     question_type: 2,
-    description:
-      'Quantas vezes na semana você pratica alguma atividade física?',
+    description: 'Quantas vezes na semana você pratica alguma atividade física?',
     multiple_choice: [
       { id: 0, choice: 'Nenhuma' },
       { id: 1, choice: '1 vez' },
@@ -219,8 +208,7 @@ export const form: IQuestion[] = [
   {
     id: 15,
     question_type: 2,
-    description:
-      'Caso você sinta alguma dor ou desconforto, o que você acredita provocar o sintoma?',
+    description: 'Caso você sinta alguma dor ou desconforto, o que você acredita provocar o sintoma?',
     multiple_choice: [
       { id: 0, choice: 'Problemas ortopédicos, doenças já diagnosticadas' },
       { id: 1, choice: 'Tensão/estresse' },

@@ -79,9 +79,7 @@ export const FormProsvider: React.FC = ({ children }) => {
   );
 
   return (
-    <FormContext.Provider
-      value={{ getForms, setActive, deleteForm, createForm, editForm, forms }}
-    >
+    <FormContext.Provider value={{ getForms, setActive, deleteForm, createForm, editForm, forms }}>
       {children}
     </FormContext.Provider>
   );

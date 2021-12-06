@@ -6,10 +6,7 @@ import Button from '@components/Button';
 import { IModalUserDelete, IModalUserDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalDeleteUser: React.ForwardRefRenderFunction<
-  IModalUserDeleteActions,
-  IModalUserDelete
-> = ({ user }, ref) => {
+const ModalDeleteUser: React.ForwardRefRenderFunction<IModalUserDeleteActions, IModalUserDelete> = ({ user }, ref) => {
   const { deleteUser } = useUser();
 
   const [isVisible, setIsVisible] = useState(false);

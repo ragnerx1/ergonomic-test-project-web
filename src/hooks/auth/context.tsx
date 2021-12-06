@@ -24,26 +24,19 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as IAuthState;
   });
 
-  const signIn = useCallback(
-    async ({ email, password }: ISignInCredentials) => {
-      const response = await api.post('/session', { email, password });
-      const { register, token, company } = response.data;
+  const signIn = useCallback(async ({ email, password }: ISignInCredentials) => {
+    const response = await api.post('/session', { email, password });
+    const { register, token, company } = response.data;
 
-      localStorage.setItem('@ergonomic:token', token);
-      localStorage.setItem('@ergonomic:user', JSON.stringify(register));
-      localStorage.setItem('@ergonomic:company', JSON.stringify(company));
+    localStorage.setItem('@ergonomic:token', token);
+    localStorage.setItem('@ergonomic:user', JSON.stringify(register));
+    localStorage.setItem('@ergonomic:company', JSON.stringify(company));
 
-      api.defaults.headers.authorization = `Bearer ${token}`;
-      setData({ register, token, company });
+    api.defaults.headers.authorization = `Bearer ${token}`;
+    setData({ register, token, company });
 
-      return response.data;
-    },
-    [],
-  );
+    return response.data;
+  }, []);
 
-  return (
-    <AuthContext.Provider value={{ signIn, user: data }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ signIn, user: data }}>{children}</AuthContext.Provider>;
 };

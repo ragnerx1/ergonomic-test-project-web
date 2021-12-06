@@ -17,9 +17,7 @@ const QuestionProvider: React.FC = ({ children }) => {
   const setActive = useCallback(
     async (id: string) => {
       try {
-        const filteredQuestions = questions.filter(
-          question => question.id !== id,
-        );
+        const filteredQuestions = questions.filter(question => question.id !== id);
 
         const response = await api.put(`questions/${id}`);
         setQuestions([...filteredQuestions, response.data]);
@@ -36,9 +34,7 @@ const QuestionProvider: React.FC = ({ children }) => {
   const deleteQuestion = useCallback(
     async (id: string) => {
       try {
-        const filteredQuestions = questions.filter(
-          question => question.id !== id,
-        );
+        const filteredQuestions = questions.filter(question => question.id !== id);
 
         await api.delete(`questions/${id}`);
         setQuestions(filteredQuestions);

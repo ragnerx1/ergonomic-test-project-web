@@ -42,60 +42,25 @@ const MultipleChoice: React.FC<IMultipleChoiceProps> = ({ onClick }) => {
   return (
     <Container onSubmit={handleCreateQuestion}>
       <label htmlFor="description">Descricão da pergunta:</label>
-      <input
-        type="text"
-        id="description"
-        value={description}
-        onChange={v => setDescription(v.target.value)}
-      />
+      <input type="text" id="description" value={description} onChange={v => setDescription(v.target.value)} />
 
       <label htmlFor="answer1">Pergunta 1:</label>
-      <input
-        type="text"
-        id="answer1"
-        value={answerFirst}
-        onChange={v => setAnswerFirst(v.target.value)}
-      />
+      <input type="text" id="answer1" value={answerFirst} onChange={v => setAnswerFirst(v.target.value)} />
 
       <label htmlFor="answer2">Pergunta 2:</label>
-      <input
-        type="text"
-        id="answer2"
-        value={answerSecond}
-        onChange={v => setAnswerSecond(v.target.value)}
-      />
+      <input type="text" id="answer2" value={answerSecond} onChange={v => setAnswerSecond(v.target.value)} />
 
       <label htmlFor="answer3">Pergunta 3:</label>
-      <input
-        type="text"
-        id="answer3"
-        value={answerThird}
-        onChange={v => setAnswerThird(v.target.value)}
-      />
+      <input type="text" id="answer3" value={answerThird} onChange={v => setAnswerThird(v.target.value)} />
 
       <label htmlFor="answer4">Pergunta 4:</label>
-      <input
-        type="text"
-        id="answer4"
-        value={answerFourth}
-        onChange={v => setAnswerFourth(v.target.value)}
-      />
+      <input type="text" id="answer4" value={answerFourth} onChange={v => setAnswerFourth(v.target.value)} />
 
       <label htmlFor="correct-answer">resposta certa:</label>
-      <input
-        type="number"
-        id="correct-answer"
-        value={answerCorrect}
-        onChange={v => setAnswerCorrect(v.target.value)}
-      />
+      <input type="number" id="correct-answer" value={answerCorrect} onChange={v => setAnswerCorrect(v.target.value)} />
 
       <label htmlFor="admin">Formulários</label>
-      <select
-        name="companies"
-        id="admin"
-        value={formSelected}
-        onChange={e => setFormSelected(e.target.value)}
-      >
+      <select name="companies" id="admin" value={formSelected} onChange={e => setFormSelected(e.target.value)}>
         {forms.map(form => (
           <option key={form.id} value={form.id}>
             {form.name}

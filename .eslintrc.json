@@ -34,6 +34,7 @@
           }
         }
       ],
+      "max-len": ["error", { "code": 120, "ignoreUrls": true }],
       "no-param-reassign": "off",
       "jsx-a11y/label-has-associated-control": "off",
       "implicit-arrow-linebreak": "off",

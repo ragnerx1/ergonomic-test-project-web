@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
 import { useForm } from '@hooks/form';
 import { HeaderModal } from '@components/HeaderModal';
@@ -11,10 +6,7 @@ import Button from '../Button';
 import { IModalCreateForm, IModalCreateFormActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalCreateForm: React.ForwardRefRenderFunction<
-  IModalCreateFormActions,
-  IModalCreateForm
-> = ({ form }, ref) => {
+const ModalCreateForm: React.ForwardRefRenderFunction<IModalCreateFormActions, IModalCreateForm> = ({ form }, ref) => {
   const { createForm, editForm } = useForm();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -49,19 +41,11 @@ const ModalCreateForm: React.ForwardRefRenderFunction<
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <HeaderModal
-          title={`${form ? 'Editar' : 'Criar'} formulário`}
-          onClick={handleCloseModal}
-        />
+        <HeaderModal title={`${form ? 'Editar' : 'Criar'} formulário`} onClick={handleCloseModal} />
 
         <form action="">
           <label htmlFor="name">Nome do formulário</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
+          <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
         </form>
 
         <Button title="Salvar" onPress={handleCreateForm} />

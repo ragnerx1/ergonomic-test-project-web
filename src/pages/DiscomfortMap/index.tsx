@@ -9,10 +9,9 @@ const DiscomfortMap: React.FC = () => (
     <h1>Mapa de Desconforto</h1>
 
     <p>
-      Tomando como base a escala progressiva de desconforto/dor, assinale na
-      tabela o número correspondente na área do corpo com base na imagem 3- o
-      desconforto permanece durante o dia 4- precisei procurar um médico ou
-      tomar medicação receitada
+      Tomando como base a escala progressiva de desconforto/dor, assinale na tabela o número correspondente na área do
+      corpo com base na imagem 3- o desconforto permanece durante o dia 4- precisei procurar um médico ou tomar
+      medicação receitada
     </p>
     <p>1- o desconforto some quando paro a atividade</p>
     <p>2- o desconforto permanece por alguns minutos após a atividade</p>
@@ -27,10 +26,7 @@ const DiscomfortMap: React.FC = () => (
     </div>
 
     <div className="choice">
-      <p>
-        Assinale a região onde sente desconforto (com base na imagem) e o grau
-        deste:
-      </p>
+      <p>Assinale a região onde sente desconforto (com base na imagem) e o grau deste:</p>
 
       <div className="legend">
         <p>0</p>

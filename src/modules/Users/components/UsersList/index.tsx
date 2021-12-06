@@ -8,12 +8,7 @@ import { ColumnMiddle } from '@components/ColumnMiddle';
 import { IUserList } from './types';
 import { Container } from './styles';
 
-export const UsersList: React.FC<IUserList> = ({
-  usersList,
-  query,
-  handleModalDelete,
-  handleModalEditModal,
-}) => {
+export const UsersList: React.FC<IUserList> = ({ usersList, query, handleModalDelete, handleModalEditModal }) => {
   const { setAdmin } = useUser();
 
   async function handleAdmin(id: string) {
@@ -33,11 +28,7 @@ export const UsersList: React.FC<IUserList> = ({
           </ColumnMiddle>
 
           <ColumnMiddle>
-            <input
-              type="checkbox"
-              checked={user.admin}
-              onChange={() => handleAdmin(user.id)}
-            />
+            <input type="checkbox" checked={user.admin} onChange={() => handleAdmin(user.id)} />
           </ColumnMiddle>
 
           <ColumnMiddle>

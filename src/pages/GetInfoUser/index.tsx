@@ -16,9 +16,8 @@ const GetInfoUser: React.FC = () => {
       <h1>Titulo</h1>
 
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae nemo
-        id neque consequuntur magni omnis? Odit vel, cupiditate distinctio
-        praesentium aut quo illo doloremque mollitia sint minus quas omnis ex?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae nemo id neque consequuntur magni omnis? Odit
+        vel, cupiditate distinctio praesentium aut quo illo doloremque mollitia sint minus quas omnis ex?
       </p>
 
       <form>
@@ -29,16 +28,8 @@ const GetInfoUser: React.FC = () => {
         <input type="text" id="role" />
 
         <label htmlFor="role">Sexo</label>
-        <Checkbox
-          choice={{ id: 0, choice: 'masculino' }}
-          selectedAnswer={item => item}
-          disabled={false}
-        />
-        <Checkbox
-          choice={{ id: 1, choice: 'feminino' }}
-          selectedAnswer={item => item}
-          disabled={false}
-        />
+        <Checkbox choice={{ id: 0, choice: 'masculino' }} selectedAnswer={item => item} disabled={false} />
+        <Checkbox choice={{ id: 1, choice: 'feminino' }} selectedAnswer={item => item} disabled={false} />
 
         <label htmlFor="age">Idade</label>
         <input type="text" id="age" />

@@ -1,9 +1,5 @@
 import { GrDocumentText } from 'react-icons/gr';
-import {
-  IoIosImages,
-  IoMdImage,
-  IoIosCheckmarkCircleOutline,
-} from 'react-icons/io';
+import { IoIosImages, IoMdImage, IoIosCheckmarkCircleOutline } from 'react-icons/io';
 
 import { IQuestiontypes } from './types';
 

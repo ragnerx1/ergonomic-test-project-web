@@ -53,11 +53,7 @@ const Form: React.FC = () => {
               <p>{form.name}</p>
             </div>
             <div className="option">
-              <input
-                type="checkbox"
-                checked={form.active}
-                onChange={() => handleActive(form)}
-              />
+              <input type="checkbox" checked={form.active} onChange={() => handleActive(form)} />
             </div>
             <div className="option">
               <button type="button" onClick={() => handleModalEditModal(form)}>
@@ -96,10 +92,7 @@ const Form: React.FC = () => {
             />
           </div>
 
-          <Button
-            title="Cadastrar novo formulário"
-            onPress={() => modalCreateForm.current?.handleVisibleModal()}
-          />
+          <Button title="Cadastrar novo formulário" onPress={() => modalCreateForm.current?.handleVisibleModal()} />
         </div>
 
         <section className="header-table">

@@ -10,23 +10,15 @@ import { HeaderModal } from '@components/HeaderModal';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import Select from '@components/Select';
-import {
-  IModalCreateUser,
-  IModalCreateUserActions,
-  createUserFormSchema,
-  TCreateUserForm,
-} from './types';
+import { IModalCreateUser, IModalCreateUserActions, createUserFormSchema, TCreateUserForm } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalCreateUser: React.ForwardRefRenderFunction<
-  IModalCreateUserActions,
-  IModalCreateUser
-> = ({ user }, ref) => {
+const ModalCreateUser: React.ForwardRefRenderFunction<IModalCreateUserActions, IModalCreateUser> = ({ user }, ref) => {
   const { createUser } = useUser();
   const { companies } = useCompany();
-  const { register, handleSubmit, formState, reset } = useForm<TCreateUserForm>(
-    { resolver: yupResolver(createUserFormSchema) },
-  );
+  const { register, handleSubmit, formState, reset } = useForm<TCreateUserForm>({
+    resolver: yupResolver(createUserFormSchema),
+  });
 
   const [isVisible, setIsVisible] = useState(false);
   const [admin, setAdmin] = useState(false);
@@ -52,18 +44,10 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <HeaderModal
-          title={`${user ? 'Editar' : 'Criar'} usuário`}
-          onClick={handleVisibleModal}
-        />
+        <HeaderModal title={`${user ? 'Editar' : 'Criar'} usuário`} onClick={handleVisibleModal} />
 
         <form onSubmit={handleSubmit(handleCreateUser)}>
-          <Input
-            id="email"
-            label="Email"
-            error={formState.errors.email}
-            {...register('email', { required: true })}
-          />
+          <Input id="email" label="Email" error={formState.errors.email} {...register('email', { required: true })} />
 
           <SimpleCheckbox
             id="admin"
@@ -72,12 +56,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<
             onChange={() => setAdmin(oldValue => !oldValue)}
           />
 
-          <Select
-            id="companies"
-            label="Empresa"
-            list={companies}
-            {...register('company_id')}
-          />
+          <Select id="companies" label="Empresa" list={companies} {...register('company_id')} />
 
           <Button title="Criar" type="submit" />
         </form>

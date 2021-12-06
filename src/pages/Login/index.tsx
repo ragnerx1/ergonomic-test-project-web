@@ -31,16 +31,8 @@ const Login: React.FC = () => {
       <h1>Login</h1>
 
       <form onSubmit={handleAuth}>
-        <input
-          type="email"
-          value={email}
-          onChange={v => setEmail(v.target.value)}
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={v => setPassword(v.target.value)}
-        />
+        <input type="email" value={email} onChange={v => setEmail(v.target.value)} />
+        <input type="password" value={password} onChange={v => setPassword(v.target.value)} />
         <button type="submit">Entrar</button>
       </form>
     </Container>

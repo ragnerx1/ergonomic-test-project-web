@@ -46,55 +46,25 @@ const ImagesChoice: React.FC<IImagesChoice> = ({ onClick }) => {
   return (
     <Container onSubmit={handleCreateQuestion}>
       <label htmlFor="description">Descricão da pergunta:</label>
-      <input
-        type="text"
-        id="description"
-        value={description}
-        onChange={v => setDescription(v.target.value)}
-      />
+      <input type="text" id="description" value={description} onChange={v => setDescription(v.target.value)} />
 
       <p>Escolher arquivo imagem:</p>
-      <input
-        type="file"
-        name="file"
-        style={{ color: 'black' }}
-        onChange={e => setImage(e.target.files)}
-      />
+      <input type="file" name="file" style={{ color: 'black' }} onChange={e => setImage(e.target.files)} />
 
       <p>Escolher arquivo imagem:</p>
-      <input
-        type="file"
-        name="file"
-        style={{ color: 'black' }}
-        onChange={e => setImage2(e.target.files)}
-      />
+      <input type="file" name="file" style={{ color: 'black' }} onChange={e => setImage2(e.target.files)} />
 
       <p>Escolher arquivo imagem:</p>
-      <input
-        type="file"
-        name="file"
-        style={{ color: 'black' }}
-        onChange={e => setImage3(e.target.files)}
-      />
+      <input type="file" name="file" style={{ color: 'black' }} onChange={e => setImage3(e.target.files)} />
 
       <p>Escolher arquivo imagem:</p>
-      <input
-        type="file"
-        name="file"
-        style={{ color: 'black' }}
-        onChange={e => setImage4(e.target.files)}
-      />
+      <input type="file" name="file" style={{ color: 'black' }} onChange={e => setImage4(e.target.files)} />
 
       <label htmlFor="correct-answer">resposta certa:</label>
       <input type="number" id="correct-answer" />
 
       <label htmlFor="admin">Formulários</label>
-      <select
-        name="companies"
-        id="admin"
-        value={formSelected}
-        onChange={e => setFormSelected(e.target.value)}
-      >
+      <select name="companies" id="admin" value={formSelected} onChange={e => setFormSelected(e.target.value)}>
         {forms.map(form => (
           <option key={form.id} value={form.id}>
             {form.name}

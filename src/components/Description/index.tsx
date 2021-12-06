@@ -33,20 +33,10 @@ const Description: React.FC<IDescriptionProps> = ({ onClick }) => {
   return (
     <Container onSubmit={handleCreateQuestion}>
       <label htmlFor="description">Descricão da pergunta:</label>
-      <input
-        type="text"
-        id="description"
-        value={description}
-        onChange={v => setDescription(v.target.value)}
-      />
+      <input type="text" id="description" value={description} onChange={v => setDescription(v.target.value)} />
 
       <label htmlFor="admin">Formulários</label>
-      <select
-        name="companies"
-        id="admin"
-        value={formSelected}
-        onChange={e => setFormSelected(e.target.value)}
-      >
+      <select name="companies" id="admin" value={formSelected} onChange={e => setFormSelected(e.target.value)}>
         {forms.map(form => (
           <option key={form.id} value={form.id}>
             {form.name}

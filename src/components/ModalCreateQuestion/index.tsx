@@ -9,34 +9,29 @@ import Description from '@components/Description';
 import { ICreateQuestionActions } from './types';
 import { Container, Content } from './styles';
 
-const ModalCreateQuestion: React.ForwardRefRenderFunction<ICreateQuestionActions> =
-  (props, ref) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [type, setType] = useState<number>(0);
+const ModalCreateQuestion: React.ForwardRefRenderFunction<ICreateQuestionActions> = (props, ref) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [type, setType] = useState<number>(0);
 
-    function handleVisibleModal() {
-      setType(0);
-      setIsVisible(oldValue => !oldValue);
-    }
+  function handleVisibleModal() {
+    setType(0);
+    setIsVisible(oldValue => !oldValue);
+  }
 
-    useImperativeHandle(ref, () => ({ handleVisibleModal }));
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
-    return (
-      <Container open={isVisible}>
-        <Content>
-          <HeaderModal title="Criar perguntas" onClick={handleVisibleModal} />
-          {type === 0 && (
-            <SelectQuestionType selectQuestionType={id => setType(id)} />
-          )}
-          {type === 1 && (
-            <ImageAndMultipleChoice onClick={handleVisibleModal} />
-          )}
-          {type === 2 && <MultipleChoice onClick={handleVisibleModal} />}
-          {type === 3 && <ImagesChoice onClick={handleVisibleModal} />}
-          {type === 4 && <Description onClick={handleVisibleModal} />}
-        </Content>
-      </Container>
-    );
-  };
+  return (
+    <Container open={isVisible}>
+      <Content>
+        <HeaderModal title="Criar perguntas" onClick={handleVisibleModal} />
+        {type === 0 && <SelectQuestionType selectQuestionType={id => setType(id)} />}
+        {type === 1 && <ImageAndMultipleChoice onClick={handleVisibleModal} />}
+        {type === 2 && <MultipleChoice onClick={handleVisibleModal} />}
+        {type === 3 && <ImagesChoice onClick={handleVisibleModal} />}
+        {type === 4 && <Description onClick={handleVisibleModal} />}
+      </Content>
+    </Container>
+  );
+};
 
 export default forwardRef(ModalCreateQuestion);
