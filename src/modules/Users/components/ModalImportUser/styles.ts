@@ -1,5 +1,5 @@
-import { Modal } from '@material-ui/core';
 import styled from 'styled-components';
+import { Modal } from '@material-ui/core';
 
 export const Container = styled(Modal)`
   display: flex;
@@ -16,14 +16,7 @@ export const ContainerCreateData = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    button {
-      border: none;
-      background-color: transparent;
-    }
+  form {
+    margin: 20px 0;
   }
 `;

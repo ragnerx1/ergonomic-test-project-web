@@ -5,14 +5,20 @@ import { useUser } from '@hooks/user';
 import { filterQuery } from '@utils/filterQuery';
 
 import { ColumnMiddle } from '@components/ColumnMiddle';
+import { IUser } from '@dtos/user';
 import { IUserList } from './types';
 import { Container } from './styles';
 
 export const UsersList: React.FC<IUserList> = ({ usersList, query, handleModalDelete, handleModalEditModal }) => {
-  const { setAdmin } = useUser();
+  const { setAdmin, selectUser } = useUser();
 
   async function handleAdmin(id: string) {
     await setAdmin(id);
+  }
+
+  function handleDelete(user: IUser) {
+    selectUser(user);
+    handleModalDelete();
   }
 
   return (
@@ -38,7 +44,7 @@ export const UsersList: React.FC<IUserList> = ({ usersList, query, handleModalDe
           </ColumnMiddle>
 
           <ColumnMiddle>
-            <button type="button" onClick={handleModalDelete}>
+            <button type="button" onClick={() => handleDelete(user)}>
               <AiFillDelete color="black" />
             </button>
           </ColumnMiddle>
