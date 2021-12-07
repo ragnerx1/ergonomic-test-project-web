@@ -1,4 +1,4 @@
-import { ICompany } from 'pages/Company/types';
+import { ICompany } from '@dtos/company';
 
 export interface IModalDeleteCompany {
   company: ICompany;

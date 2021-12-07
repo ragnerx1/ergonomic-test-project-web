@@ -1,8 +1,4 @@
-export interface ICompany {
-  id: string;
-  name: string;
-  form_id: string;
-}
+import { ICompany } from '@dtos/company';
 
 export interface IListCompanies {
   listCompanies: ICompany[];

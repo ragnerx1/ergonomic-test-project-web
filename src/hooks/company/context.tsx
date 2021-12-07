@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { ICompany } from 'pages/Company/types';
+import { ICompany } from '@dtos/company';
 import api from '../../services/api';
 import { ICompanyContextData } from './types';
 

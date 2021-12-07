@@ -8,8 +8,8 @@ import UserForm from '../pages/UserForm';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
 import { Users } from '../modules/Users';
+import { Company } from '../modules/Company';
 import LoginAdmin from '../pages/LoginAdmin';
-import Company from '../pages/Company';
 import Form from '../pages/Form';
 import Questions from '../pages/Questions';
 

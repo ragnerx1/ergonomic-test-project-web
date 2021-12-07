@@ -1,5 +1,5 @@
-import { Modal } from '@material-ui/core';
 import styled from 'styled-components';
+import { Modal } from '@material-ui/core';
 
 export const Container = styled(Modal)`
   display: flex;

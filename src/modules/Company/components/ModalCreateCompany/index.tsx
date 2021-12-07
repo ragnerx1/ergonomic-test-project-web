@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
 import { useCompany } from '@hooks/company';
 import { HeaderModal } from '@components/HeaderModal';
 import { useForm } from '@hooks/form';
-import Button from '../Button';
+import Button from '@components/Button';
 import { IModalCreateCompany, IModalCreateCompanyActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 

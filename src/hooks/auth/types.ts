@@ -1,5 +1,5 @@
+import { ICompany } from '@dtos/company';
 import { IUser } from '@dtos/user';
-import { ICompany } from 'pages/Company/types';
 
 export interface ISignInCredentials {
   email: string;

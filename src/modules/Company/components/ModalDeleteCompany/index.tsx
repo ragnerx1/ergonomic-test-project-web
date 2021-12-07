@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 import { useCompany } from '@hooks/company';
-import Button from '../Button';
+import Button from '@components/Button';
 import { IModalDeleteCompany, IModalDeleteCompanyActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
