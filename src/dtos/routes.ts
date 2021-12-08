@@ -2,7 +2,6 @@
 
 export enum ERoutes {
   LOGIN_USER = '/',
-  LOGIN_ADMIN = '/admin',
   HOME = '/home',
   USERS = '/users',
   COMPANY = '/company',
