@@ -14,7 +14,7 @@ export interface IAuthState {
 
 export interface IResponseSignin {
   register: {
-    access: boolean;
+    admin: boolean;
   };
 }
 

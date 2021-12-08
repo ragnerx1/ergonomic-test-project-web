@@ -22,7 +22,7 @@ export const Login: React.FC = () => {
     try {
       const response = await signIn({ email: data.email, password: data.password });
 
-      if (response.register.access === true) {
+      if (response.register.admin === true) {
         push(ERoutes.HOME);
         return;
       }
