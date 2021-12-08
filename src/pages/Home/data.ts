@@ -39,6 +39,6 @@ export const homeData: IHomeDataProps[] = [
     title: 'Sair',
     icon: GrLogout,
     color: '#fff0f0',
-    route: ERoutes.LOGIN_ADMIN,
+    route: ERoutes.LOGIN_USER,
   },
 ];

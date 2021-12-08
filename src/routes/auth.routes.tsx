@@ -5,11 +5,10 @@ import { ERoutes } from '../dtos/routes';
 import DiscomfortMap from '../pages/DiscomfortMap';
 import GetInfoUser from '../pages/GetInfoUser';
 import UserForm from '../pages/UserForm';
-import Login from '../pages/Login';
 import Home from '../pages/Home';
+import { Login } from '../modules/Login';
 import { Users } from '../modules/Users';
 import { Company } from '../modules/Company';
-import LoginAdmin from '../pages/LoginAdmin';
 import Form from '../pages/Form';
 import Questions from '../pages/Questions';
 
@@ -17,7 +16,6 @@ export const Routes: React.FC = () => (
   <BrowserRouter>
     <Switch>
       <Route path={ERoutes.LOGIN_USER} exact component={Login} />
-      <Route path={ERoutes.LOGIN_ADMIN} component={LoginAdmin} />
       <Route path={ERoutes.HOME} component={Home} />
       <Route path={ERoutes.USERS} component={Users} />
       <Route path={ERoutes.COMPANY} component={Company} />
