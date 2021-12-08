@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { FormContext } from './context';
 import { IFormContextData } from './types';
 
-export function useForm(): IFormContextData {
+export function useForms(): IFormContextData {
   const context = useContext(FormContext);
 
   if (!context) {

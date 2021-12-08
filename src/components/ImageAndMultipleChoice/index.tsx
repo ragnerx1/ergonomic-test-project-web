@@ -3,13 +3,13 @@ import React, { FormEvent, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
 import { useQuestion } from '@hooks/questions';
-import { useForm } from '@hooks/form';
+import { useForms } from '@hooks/form';
 import { IImageAndMultipleChoiceProps } from './types';
 import { Container } from './styles';
 
 const ImageAndMultipleChoice: React.FC<IImageAndMultipleChoiceProps> = ({ onClick }) => {
   const { createQuestion, updateImage } = useQuestion();
-  const { getForms, forms } = useForm();
+  const { getForms, forms } = useForms();
 
   const [image, setImage] = useState<any>();
   const [description, setDescription] = useState('');

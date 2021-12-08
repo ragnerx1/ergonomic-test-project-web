@@ -7,12 +7,12 @@ import ModalFormDelete from '@components/ModalFormDelete';
 import ModalCreateForm from '@components/ModalCreateForm';
 import Button from '@components/Button';
 import Header from '@components/Header';
-import { useForm } from '@hooks/form';
+import { useForms } from '@hooks/form';
 import { IForm, IFormList } from './types';
 import { Container } from './styles';
 
 const Form: React.FC = () => {
-  const { getForms, forms, setActive } = useForm();
+  const { getForms, forms, setActive } = useForms();
 
   const modalFormDelete = useRef<IModalFormDeleteActions>(null);
   const modalCreateForm = useRef<IModalCreateFormActions>(null);

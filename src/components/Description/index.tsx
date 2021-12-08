@@ -1,13 +1,13 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import { useForm } from '@hooks/form';
+import { useForms } from '@hooks/form';
 import { useQuestion } from '@hooks/questions';
 import { IDescriptionProps } from './types';
 import { Container } from './styles';
 
 const Description: React.FC<IDescriptionProps> = ({ onClick }) => {
-  const { getForms, forms } = useForm();
+  const { getForms, forms } = useForms();
   const { createQuestion } = useQuestion();
 
   const [description, setDescription] = useState('');

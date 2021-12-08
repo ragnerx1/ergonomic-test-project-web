@@ -1,13 +1,13 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
-import { useForm } from '@hooks/form';
+import { useForms } from '@hooks/form';
 import { HeaderModal } from '@components/HeaderModal';
 import Button from '../Button';
 import { IModalCreateForm, IModalCreateFormActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
 const ModalCreateForm: React.ForwardRefRenderFunction<IModalCreateFormActions, IModalCreateForm> = ({ form }, ref) => {
-  const { createForm, editForm } = useForm();
+  const { createForm, editForm } = useForms();
 
   const [isVisible, setIsVisible] = useState(false);
   const [name, setName] = useState('');

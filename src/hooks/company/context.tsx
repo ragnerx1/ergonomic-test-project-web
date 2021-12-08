@@ -9,6 +9,11 @@ export const CompanyContext = createContext({} as ICompanyContextData);
 
 export const CompanyProvider: React.FC = ({ children }) => {
   const [companies, setCompanies] = useState<ICompany[]>([]);
+  const [selectedcompany, setSelectedCompany] = useState<ICompany>({} as ICompany);
+
+  const setCompany = useCallback((company: ICompany) => {
+    setSelectedCompany(company);
+  }, []);
 
   const getCompanies = useCallback(async () => {
     const response = await api.get('company');
@@ -66,6 +71,8 @@ export const CompanyProvider: React.FC = ({ children }) => {
         deleteCompany,
         createCompany,
         editCompany,
+        setCompany,
+        selectedcompany,
         companies,
       }}
     >

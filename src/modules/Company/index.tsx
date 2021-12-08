@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AiOutlineSearch, AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 import Button from '@components/Button';
 import Header from '@components/Header';
 import { useCompany } from '@hooks/company';
-import { ICompany } from '@dtos/company';
 
 import { IModalCreateCompanyActions } from './components/ModalCreateCompany/types';
 import { IModalDeleteCompanyActions } from './components/ModalDeleteCompany/types';
 import ModalCreateCompany from './components/ModalCreateCompany';
 import ModalDeleteCompany from './components/ModalDeleteCompany';
 
-import { IListCompanies } from './types';
 import { Container } from './styles';
+import { CompaniesList } from './components/CompaniesList';
 
 export const Company: React.FC = () => {
   const { getCompanies, companies } = useCompany();
@@ -20,58 +19,17 @@ export const Company: React.FC = () => {
   const modalCreateCompany = useRef<IModalCreateCompanyActions>(null);
   const modalDeleteCompany = useRef<IModalDeleteCompanyActions>(null);
 
-  const [companySelected, setCompanySelected] = useState<ICompany>();
   const [serach, setSearch] = useState('');
 
   useEffect(() => {
     getCompanies().then();
   }, [getCompanies]);
 
-  function handleModalDelete(company: ICompany) {
-    setCompanySelected(company);
-    modalDeleteCompany.current?.handleVisibleModal();
-  }
-
-  function handleModalEditModal(company: ICompany) {
-    setCompanySelected(company);
-    modalCreateCompany.current?.handleVisibleModal();
-  }
-
-  const filter = (listCompanies: ICompany[], query: string) =>
-    listCompanies.filter(company => company.name.toLowerCase().includes(query));
-
-  function CompaniesList({ listCompanies, query }: IListCompanies) {
-    const filtered = filter(listCompanies, query);
-
-    return (
-      <>
-        {filtered.map(company => (
-          <section key={company.id}>
-            <div className="id">{`${company.id.substring(0, 25)}...`}</div>
-            <div className="company">
-              <p>{company.name}</p>
-            </div>
-            <div className="option">
-              <button type="button" onClick={() => handleModalEditModal(company)}>
-                <AiFillEdit color="black" />
-              </button>
-            </div>
-            <div className="option">
-              <button type="button" onClick={() => handleModalDelete(company)}>
-                <AiFillDelete color="black" />
-              </button>
-            </div>
-          </section>
-        ))}
-      </>
-    );
-  }
-
   return (
     <Container>
       <Header buttomBack />
 
-      <section>
+      <section className="content">
         <div>
           <h1>Empresas</h1>
 
@@ -106,11 +64,16 @@ export const Company: React.FC = () => {
           </div>
         </section>
 
-        <CompaniesList listCompanies={companies} query={serach} />
+        <CompaniesList
+          listCompanies={companies}
+          query={serach}
+          editCompany={() => modalCreateCompany.current?.handleVisibleModal()}
+          deleteCompany={() => modalDeleteCompany.current?.handleVisibleModal()}
+        />
       </section>
 
-      <ModalCreateCompany company={companySelected!} ref={modalCreateCompany} />
-      <ModalDeleteCompany company={companySelected!} ref={modalDeleteCompany} />
+      <ModalCreateCompany ref={modalCreateCompany} />
+      <ModalDeleteCompany ref={modalDeleteCompany} />
     </Container>
   );
 };

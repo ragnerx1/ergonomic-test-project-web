@@ -1,70 +1,58 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useCompany } from '@hooks/company';
-import { HeaderModal } from '@components/HeaderModal';
-import { useForm } from '@hooks/form';
 import Button from '@components/Button';
-import { IModalCreateCompany, IModalCreateCompanyActions } from './types';
+import Input from '@components/Input';
+import { HeaderModal } from '@components/HeaderModal';
+import { useCompany } from '@hooks/company';
+import { useForms } from '@hooks/form';
+import Select from '@components/Select';
+import { IModalCreateCompanyActions, TCreateCompanyForm, createCompanyFormSchema } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalCreateCompany: React.ForwardRefRenderFunction<IModalCreateCompanyActions, IModalCreateCompany> = (
-  { company },
-  ref,
-) => {
-  const { createCompany, editCompany } = useCompany();
-  const { getForms, forms } = useForm();
+const ModalCreateCompany: React.ForwardRefRenderFunction<IModalCreateCompanyActions> = (props, ref) => {
+  const { createCompany } = useCompany();
+  const { getForms, forms } = useForms();
+  const { register, handleSubmit, formState, reset } = useForm<TCreateCompanyForm>({
+    resolver: yupResolver(createCompanyFormSchema),
+  });
 
   const [isVisible, setIsVisible] = useState(false);
-  const [name, setName] = useState('');
-  const [formSelected, setFormSelected] = useState('');
-
-  function handleVisibleModal() {
-    setIsVisible(oldValue => !oldValue);
-  }
 
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   useEffect(() => {
     getForms().then();
-    if (company) setName(company.name);
-  }, [company, getForms]);
+  }, [getForms]);
 
-  function handleCloseModal() {
-    setName('');
-    handleVisibleModal();
+  function handleVisibleModal() {
+    reset();
+    setIsVisible(oldValue => !oldValue);
   }
 
-  async function handleCreateCompany() {
-    if (!company) {
-      await createCompany(name, formSelected);
-    } else {
-      const data = { id: company.id, name, form_id: formSelected };
-      await editCompany(data);
-    }
-
-    handleCloseModal();
+  async function handleCreateCompany(data: TCreateCompanyForm) {
+    await createCompany(data.name, data.formId);
+    handleVisibleModal();
   }
 
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <HeaderModal title={`${company ? 'Editar' : 'Criar'} empresa`} onClick={handleCloseModal} />
+        <HeaderModal title="Criar empresa" onClick={handleVisibleModal} />
 
-        <form action="">
-          <label htmlFor="name">Nome da empresa</label>
-          <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
+        <form onSubmit={handleSubmit(handleCreateCompany)}>
+          <Input
+            id="name"
+            label="Nome da empresa"
+            error={formState.errors.name}
+            {...register('name', { required: true })}
+          />
+
+          <Select id="forms" label="Formulários" list={forms} {...register('formId')} />
+
+          <Button title="Salvar" type="submit" />
         </form>
-
-        <label htmlFor="admin">Formulários</label>
-        <select name="companies" id="admin" value={formSelected} onChange={e => setFormSelected(e.target.value)}>
-          {forms.map(form => (
-            <option key={form.id} value={form.id}>
-              {form.name}
-            </option>
-          ))}
-        </select>
-
-        <Button title="Salvar" onPress={handleCreateCompany} />
       </ContainerCreateData>
     </Container>
   );

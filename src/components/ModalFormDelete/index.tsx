@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
-import { useForm } from '@hooks/form';
+import { useForms } from '@hooks/form';
 import Button from '../Button';
 import { IModalFormDelete, IModalFormDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
@@ -10,7 +10,7 @@ const ModalFormDelete: React.ForwardRefRenderFunction<IModalFormDeleteActions, I
   { company },
   ref,
 ) => {
-  const { deleteForm } = useForm();
+  const { deleteForm } = useForms();
   const [isVisible, setIsVisible] = useState(false);
 
   function handleVisibleModal() {
