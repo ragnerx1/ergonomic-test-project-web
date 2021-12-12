@@ -32,7 +32,7 @@ export const homeData: IHomeDataProps[] = [
     title: 'Perguntas',
     icon: AiOutlineQuestionCircle,
     color: '#f7f7f7',
-    route: ERoutes.QUESTION,
+    route: ERoutes.HOME,
   },
   {
     id: 4,

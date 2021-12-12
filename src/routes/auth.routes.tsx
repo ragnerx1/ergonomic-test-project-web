@@ -10,7 +10,6 @@ import { Login } from '../modules/Login';
 import { Users } from '../modules/Users';
 import { Company } from '../modules/Company';
 import { Forms } from '../modules/Forms';
-import Questions from '../pages/Questions';
 
 export const Routes: React.FC = () => (
   <BrowserRouter>
@@ -20,7 +19,6 @@ export const Routes: React.FC = () => (
       <Route path={ERoutes.USERS} component={Users} />
       <Route path={ERoutes.COMPANY} component={Company} />
       <Route path={ERoutes.FORM} component={Forms} />
-      <Route path={ERoutes.QUESTION} component={Questions} />
       <Route path={ERoutes.USER_FORM} component={UserForm} />
       <Route path={ERoutes.USER_INFO} component={GetInfoUser} />
       <Route path={ERoutes.DISCOMFORT_MAP} component={DiscomfortMap} />
