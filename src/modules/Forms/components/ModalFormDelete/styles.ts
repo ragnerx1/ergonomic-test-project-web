@@ -15,15 +15,4 @@ export const ContainerCreateData = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    button {
-      border: none;
-      background-color: transparent;
-    }
-  }
 `;

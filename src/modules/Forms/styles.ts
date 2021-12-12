@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  section {
+  padding: 0 20vw;
+
+  .content {
     margin-top: 80px;
 
     div {
@@ -38,35 +40,6 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-    }
-
-    section {
-      display: flex;
-      margin: 10px 0;
-
-      .id {
-        width: 15vw;
-      }
-
-      .form {
-        width: 15vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .option {
-        width: 15vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        button {
-          border: none;
-          background-color: transparent;
-          width: 50px;
-        }
       }
     }
   }

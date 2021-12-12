@@ -1,38 +1,30 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
 
 import { useForms } from '@hooks/form';
-import Button from '../Button';
-import { IModalFormDelete, IModalFormDeleteActions } from './types';
+import Button from '@components/Button';
+import { HeaderModal } from '@components/HeaderModal';
+import { IModalFormDeleteActions } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalFormDelete: React.ForwardRefRenderFunction<IModalFormDeleteActions, IModalFormDelete> = (
-  { company },
-  ref,
-) => {
-  const { deleteForm } = useForms();
+const ModalFormDelete: React.ForwardRefRenderFunction<IModalFormDeleteActions> = (props, ref) => {
+  const { deleteForm, selectedForm } = useForms();
   const [isVisible, setIsVisible] = useState(false);
+
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
 
   function handleVisibleModal() {
     setIsVisible(oldValue => !oldValue);
   }
 
-  useImperativeHandle(ref, () => ({ handleVisibleModal }));
-
   async function handleDeleteCompany() {
-    await deleteForm(company.id);
+    await deleteForm(selectedForm.id);
     handleVisibleModal();
   }
 
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <section className="header">
-          <h2>Excluir formulário</h2>
-          <button type="button" onClick={handleVisibleModal}>
-            <AiFillCloseCircle size={20} />
-          </button>
-        </section>
+        <HeaderModal title="Excluir formulário" onClick={handleVisibleModal} />
 
         <p>Tem certeza que deseja excluir esse formulário?</p>
 

@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { IForm } from 'pages/Form/types';
+import { IForm } from '@dtos/form';
 import api from '../../services/api';
 import { IFormContextData } from './types';
 
@@ -9,31 +9,16 @@ export const FormContext = createContext({} as IFormContextData);
 
 export const FormProsvider: React.FC = ({ children }) => {
   const [forms, setForms] = useState<IForm[]>([]);
+  const [selectedForm, setSelectedForm] = useState<IForm>({} as IForm);
 
   const getForms = useCallback(async () => {
     const response = await api.get('forms');
     setForms(response.data);
   }, []);
 
-  const setActive = useCallback(
-    async (id: string, formSelected: IForm) => {
-      try {
-        const updatedForms = forms.map(form => {
-          if (form.id === id) form.active = !form.active;
-          return form;
-        });
-        setForms(updatedForms);
-
-        const data = { name: formSelected.name, active: formSelected.active };
-
-        await api.put(`forms/${id}`, data);
-        toast.success('Formulário ativado');
-      } catch (error) {
-        toast.error('Erro ao ativar formulário', { theme: 'dark' });
-      }
-    },
-    [forms],
-  );
+  const setForm = useCallback((form: IForm) => {
+    setSelectedForm(form);
+  }, []);
 
   const deleteForm = useCallback(
     async (id: string) => {
@@ -62,12 +47,12 @@ export const FormProsvider: React.FC = ({ children }) => {
   }, []);
 
   const editForm = useCallback(
-    async (selectedForm: IForm) => {
+    async (form: IForm) => {
       try {
-        const data = { name: selectedForm.name };
-        const response = await api.put(`forms/${selectedForm.id}`, data);
+        const data = { name: form.name };
+        const response = await api.put(`forms/${form.id}`, data);
 
-        const filteredForm = forms.filter(form => form.id !== selectedForm.id);
+        const filteredForm = forms.filter(value => value.id !== form.id);
         setForms([...filteredForm, response.data]);
 
         toast.success('Formulário atualizado');
@@ -79,7 +64,7 @@ export const FormProsvider: React.FC = ({ children }) => {
   );
 
   return (
-    <FormContext.Provider value={{ getForms, setActive, deleteForm, createForm, editForm, forms }}>
+    <FormContext.Provider value={{ getForms, deleteForm, createForm, editForm, forms, setForm, selectedForm }}>
       {children}
     </FormContext.Provider>
   );
