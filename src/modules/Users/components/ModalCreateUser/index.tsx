@@ -10,10 +10,10 @@ import { HeaderModal } from '@components/HeaderModal';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import Select from '@components/Select';
-import { IModalCreateUser, IModalCreateUserActions, createUserFormSchema, TCreateUserForm } from './types';
+import { IModalCreateUserActions, createUserFormSchema, TCreateUserForm } from './types';
 import { Container, ContainerCreateData } from './styles';
 
-const ModalCreateUser: React.ForwardRefRenderFunction<IModalCreateUserActions, IModalCreateUser> = ({ user }, ref) => {
+const ModalCreateUser: React.ForwardRefRenderFunction<IModalCreateUserActions> = (props, ref) => {
   const { createUser } = useUser();
   const { companies } = useCompany();
   const { register, handleSubmit, formState, reset } = useForm<TCreateUserForm>({
@@ -44,7 +44,7 @@ const ModalCreateUser: React.ForwardRefRenderFunction<IModalCreateUserActions, I
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>
-        <HeaderModal title={`${user ? 'Editar' : 'Criar'} usuário`} onClick={handleVisibleModal} />
+        <HeaderModal title="Criar usuário" onClick={handleVisibleModal} />
 
         <form onSubmit={handleSubmit(handleCreateUser)}>
           <Input id="email" label="Email" error={formState.errors.email} {...register('email', { required: true })} />

@@ -21,7 +21,7 @@ const ModalImportUser: React.ForwardRefRenderFunction<IModalImportUserActions> =
   useImperativeHandle(ref, () => ({ handleVisibleModal }));
   useEffect(() => {
     getCompanies().then();
-  }, []);
+  }, [getCompanies]);
 
   function handleVisibleModal() {
     setIsVisible(oldValue => !oldValue);

@@ -5,7 +5,6 @@ import Header from '@components/Header';
 import Button from '@components/Button';
 
 import { useUser } from '@hooks/user';
-import { IUser } from '@dtos/user';
 
 import ModalImportUser from './components/ModalImportUser';
 import ModalUserDelete from './components/ModalDeleteUser';
@@ -24,7 +23,6 @@ export const Users: React.FC = () => {
   const modalUserCreate = useRef<IModalCreateUserActions>(null);
   const modalImportUser = useRef<IModalImportUserActions>(null);
 
-  const [userSerlected, setUserSerlected] = useState<IUser>();
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -32,7 +30,6 @@ export const Users: React.FC = () => {
   }, [getUsers]);
 
   function handleModalEditModal() {
-    // setUserSerlected(user);
     modalUserCreate.current?.handleVisibleModal();
   }
 
@@ -96,7 +93,7 @@ export const Users: React.FC = () => {
         />
       </section>
 
-      <ModalCreateUser user={userSerlected!} ref={modalUserCreate} />
+      <ModalCreateUser ref={modalUserCreate} />
       <ModalUserDelete ref={modalUserDelete} />
       <ModalImportUser ref={modalImportUser} />
     </Container>

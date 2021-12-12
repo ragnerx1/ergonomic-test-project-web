@@ -1,9 +1,4 @@
-import { IUser } from 'dtos/user';
 import * as Yup from 'yup';
-
-export interface IModalCreateUser {
-  user: IUser | undefined;
-}
 
 export interface IModalCreateUserActions {
   handleVisibleModal(): void;
