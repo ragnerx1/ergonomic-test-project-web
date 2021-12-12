@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
+import { Home } from '../modules/Home';
 import { ERoutes } from '../dtos/routes';
 import DiscomfortMap from '../pages/DiscomfortMap';
 import GetInfoUser from '../pages/GetInfoUser';
 import UserForm from '../pages/UserForm';
-import Home from '../pages/Home';
 import { Login } from '../modules/Login';
 import { Users } from '../modules/Users';
 import { Company } from '../modules/Company';

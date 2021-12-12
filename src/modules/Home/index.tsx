@@ -6,7 +6,7 @@ import { homeData } from './data';
 import { IHomeDataProps } from './types';
 import { Container, ButtonCard } from './styles';
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const { push } = useHistory();
 
   function handleNavigateTo(routeName: string) {
@@ -30,5 +30,3 @@ const Home: React.FC = () => {
     </Container>
   );
 };
-
-export default Home;
