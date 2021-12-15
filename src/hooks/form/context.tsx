@@ -16,6 +16,11 @@ export const FormProsvider: React.FC = ({ children }) => {
     setForms(response.data);
   }, []);
 
+  const getFormById = useCallback(async (id?: string) => {
+    const response = await api.get(`forms/${id}`);
+    return response.data;
+  }, []);
+
   const setForm = useCallback((form: IForm) => {
     setSelectedForm(form);
   }, []);
@@ -64,7 +69,9 @@ export const FormProsvider: React.FC = ({ children }) => {
   );
 
   return (
-    <FormContext.Provider value={{ getForms, deleteForm, createForm, editForm, forms, setForm, selectedForm }}>
+    <FormContext.Provider
+      value={{ getForms, getFormById, deleteForm, createForm, editForm, forms, setForm, selectedForm }}
+    >
       {children}
     </FormContext.Provider>
   );

@@ -16,6 +16,9 @@ export interface IResponseSignin {
   register: {
     admin: boolean;
   };
+  company: {
+    form_id: string;
+  };
 }
 
 export interface IAuthContextData {

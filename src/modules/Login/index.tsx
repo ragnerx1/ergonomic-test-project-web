@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { isAfter, isBefore } from 'date-fns';
 
 import Input from '@components/Input';
 import { useAuth } from '@hooks/auth';
+import { useForms } from '@hooks/form';
 import { ERoutes } from '@dtos/routes';
 import logo from '../../assets/logo.png';
 import { TLoginForm, createLoginFormSchema } from './types';
@@ -14,6 +16,7 @@ import { Container } from './styles';
 export const Login: React.FC = () => {
   const { push } = useHistory();
   const { signIn } = useAuth();
+  const { getFormById } = useForms();
   const { register, handleSubmit, formState } = useForm<TLoginForm>({
     resolver: yupResolver(createLoginFormSchema),
   });
@@ -27,7 +30,17 @@ export const Login: React.FC = () => {
         return;
       }
 
-      push(ERoutes.USER_INFO);
+      const { initial_date, final_date } = await getFormById(response.company.form_id);
+      const today = new Date();
+
+      const todayIsBeforeThanInitialDate = isBefore(today, new Date(initial_date));
+      const todayIsAfterThanFinalDate = isAfter(today, new Date(final_date));
+
+      if (!todayIsBeforeThanInitialDate && !todayIsAfterThanFinalDate) {
+        push(ERoutes.USER_INFO);
+      } else {
+        toast.error('Esse formulario expirou', { theme: 'dark' });
+      }
     } catch (error) {
       toast.error('Confira seus dados e tente novamente', { theme: 'dark' });
     }
