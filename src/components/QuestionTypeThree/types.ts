@@ -1,4 +1,4 @@
-import { IQuestion } from '../../pages/UserForm/types';
+import { IQuestion } from 'modules/ErgonimicForm/types';
 
 export interface IQuestionTypeThree {
   data: IQuestion;

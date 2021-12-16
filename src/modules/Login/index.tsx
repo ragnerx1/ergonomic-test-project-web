@@ -37,7 +37,7 @@ export const Login: React.FC = () => {
       const todayIsAfterThanFinalDate = isAfter(today, new Date(final_date));
 
       if (!todayIsBeforeThanInitialDate && !todayIsAfterThanFinalDate) {
-        push(ERoutes.USER_INFO);
+        push(ERoutes.USER_FORM);
       } else {
         toast.error('Esse formulario expirou', { theme: 'dark' });
       }

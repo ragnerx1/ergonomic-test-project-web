@@ -8,7 +8,7 @@ import Button from '@components/Button';
 import { form } from './data';
 import { Container } from './styles';
 
-const UserForm: React.FC = () => {
+export const ErgonomicForm: React.FC = () => {
   const { push } = useHistory();
 
   return (
@@ -27,5 +27,3 @@ const UserForm: React.FC = () => {
     </Container>
   );
 };
-
-export default UserForm;

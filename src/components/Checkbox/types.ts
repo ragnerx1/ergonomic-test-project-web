@@ -1,8 +1,8 @@
 export interface ICheckbox {
   choice: {
-    id: number;
+    id: string | number;
     choice: string;
   };
-  selectedAnswer(id: number): void;
+  selectedAnswer(id: string | number): void;
   disabled: boolean;
 }

@@ -4,12 +4,12 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Home } from '../modules/Home';
 import { ERoutes } from '../dtos/routes';
 import DiscomfortMap from '../pages/DiscomfortMap';
-import GetInfoUser from '../pages/GetInfoUser';
-import UserForm from '../pages/UserForm';
 import { Login } from '../modules/Login';
 import { Users } from '../modules/Users';
 import { Company } from '../modules/Company';
 import { Forms } from '../modules/Forms';
+import { UserForm } from '../modules/UserForm';
+import { ErgonomicForm } from '../modules/ErgonimicForm';
 
 export const Routes: React.FC = () => (
   <BrowserRouter>
@@ -20,7 +20,7 @@ export const Routes: React.FC = () => (
       <Route path={ERoutes.COMPANY} component={Company} />
       <Route path={ERoutes.FORM} component={Forms} />
       <Route path={ERoutes.USER_FORM} component={UserForm} />
-      <Route path={ERoutes.USER_INFO} component={GetInfoUser} />
+      <Route path={ERoutes.ERGONOMIC_FORM} component={ErgonomicForm} />
       <Route path={ERoutes.DISCOMFORT_MAP} component={DiscomfortMap} />
     </Switch>
   </BrowserRouter>

@@ -8,12 +8,11 @@ import { Container, ContainerCreateData } from './styles';
 const ModalForm: React.ForwardRefRenderFunction<IModalFormActions> = (props, ref) => {
   const [isVisible, setIsVisible] = useState(true);
 
+  useImperativeHandle(ref, () => ({ handleVisibleModal }));
+
   function handleVisibleModal() {
     setIsVisible(oldValue => !oldValue);
   }
-
-  useImperativeHandle(ref, () => ({ handleVisibleModal }));
-
   return (
     <Container open={isVisible} onClose={handleVisibleModal}>
       <ContainerCreateData>

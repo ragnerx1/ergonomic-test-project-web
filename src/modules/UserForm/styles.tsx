@@ -1,5 +1,5 @@
-import { lighten } from 'polished';
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 import { variables } from '../../styles/variables';
 
@@ -29,12 +29,6 @@ export const Container = styled.section`
       margin-top: 20px;
       margin-bottom: 10px;
       font-weight: bold;
-    }
-
-    input {
-      border: none;
-      border-bottom: 1px solid lightgray;
-      margin-bottom: 30px;
     }
   }
 

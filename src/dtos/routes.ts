@@ -7,6 +7,6 @@ export enum ERoutes {
   COMPANY = '/company',
   FORM = '/form',
   USER_FORM = '/user-form',
-  USER_INFO = '/user-info',
+  ERGONOMIC_FORM = '/ergonomic-form',
   DISCOMFORT_MAP = '/discomfort-map',
 }
