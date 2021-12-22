@@ -7,7 +7,7 @@ import { IFormContextData } from './types';
 
 export const FormContext = createContext({} as IFormContextData);
 
-export const FormProsvider: React.FC = ({ children }) => {
+export const FormProvider: React.FC = ({ children }) => {
   const [forms, setForms] = useState<IForm[]>([]);
   const [selectedForm, setSelectedForm] = useState<IForm>({} as IForm);
 
