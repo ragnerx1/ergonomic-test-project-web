@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import QuestionTypeOne from '@components/QuestionTypeOne';
+import { QuestionTypeOne } from '@components/QuestionTypeOne';
 import QuestionTypeTwo from '@components/QuestionTypeTwo';
 import QuestionTypeThree from '@components/QuestionTypeThree';
 import Button from '@components/Button';
@@ -17,7 +17,9 @@ export const ErgonomicForm: React.FC = () => {
 
       {form.map(question => (
         <div key={question.id}>
-          {question.question_type === 1 && <QuestionTypeOne data={question} />}
+          {question.question_type === 1 && (
+            <QuestionTypeOne data={question} selectedAnswer={answer => console.log(answer)} />
+          )}
           {question.question_type === 2 && <QuestionTypeTwo data={question} />}
           {question.question_type === 3 && <QuestionTypeThree data={question} />}
         </div>

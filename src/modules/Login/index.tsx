@@ -54,7 +54,13 @@ export const Login: React.FC = () => {
       <form onSubmit={handleSubmit(handleAuth)}>
         <Input id="email" label="Seu e-mail" error={formState.errors.email} {...register('email')} />
 
-        <Input id="password" label="Sua senha" error={formState.errors.password} {...register('password')} />
+        <Input
+          id="password"
+          label="Sua senha"
+          type="password"
+          error={formState.errors.password}
+          {...register('password')}
+        />
 
         <button type="submit">Entrar</button>
       </form>

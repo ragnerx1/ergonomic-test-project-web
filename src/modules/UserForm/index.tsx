@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,6 +22,10 @@ export const UserForm: React.FC = () => {
   const { push } = useHistory();
 
   const [gender, setGender] = useState('');
+
+  useEffect(() => {
+    if (user.register.name) push(ERoutes.ERGONOMIC_FORM);
+  }, [user, push]);
 
   async function handleUpdateUser(data: TUserForm) {
     await editUser(user.register.id, {

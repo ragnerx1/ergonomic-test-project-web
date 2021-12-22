@@ -1,14 +1,21 @@
-import Answer from '@components/Answer';
-import QuestionOrder from '@components/QuestionOrder';
 import React, { useState } from 'react';
 
+import Answer from '@components/Answer';
+import QuestionOrder from '@components/QuestionOrder';
+import { IQuestion } from '@dtos/question';
 import { Container } from './styles';
-import { IQuestionTypeOne } from './types';
 
-const QuestionTypeOne: React.FC<IQuestionTypeOne> = ({ data }) => {
+export interface IQuestionTypeOne {
+  data: IQuestion;
+  selectedAnswer(number: number): void;
+}
+
+export const QuestionTypeOne: React.FC<IQuestionTypeOne> = ({ data, selectedAnswer }) => {
   const [answer, setAnswer] = useState('');
 
   function handleChoicceImage(number: 1 | 2 | 3 | 4) {
+    selectedAnswer(number);
+
     switch (number) {
       case 1:
         setAnswer(data.first_answer!);
@@ -59,5 +66,3 @@ const QuestionTypeOne: React.FC<IQuestionTypeOne> = ({ data }) => {
     </Container>
   );
 };
-
-export default QuestionTypeOne;
