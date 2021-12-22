@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { IQuestion } from './types';
+import { IQuestion } from '@dtos/question';
 
 export const form: IQuestion[] = [
   {
