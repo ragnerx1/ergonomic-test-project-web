@@ -3,20 +3,23 @@ import React, { useState } from 'react';
 import Answer from '@components/Answer';
 import QuestionOrder from '@components/QuestionOrder';
 import { IQuestion } from '@dtos/question';
+import { IAnswerProps } from 'modules/ErgonimicForm/types';
 import { Container } from './styles';
 
 export interface IQuestionTypeOne {
   data: IQuestion;
-  selectedAnswer(number: number): void;
+  selectedAnswer(answer: IAnswerProps): void;
 }
 
 export const QuestionTypeOne: React.FC<IQuestionTypeOne> = ({ data, selectedAnswer }) => {
+  const questionNUmber = data.id + 1;
+
   const [answer, setAnswer] = useState('');
 
-  function handleChoicceImage(number: 1 | 2 | 3 | 4) {
-    selectedAnswer(number);
+  function handleChoicceImage(answerSelected: number) {
+    selectedAnswer({ id: questionNUmber, answer: answerSelected });
 
-    switch (number) {
+    switch (answerSelected) {
       case 1:
         setAnswer(data.first_answer!);
         break;
@@ -36,7 +39,7 @@ export const QuestionTypeOne: React.FC<IQuestionTypeOne> = ({ data, selectedAnsw
 
   return (
     <Container>
-      <QuestionOrder questionNumber={data.id + 1} />
+      <QuestionOrder questionNumber={questionNUmber} />
 
       <p className="question-description">{data.description}</p>
 

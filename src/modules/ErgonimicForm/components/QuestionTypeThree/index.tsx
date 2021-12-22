@@ -3,14 +3,24 @@ import React, { useState } from 'react';
 import QuestionOrder from '@components/QuestionOrder';
 import Checkbox from '@components/Checkbox';
 import Answer from '@components/Answer';
+import { IQuestion } from '@dtos/question';
+import { IAnswerProps } from 'modules/ErgonimicForm/types';
 import { Container } from './styles';
-import { IQuestionTypeThree } from './types';
 
-const QuestionTypeThree: React.FC<IQuestionTypeThree> = ({ data }) => {
+export interface IQuestionTypeThree {
+  data: IQuestion;
+  selectedAnswer(answer: IAnswerProps): void;
+}
+
+export const QuestionTypeThree: React.FC<IQuestionTypeThree> = ({ data, selectedAnswer }) => {
+  const questionNUmber = data.id + 1;
+
   const [answer, setAnswer] = useState('');
 
-  function handleChooseAnswer(number: number) {
-    switch (number) {
+  function handleChooseAnswer(answerSelected: number) {
+    selectedAnswer({ id: questionNUmber, answer: answerSelected });
+
+    switch (answerSelected) {
       case 0:
         setAnswer(data.first_answer!);
         break;
@@ -30,7 +40,7 @@ const QuestionTypeThree: React.FC<IQuestionTypeThree> = ({ data }) => {
 
   return (
     <Container>
-      <QuestionOrder questionNumber={data.id + 1} />
+      <QuestionOrder questionNumber={questionNUmber} />
 
       <p className="question-description">{data.description}</p>
 
@@ -51,5 +61,3 @@ const QuestionTypeThree: React.FC<IQuestionTypeThree> = ({ data }) => {
     </Container>
   );
 };
-
-export default QuestionTypeThree;
