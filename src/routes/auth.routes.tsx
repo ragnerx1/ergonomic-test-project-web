@@ -10,6 +10,7 @@ import { Company } from '../modules/Company';
 import { Forms } from '../modules/Forms';
 import { UserForm } from '../modules/UserForm';
 import { ErgonomicForm } from '../modules/ErgonimicForm';
+import { Resume } from '../modules/Resume';
 
 export const Routes: React.FC = () => (
   <BrowserRouter>
@@ -22,6 +23,7 @@ export const Routes: React.FC = () => (
       <Route path={ERoutes.USER_FORM} component={UserForm} />
       <Route path={ERoutes.ERGONOMIC_FORM} component={ErgonomicForm} />
       <Route path={ERoutes.DISCOMFORT_MAP} component={DiscomfortMap} />
+      <Route path={ERoutes.RESUME} component={Resume} />
     </Switch>
   </BrowserRouter>
 );

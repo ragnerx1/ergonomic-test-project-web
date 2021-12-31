@@ -9,4 +9,5 @@ export enum ERoutes {
   USER_FORM = '/user-form',
   ERGONOMIC_FORM = '/ergonomic-form',
   DISCOMFORT_MAP = '/discomfort-map',
+  RESUME = '/resume',
 }
