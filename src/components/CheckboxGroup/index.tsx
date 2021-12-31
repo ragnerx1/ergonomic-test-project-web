@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 
 import { Container } from './styles';
 
-const RowCustomCheckbox: React.FC = () => {
+interface IRowCustomCheckbox {
+  selectedAnswer(answer: number): void;
+}
+
+export const CheckboxGroup: React.FC<IRowCustomCheckbox> = ({ selectedAnswer }) => {
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
@@ -10,6 +14,7 @@ const RowCustomCheckbox: React.FC = () => {
   const [checked4, setChecked4] = useState(false);
 
   function handleCheck() {
+    selectedAnswer(0);
     setChecked(true);
     setChecked1(false);
     setChecked2(false);
@@ -18,6 +23,7 @@ const RowCustomCheckbox: React.FC = () => {
   }
 
   function handleCheck1() {
+    selectedAnswer(1);
     setChecked(false);
     setChecked1(true);
     setChecked2(false);
@@ -26,6 +32,7 @@ const RowCustomCheckbox: React.FC = () => {
   }
 
   function handleCheck2() {
+    selectedAnswer(2);
     setChecked(false);
     setChecked1(false);
     setChecked2(true);
@@ -34,6 +41,7 @@ const RowCustomCheckbox: React.FC = () => {
   }
 
   function handleCheck3() {
+    selectedAnswer(3);
     setChecked(false);
     setChecked1(false);
     setChecked2(false);
@@ -42,6 +50,7 @@ const RowCustomCheckbox: React.FC = () => {
   }
 
   function handleCheck4() {
+    selectedAnswer(4);
     setChecked(false);
     setChecked1(false);
     setChecked2(false);
@@ -73,5 +82,3 @@ const RowCustomCheckbox: React.FC = () => {
     </>
   );
 };
-
-export default RowCustomCheckbox;
