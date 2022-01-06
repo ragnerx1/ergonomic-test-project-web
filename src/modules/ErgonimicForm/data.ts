@@ -5,7 +5,7 @@ export const form: IQuestion[] = [
   {
     id: 0,
     question_type: 1,
-    description: 'Qual imagem mais se assemelha ao local onde você usa o computador para trabalhar:',
+    description: 'QuaL imagem mais se assemelha ao local onde você usa o computador para trabalhar:',
     first_photo: 'https://www.moveisdevalor.com.br/portal/upload/files/image/16475/pessoa_trabalhando_na_cama.png',
     second_photo:
       'https://st.depositphotos.com/1743476/1276/i/950/depositphotos_12765235-stock-photo-young-man-at-laptop.jpg',
@@ -14,11 +14,11 @@ export const form: IQuestion[] = [
     fourth_photo:
       'https://www.meupositivo.com.br/panoramapositivo/wp-content/uploads/2019/02/original-845ef4a870d43861d9b59d340aaf9035.jpg',
     first_answer:
-      'Nesta posição você está  expondo seu corpo ao risco de desenvolver doenças osteomusculares. Procure trabalhar em uma mesa compatível com sua altura.',
+      'Nesta posição você está expondo seu corpo ao risco de desenvolver doenças osteomusculares. Trabalhar em uma mesa compatível com sua altura pode prevenir dores e lesões nas mãos, braços e pescoço.',
     second_answer:
-      'Nesta posição você está  expondo seu corpo ao risco de desenvolver doenças osteomusculares. Procure trabalhar em uma mesa compatível com sua altura.',
+      'Nesta posição você está expondo seu corpo ao risco de desenvolver doenças osteomusculares. Trabalhar em uma mesa compatível com sua altura pode prevenir dores e lesões nas mãos, braços e pescoço.',
     third_answer:
-      'Você está utilizando uma mesa, isso é bom. Pode ser necessário alguma adaptação para estar compativel com sua altura',
+      'Você está utilizando uma mesa, isso é bom. Pode ser necessário alguma adaptação para maior conforto dos seus ombros e braços.',
     fourth_answer: 'Está mesa é ergonômica e facilita o conforto.',
   },
   {
@@ -34,12 +34,12 @@ export const form: IQuestion[] = [
     fourth_photo:
       'https://attraktiva.vteximg.com.br/arquivos/ids/191468-1000-1000/Sofa-Ohio-3-Lugares--L--208cm--100--Couro-Natural-Preto.png?v=637407086128630000',
     first_answer:
-      'Está cadeira não é adequada para trabalho diário , mas é possível, melhorar o seu conforto. Assista ao vídeo de dicas.',
+      'Está cadeira não é adequada para trabalho diário, mas é possível adapta-la para melhorar o seu conforto. Assista ao vídeo de dicas ao final do questionário para saber.',
     second_answer:
       'Esta cadeira é ergonômica do ponto de vista da regulagem de altura, mas se possível adquira uma que tenha suporte para braços também.',
     third_answer: 'Esta cadeira é ergonômica e possibilita regulagens e adequação à mesa utilizada para o  trabalho .',
     fourth_answer:
-      'Sofás não são recomendados para serem utilizados como assento para trabalho com computador devido a não possibilitar regulagem de altura e não permitir um suporte adequado à coluna vertebral',
+      'Trabalhar no sofá geralmente sobrecarrega os músculos do ombro e pescoço, além de não proporcionar um apoio adequado à coluna vertebral, por isso não são recomendados.',
   },
   {
     id: 2,
@@ -61,12 +61,12 @@ export const form: IQuestion[] = [
     ],
     first_photo: 'https://img.kalunga.com.br/fotosdeprodutos/666032z.jpg',
     first_answer:
-      'Notebooks utilizados diretamente sobre a mesa ou outra superfície tendem a sobrecarregar o pescoço e os músculos do trapézio, predispondo à dores. Procure elevar o Notebook com suporte apropriado, livros ou caixas para que fique na altura da linha dos olhos',
+      'Notebooks utilizados diretamente sobre a mesa ou outra superfície tendem a sobrecarregar o pescoço e os músculos do pescoço, predispondo à dores. Procure elevar o Notebook com suporte apropriado, livros ou caixas até que a tela fique na altura da linha dos olhos.  ',
     second_answer:
       'Você está utilizando o Notebook de maneira ergonômica utilizando suporte para eleva-lo à altura dos olhos.',
     third_answer: 'Utilize apoios para elevar a altura do monitor  de maneira que fique na altura da linha dos olhos.',
     fourth_answer:
-      'Você está cuidando de seu bem estar utilizando apoio para elevar e regular a altura do monitor em relação a linha dos olhos.',
+      'Utilizando apoio para elevar e regular a altura do monitor, você está proporcionando maior conforto para o seu pescoço.',
   },
   {
     id: 4,
@@ -79,7 +79,7 @@ export const form: IQuestion[] = [
     ],
     first_answer: 'Você está trabalhando de forma ergonômica e prevenindo problemas osteomusculares',
     second_answer:
-      'Geralmente a não utilização de teclado e mouse acoplado ao notebook predispõe a sobrecarregar o músculo do Trapézio e gerar dores nos ombros. Melhore seu conforto fazendo uso destes periféricos.',
+      'Geralmente a não utilização de teclado e mouse acoplado ao notebook predispõe a sobrecarga do músculo do Trapézio e gera dores nos ombros. Melhore seu conforto fazendo uso destes periféricos.',
   },
   {
     id: 5,
@@ -92,9 +92,9 @@ export const form: IQuestion[] = [
     first_photo:
       'https://lh4.googleusercontent.com/-7-pXZhtaPDeL7FhwII3uZpGwkqMj6NbKf066JTJPbiZvLFUHodpzFT-XYQp9RWLKPLKIy9INDL3Efd1G11kJIkNT-MLyoU2TvEcjWr2Gi59riG21xOF8FYg8gWbZyGWAA=w450',
     first_answer:
-      'Parabéns! você está cuidando de seu punho e do Túnel do Carpo, por onde passam os tendões dos dedos da mão',
+      'Usando mousepad ergonômico seus tendões operam livremente evitando lesões na região do seu punho, por onde passam os tendões dos dedos da mão.',
     second_answer:
-      'O mousepad auxilia manter o punho em posição neutra e prevenir tendinites e problemas com o Túnel do Carpo (por onde passam os tendões dos dedos da mão.) Procure utilizar o mousepad para seu maior conforto.',
+      'Para prevenir tendinites e problemas com o túnel do carpo é interessante usar um mousepad ergonômico, pois ele ajuda a manter o punho em posição neutra e propicia melhor funcionalidade do tendão.',
   },
   {
     id: 6,
@@ -105,9 +105,9 @@ export const form: IQuestion[] = [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
     ],
-    first_answer: 'Uma boa iluminação favorece o conforto ao trabalhar, que bom que você cuida este aspecto!',
+    first_answer: 'Uma iluminação ambiente adequada traz mais disposição e exige menos esforço da visão para realizar nossas tarefas.',
     second_answer:
-      'A utilização de computador em lugar com má iluminação predispõe há um maior cansaço e outros problemas.',
+      'A utilização de computadores e celulares em ambientes com baixa iluminação pode causar estresse aos olhos, predispor a doenças oculares e interferir na qualidade do sono.',
   },
   {
     id: 7,
@@ -144,9 +144,9 @@ export const form: IQuestion[] = [
       { id: 1, choice: 'Não' },
     ],
     first_answer:
-      'Seus músculos e tendões agradecem! Continue cuidando de seu corpo! Os alongamentos promovem o alinhamento das fibras musculares promovendo melhor desempenho dos músculos e tendões, melhora a circulação e acelera a metabolização do Ácido Lácteo (residuo que causa dor nos músculos) ',
+      'Quando nos alongamos promovemos o alinhamento das fibras musculares que proporcionam um melhor desempenho dos músculos e tendões, melhorando a circulação e aliviando a tensão muscular.',
     second_answer:
-      'Seus músculos e tendões precisam de reparos e descanso! Os alongamentos promovem o alinhamento das fibras musculares promovendo melhor desempenho dos músculos e tendões, melhora a circulação e acelera a metabolização do Ácido Lácteo (residuo que causa dor nos músculos). Quando alonga você prolonga a vida de seus músculos e tendões bem como de seu corpo todo!!!!',
+      'A falta de alongamento pode facilitar o aparecimento de dores musculares. Os alongamentos promovem o alinhamento das fibras musculares promovendo melhor desempenho dos músculos e melhorando a circulação e aliviando a tensão muscular.',
   },
   {
     id: 10,
@@ -156,9 +156,9 @@ export const form: IQuestion[] = [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
     ],
-    first_answer: 'Muito bem você está permitindo que seus ombros e braços estejam em posição mais confortável.',
+    first_answer: 'Você está permitindo que seus ombros e braços estejam em posição mais confortável.',
     second_answer:
-      'De preferência para que os objetos que mais utiliza se encontrem bem ao alcance de suas mão e procure acessa-los sem esforço. Teclado e mouse devem ficar perto da borda da mesa para facilitar o acesso e utilização mais confortável.',
+      'É interessante deixar o teclado e o mouse perto da borda da mesa facilitando ser acessado pelas mãos e proporcionando mais conforto.',
   },
   {
     id: 11,
@@ -169,9 +169,9 @@ export const form: IQuestion[] = [
     second_photo:
       'https://patricialacombe.com.br/blog/wp-content/uploads/2018/03/179186-voce-sabe-qual-e-a-postura-correta-para-usar-o-celular-730x340.jpg',
     first_answer:
-      'Desta forma a cabeça fica pendendo para frente e sobrecarregando ombros e pescoço, predispondo a dores. Dependendo do tempo de exposição ao celular. Procure utilizar o celular na posição do aparelho em pé como o exemplo  da figura 2 para o maior conforto das vértebras da coluna Cervical.',
+      'Desta forma o peso da sua cabeça está adequadamente distribuído sobre o pescoço e ombros evitando sobrecarga dos músculos envolvidos.',
     second_answer:
-      'Desta forma sua cabeça está apoiada adequadamente e não sobrecarrega ombros e pescoço. A Ergonomia é um valor para você!',
+      'Com a cabeça pendendo para frente seus ombros e pescoço acabam ficando sobrecarregados, predispondo a dores. Acostume-se a utilizar o celular em pé como o exemplo da figura 2 para o maior conforto do pescoço e ombros.',
   },
   {
     id: 12,
@@ -182,7 +182,7 @@ export const form: IQuestion[] = [
       { id: 1, choice: 'Não' },
     ],
     first_answer:
-      'Durante o sono um hormônio muito importante é produzido: a Melatonina, um dos principais hormônios reguladores de diversos processos intracelulares.Quanto mais Melatonina melhor a reparação celular e retardo do envelhecimento das células do organismo. O ideal é dormir de 6-8h por noite, dependendo da pessoa e da idade. Invista em uma boa noite de sono.',
+      'A falta de sono pode causar diversos prejuízos a nossa saúde física e mental, dentre eles podemos citar a diminuição dos reflexos, a diminuição da atenção, a diminuição da tolerância ao estresse e desordem hormonal. Durante o sono ocorre a reparação celular e organização das novas informações em nossa memória. O ideal é dormir de 6-8h por noite, dependendo da pessoa e da idade.',
   },
   {
     id: 13,
@@ -192,7 +192,7 @@ export const form: IQuestion[] = [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
     ],
-    first_answer: 'A água é fundamental para as funções de nosso organismo, 80% dele é líquido. A água  ',
+    first_answer: '80% do nosso corpo é liquido e todas as suas funções ocorrem em meio aquoso, portanto a hidratação adequada é essencial para uma boa saúde. A quantidade de água que necessitamos tomar diariamente varia de acordo com o peso corporal. Para obter a quantidade de água que o seu corpo necessita, basta calcular seu peso corporal multiplicado por 3,5.',
   },
   {
     id: 14,
