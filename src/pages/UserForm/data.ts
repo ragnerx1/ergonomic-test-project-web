@@ -56,7 +56,7 @@ export const form: IQuestion[] = [
     id: 3,
     question_type: 3,
     description:
-      'Você usa suporte ou adaptação para o monitor ou tela do notebook ficar na altura dos seus olhos, sem inclinar o pescoço?',
+      'Você usa a maior parte do tempo suporte ou adaptação para o monitor ou tela do notebook ficar na altura dos seus olhos, sem inclinar o pescoço?',
     multiple_choice: [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
@@ -74,7 +74,7 @@ export const form: IQuestion[] = [
   {
     id: 4,
     question_type: 2,
-    description: 'Você usa teclado e mouse conectados ao notebook ?',
+    description: 'Você usa teclado e mouse conectados ao notebook a maior parte do tempo ?',
     multiple_choice: [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
@@ -88,7 +88,7 @@ export const form: IQuestion[] = [
   {
     id: 5,
     question_type: 3,
-    description: 'Você usa pad mouse ergonômico',
+    description: 'Você usa pad mouse ergonômico a maior parte do tempo?',
     multiple_choice: [
       { id: 0, choice: 'Sim' },
       { id: 1, choice: 'Não' },
@@ -187,8 +187,8 @@ export const form: IQuestion[] = [
     question_type: 2,
     description: 'Em média quantas horas você dorme?',
     multiple_choice: [
-      { id: 0, choice: 'Sim' },
-      { id: 1, choice: 'Não' },
+      { id: 0, choice: 'Até 6 horas de sono' },
+      { id: 1, choice: 'Entre 7 e 8 horas de sono' },
     ],
     first_answer:
       'Durante o sono um hormônio muito importante é produzido: a Melatonina, um dos principais hormônios reguladores de diversos processos intracelulares.Quanto mais Melatonina melhor a reparação celular e retardo do envelhecimento das células do organismo. O ideal é dormir de 6-8h por noite, dependendo da pessoa e da idade. Invista em uma boa noite de sono.',
@@ -198,8 +198,8 @@ export const form: IQuestion[] = [
     question_type: 2,
     description: 'Em média, quantos copos de água você bebe por dia?',
     multiple_choice: [
-      { id: 0, choice: 'Sim' },
-      { id: 1, choice: 'Não' },
+      { id: 0, choice: 'Até 5 copos de água por dia' },
+      { id: 1, choice: '6 copos ou mais' },
     ],
     first_answer:
       'A água é fundamental para todas as funções de nosso organismo, 80% dele é líquido. A hidratação adequada influencia diretamente em nosso bem-estar e desempenho. O ideal é ingerirmos de 6-8 copos de água por dia ou mais dependendo do peso corporal e do clima.',
